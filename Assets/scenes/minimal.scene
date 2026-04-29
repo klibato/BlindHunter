@@ -43,133 +43,6 @@
       "Children": []
     },
     {
-      "__guid": "cf9c338a-3883-47e2-acde-6e50b7f66481",
-      "__version": 2,
-      "__Prefab": "templates/gameobject/player controller.prefab",
-      "__PrefabInstancePatch": {
-        "AddedObjects": [
-          {
-            "Id": {
-              "Type": "GameObject",
-              "IdValue": "49b8f071-3965-436d-942e-73a8ffd43939"
-            },
-            "Parent": {
-              "Type": "GameObject",
-              "IdValue": "9464ebe1-1ad1-4c43-9e29-46e2e03bb4ba"
-            },
-            "PreviousElement": {
-              "Type": "GameObject",
-              "IdValue": "14c32c81-db65-4764-b235-8d1469a40438"
-            },
-            "ContainerProperty": "Children",
-            "IsContainerArray": true,
-            "Data": {
-              "__guid": "49b8f071-3965-436d-942e-73a8ffd43939",
-              "__version": 2,
-              "Flags": 0,
-              "Name": "Camera",
-              "Position": "0,0,0",
-              "Rotation": "0,0,0,1",
-              "Scale": "1,1,1",
-              "Tags": "maincamera",
-              "Enabled": true,
-              "NetworkMode": 2,
-              "NetworkFlags": 0,
-              "NetworkOrphaned": 0,
-              "NetworkTransmit": true,
-              "OwnerTransfer": 1,
-              "Components": [],
-              "Children": []
-            }
-          },
-          {
-            "Id": {
-              "Type": "Component",
-              "IdValue": "574ce07c-ee7a-4d25-8778-0b04344dcc3e"
-            },
-            "Parent": {
-              "Type": "GameObject",
-              "IdValue": "49b8f071-3965-436d-942e-73a8ffd43939"
-            },
-            "PreviousElement": null,
-            "ContainerProperty": "Components",
-            "IsContainerArray": true,
-            "Data": {
-              "__type": "Sandbox.CameraComponent",
-              "__guid": "574ce07c-ee7a-4d25-8778-0b04344dcc3e",
-              "__enabled": true,
-              "Flags": 0,
-              "BackgroundColor": "0.33333,0.46275,0.52157,1",
-              "ClearFlags": "All",
-              "EnablePostProcessing": true,
-              "FieldOfView": 60,
-              "FovAxis": "Horizontal",
-              "IsMainCamera": true,
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "Orthographic": false,
-              "OrthographicHeight": 1204,
-              "PostProcessAnchor": null,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": "",
-              "RenderTexture": null,
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 10000,
-              "ZNear": 10
-            }
-          }
-        ],
-        "RemovedObjects": [],
-        "PropertyOverrides": [
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "3ae1b3c4-14c5-4d68-be0a-1096ec3e2c8d"
-            },
-            "Property": "ThirdPerson",
-            "Value": false
-          },
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "3ae1b3c4-14c5-4d68-be0a-1096ec3e2c8d"
-            },
-            "Property": "ToggleCameraModeButton",
-            "Value": ""
-          },
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "f2b49a45-d5d0-4868-8e56-f85f9a989be6"
-            },
-            "Property": "MaterialGroup",
-            "Value": "default"
-          }
-        ],
-        "MovedObjects": []
-      },
-      "__PrefabIdToInstanceId": {
-        "9464ebe1-1ad1-4c43-9e29-46e2e03bb4ba": "cf9c338a-3883-47e2-acde-6e50b7f66481",
-        "3ae1b3c4-14c5-4d68-be0a-1096ec3e2c8d": "65d6a457-a7ae-4a34-baa9-6e9232ac2cd5",
-        "b3091a87-5492-4ba9-8aa8-6daa61c8ab13": "20b8ec47-d1f7-468f-94ee-32a264dd5869",
-        "c818a718-51a0-4f30-b561-3719718d81d4": "de594ca4-35c9-4f02-985b-d82cc7dff20e",
-        "2f565d25-cbfa-4244-890f-d82931c0bdc1": "7fccafbc-29da-41d9-bda5-338f419b13ff",
-        "20be986f-7510-4bf5-ae9a-2935f448faff": "b4339d33-6618-4a58-a901-c6fc4695a81b",
-        "50c8624c-ca50-48e3-951d-a189ae9f2de5": "cc3528dd-b81f-48a7-9519-7f129801b754",
-        "6b5cbc3e-e37c-4eb9-afa6-577469114047": "fc2d6dab-cfaf-4c3b-b1ef-12d4c345cad1",
-        "f2b49a45-d5d0-4868-8e56-f85f9a989be6": "302b6daf-f17d-4850-a4b2-e98bd887e60c",
-        "14c32c81-db65-4764-b235-8d1469a40438": "611996f2-8504-4657-937d-622d9d34f3b1",
-        "996337b2-679a-4b95-bced-979f20df922a": "97e77e57-973d-4b26-aa45-0e002efa86a5",
-        "ee640c43-fd61-4d0f-826e-5530c1cc9b27": "0a99bcd0-c26f-4c68-be17-b3a6d68e985a"
-      }
-    },
-    {
       "__guid": "f5511b25-c98d-4893-9f5c-e414467ea073",
       "__version": 2,
       "Flags": 0,
@@ -240,6 +113,42 @@
         }
       ],
       "Children": []
+    },
+    {
+      "__guid": "28cd667e-788a-4c44-b2a7-b383efcb6ea5",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "GameManager",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "GameManager",
+          "__guid": "4c6e0169-a4cf-4d7d-80c1-3e27f8c4fac9",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "PlayerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/player.prefab"
+          },
+          "SpawnPosition": "0,0,50"
+        }
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {
@@ -264,6 +173,11 @@
     "GameObjectSystems": {
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
+      },
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "c98059ef-568f-4473-8e0b-2a51270da101"
+        }
       },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
