@@ -95,7 +95,7 @@
       "__version": 2,
       "Flags": 0,
       "Name": "Cube",
-      "Position": "160.984146,-2.42137718,16.9378815",
+      "Position": "160.984146,-2.42137718,44.3069992",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
@@ -144,7 +144,7 @@
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
-          "Speed": 100000
+          "Speed": 200
         }
       ],
       "Children": []
