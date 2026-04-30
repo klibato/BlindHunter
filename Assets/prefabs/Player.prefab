@@ -424,7 +424,68 @@
             "ZNear": 10
           }
         ],
-        "Children": []
+        "Children": [
+          {
+            "__guid": "a411629f-2b40-4689-adf1-e2ec33af825a",
+            "__version": 2,
+            "Flags": 0,
+            "Name": "Flashlight",
+            "Position": "0,0,0",
+            "Rotation": "0,0,0,1",
+            "Scale": "1,1,1",
+            "Tags": "light_spot,light",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkFlags": 0,
+            "NetworkOrphaned": 0,
+            "NetworkTransmit": true,
+            "OwnerTransfer": 1,
+            "Components": [
+              {
+                "__type": "Sandbox.SpotLight",
+                "__guid": "f3de6fa0-62ec-4268-8708-8b89c2ca3860",
+                "__enabled": true,
+                "Flags": 0,
+                "Attenuation": 1,
+                "ConeInner": 15,
+                "ConeOuter": 45,
+                "Cookie": null,
+                "FogMode": "Enabled",
+                "FogStrength": 1,
+                "LightColor": "0.91373,0.98039,1,1",
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
+                "Radius": 500,
+                "ShadowBias": 0.0005,
+                "ShadowHardness": 0,
+                "Shadows": true
+              },
+              {
+                "__type": "Flashlight",
+                "__guid": "8e2f4e74-d911-4681-adcc-96e39e70ca65",
+                "__enabled": true,
+                "Flags": 0,
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
+                "TargetPlayer": {
+                  "_type": "component",
+                  "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+                  "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+                  "component_type": "PlayerSetup"
+                }
+              }
+            ],
+            "Children": []
+          }
+        ]
       }
     ],
     "__properties": {
