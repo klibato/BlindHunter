@@ -146,6 +146,18 @@
             "prefab": "prefabs/player.prefab"
           },
           "SpawnPosition": "0,0,50"
+        },
+        {
+          "__type": "NoiseVisualizer",
+          "__guid": "185dd75d-e5a3-4d97-b4b5-7183222caf82",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         }
       ],
       "Children": []
@@ -171,18 +183,18 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
+        }
       },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "c98059ef-568f-4473-8e0b-2a51270da101"
         }
       },
-      "Sandbox.SelectionSetsSystem": {
-        "Data": {
-          "SelectionSets": []
-        }
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
       }
     }
   },
