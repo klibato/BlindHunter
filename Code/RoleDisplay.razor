@@ -1,0 +1,45 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+	@if (ShouldDisplay)
+	{
+		<div class="role-banner" style="color: @TextColor;">
+			@RoleText
+		</div>
+	}
+</root>
+
+@code
+{
+	[Property] public PlayerSetup TargetPlayer { get; set; }
+
+	private float DisplayUntil { get; set; }
+
+	private bool ShouldDisplay => RealTime.Now < DisplayUntil && TargetPlayer != null && TargetPlayer.Role !=
+PlayerRole.None && !TargetPlayer.IsProxy;
+
+	private string RoleText => TargetPlayer?.Role switch
+	{
+		PlayerRole.Killer => "YOU ARE THE KILLER",
+		PlayerRole.Survivor => "YOU ARE A SURVIVOR",
+		_ => ""
+	};
+
+	private string TextColor => TargetPlayer?.Role switch
+	{
+		PlayerRole.Killer => "#ff3333",
+		PlayerRole.Survivor => "#3399ff",
+		_ => "#ffffff"
+	};
+
+	protected override void OnStart()
+	{
+		// Affiche pendant 3 secondes après le start
+		DisplayUntil = RealTime.Now + 3f;
+	}
+
+	protected override int BuildHash() => HashCode.Combine(ShouldDisplay, RoleText, TextColor);
+}

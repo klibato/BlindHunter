@@ -203,6 +203,42 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null
+      },
+      {
+        "__type": "Sandbox.ScreenPanel",
+        "__guid": "893be896-46d4-40f8-8327-ef44093f0cd1",
+        "__enabled": true,
+        "Flags": 0,
+        "AutoScreenScale": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Opacity": 1,
+        "Scale": 1,
+        "ScaleStrategy": "ConsistentHeight",
+        "TargetCamera": null,
+        "ZIndex": 100
+      },
+      {
+        "__type": "Sandbox.RoleDisplay",
+        "__guid": "f0fbed6f-4640-4d07-a663-1cfd5b43af27",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        }
       }
     ],
     "Children": [
