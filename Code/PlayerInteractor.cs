@@ -18,7 +18,6 @@ public sealed class PlayerInteractor : Component
 	var camera = GetComponentInChildren<CameraComponent>();
 	if ( camera == null )
 	{
-		Log.Info( "PlayerInteractor: no camera found" );
 		return;
 	}
 
@@ -28,13 +27,9 @@ public sealed class PlayerInteractor : Component
 		.IgnoreGameObjectHierarchy( GameObject )
 		.Run();
 
-	// LOG DEBUG
-	Log.Info( $"Trace hit: {trace.Hit}, GameObject: {trace.GameObject?.Name ?? "null"}, Distance: {trace.Distance}" );
-
 	if ( trace.Hit && trace.GameObject != null )
 	{
 		var interactable = trace.GameObject.GetComponent<Interactable>();
-		Log.Info( $"Interactable found: {interactable != null}" );
 
 		if ( interactable != null && !interactable.IsCompleted )
 		{
@@ -42,7 +37,6 @@ public sealed class PlayerInteractor : Component
 
 			if ( Input.Pressed( "Use" ) )
 			{
-				Log.Info( $"E pressed, calling RPC for {interactable.GameObject.Name}" );
 				InteractRpc( interactable.GameObject.Id );
 			}
 			return;

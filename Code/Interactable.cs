@@ -15,7 +15,6 @@ public sealed class Interactable : Component
         if (!Networking.IsHost) return;
 
         IsCompleted = true;
-        Log.Info($"BEFORE invoke: IsCompleted = {IsCompleted}");
         OnInteracted?.Invoke(interactor);
         Log.Info($"Interactable {GameObject.Name} was activated by {interactor.GameObject.Name}");
     }
@@ -25,7 +24,6 @@ public sealed class Interactable : Component
         var renderer = GetComponent<ModelRenderer>();
         if (renderer == null)
         {
-            Log.Info("Interactable: no ModelRenderer found!");
             return;
         }
 

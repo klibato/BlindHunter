@@ -276,6 +276,24 @@
           "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
           "component_type": "PlayerInteractor"
         }
+      },
+      {
+        "__type": "Sandbox.QuestProgress",
+        "__guid": "2996c5ed-3f25-48d6-ba0d-1b22f6b2236d",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        }
       }
     ],
     "Children": [

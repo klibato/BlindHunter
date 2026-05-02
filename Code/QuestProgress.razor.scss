@@ -1,0 +1,16 @@
+.progress {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 8px;
+	padding: 12px 20px;
+
+	.label {
+		color: white;
+		font-size: 22px;
+		font-weight: bold;
+		font-family: Arial;
+		letter-spacing: 1px;
+	}
+}

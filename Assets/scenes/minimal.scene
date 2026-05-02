@@ -833,8 +833,24 @@
               "Type": "GameObject",
               "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
             },
+            "Property": "Name",
+            "Value": "Generator"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
             "Property": "Position",
             "Value": "73.3324509,25.1709061,32.5"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "PromptText",
+            "Value": "Activate the generator"
           }
         ],
         "MovedObjects": []
@@ -860,7 +876,7 @@
               "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
             },
             "Property": "Name",
-            "Value": "generic_interactable (1)"
+            "Value": "Key"
           },
           {
             "Target": {
@@ -869,6 +885,14 @@
             },
             "Property": "Position",
             "Value": "-207.101013,310.447754,32.5"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "PromptText",
+            "Value": "Pick up the key"
           }
         ],
         "MovedObjects": []
@@ -894,7 +918,7 @@
               "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
             },
             "Property": "Name",
-            "Value": "generic_interactable (2)"
+            "Value": "Door"
           },
           {
             "Target": {
@@ -903,6 +927,14 @@
             },
             "Property": "Position",
             "Value": "-166.312439,-244.763916,32.5"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "PromptText",
+            "Value": "Open the exit door"
           }
         ],
         "MovedObjects": []
@@ -913,6 +945,37 @@
         "7e074844-9de6-4028-ac6c-791bfb21bc44": "79544a9b-1292-4412-9c70-1fba34817534",
         "2b2e7d02-2f6e-496e-abde-e954f8430685": "c64bf074-e39e-4563-8961-d699ab3ed93d"
       }
+    },
+    {
+      "__guid": "26b355de-ccf7-46db-b1d5-0e367cd22404",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "QuestManager",
+      "Position": "-230.769684,204.811005,81.8883362",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "QuestManager",
+          "__guid": "292b7328-ba9c-4d1b-8d19-8b157548c908",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {
