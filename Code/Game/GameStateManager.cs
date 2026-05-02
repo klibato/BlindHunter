@@ -1,5 +1,3 @@
-using Sandbox;
-
 public enum GameState
 {
 	Playing,
@@ -7,9 +5,10 @@ public enum GameState
 	KillerWon
 }
 
+/// <summary>Tracks overall game state and broadcasts victory conditions to all clients.</summary>
 public sealed class GameStateManager : Component
 {
-	[Sync(SyncFlags.FromHost)] public GameState CurrentState { get; set; } = GameState.Playing;
+	[Sync( SyncFlags.FromHost )] public GameState CurrentState { get; set; } = GameState.Playing;
 
 	public static GameStateManager Instance { get; private set; }
 
@@ -18,6 +17,7 @@ public sealed class GameStateManager : Component
 		Instance = this;
 	}
 
+	/// <summary>Declares survivors victorious. Host only.</summary>
 	public void DeclareSurvivorsVictory()
 	{
 		if ( !Networking.IsHost ) return;
@@ -27,6 +27,7 @@ public sealed class GameStateManager : Component
 		Log.Info( "Game over: Survivors won!" );
 	}
 
+	/// <summary>Declares the killer victorious. Host only.</summary>
 	public void DeclareKillerVictory()
 	{
 		if ( !Networking.IsHost ) return;

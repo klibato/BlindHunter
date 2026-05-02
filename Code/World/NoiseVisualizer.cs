@@ -1,8 +1,9 @@
-using Sandbox;
-using System.Collections.Generic;
-
+/// <summary>Renders temporary noise indicators visible only to the Killer when survivors move.</summary>
 public sealed class NoiseVisualizer : Component
 {
+	private const float NoiseLifetime = 1.5f;
+	private const float SphereExpansionFactor = 0.5f;
+
 	private class NoiseEntry
 	{
 		public Vector3 Position;
@@ -18,28 +19,28 @@ public sealed class NoiseVisualizer : Component
 	protected override void OnAwake()
 	{
 		_instance = this;
+		_noises.Clear();
 	}
 
+	/// <summary>Registers a noise event at the given world position. Visible to the local Killer only.</summary>
 	public static void AddNoise( Vector3 position, float intensity )
 	{
 		if ( _instance == null ) return;
 
-		// Créer un GameObject avec une PointLight pour révéler la géométrie
 		var lightObject = _instance.Scene.CreateObject();
 		lightObject.WorldPosition = position;
 		lightObject.Name = "NoiseLight";
 
 		var light = lightObject.Components.Create<PointLight>();
 		light.LightColor = Color.White;
-		light.Radius = intensity; // rayon de révélation proportionnel à l'intensité
-		// Brightness peut s'appeler différemment dans ta version, on adapte si besoin
+		light.Radius = intensity;
 
 		_noises.Add( new NoiseEntry
 		{
 			Position = position,
 			Intensity = intensity,
 			SpawnedAt = RealTime.Now,
-			Lifetime = 1.5f,
+			Lifetime = NoiseLifetime,
 			LightObject = lightObject
 		} );
 	}
@@ -54,7 +55,6 @@ public sealed class NoiseVisualizer : Component
 
 			if ( t >= 1f )
 			{
-				// Détruire la lumière et retirer
 				entry.LightObject?.Destroy();
 				_noises.RemoveAt( i );
 				continue;
@@ -62,18 +62,14 @@ public sealed class NoiseVisualizer : Component
 
 			float alpha = 1f - t;
 
-			// Animer l'intensité de la lumière (fade out)
 			if ( entry.LightObject != null && entry.LightObject.IsValid() )
 			{
 				var light = entry.LightObject.GetComponent<PointLight>();
 				if ( light != null )
-				{
 					light.LightColor = Color.White.WithAlpha( alpha );
-				}
 			}
 
-			// Garder le wireframe Gizmo aussi pour le repère visuel
-			float currentRadius = entry.Intensity * t * 0.5f;
+			float currentRadius = entry.Intensity * t * SphereExpansionFactor;
 			Gizmo.Draw.Color = Color.White.WithAlpha( alpha );
 			Gizmo.Draw.LineSphere( entry.Position, currentRadius );
 		}
