@@ -819,6 +819,100 @@
           "Children": []
         }
       ]
+    },
+    {
+      "__guid": "750a6ee4-527a-4850-9e6e-97f9ef71d468",
+      "__version": 2,
+      "__Prefab": "prefabs/generic_interactable.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Position",
+            "Value": "73.3324509,25.1709061,32.5"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "caf984f2-4c63-48cf-94c9-333161a67256": "750a6ee4-527a-4850-9e6e-97f9ef71d468",
+        "30ee111d-da90-4369-84e9-f0571d217078": "024ea790-b45e-4944-adc1-927b6d095e50",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "58aeff95-dbec-4fcd-a15b-39240dc10f57",
+        "2b2e7d02-2f6e-496e-abde-e954f8430685": "0415a396-0e4c-45d5-8458-06e8da032cdc"
+      }
+    },
+    {
+      "__guid": "9fc7c6dc-7e50-4028-bc6b-b0ae9eb2770e",
+      "__version": 2,
+      "__Prefab": "prefabs/generic_interactable.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Name",
+            "Value": "generic_interactable (1)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Position",
+            "Value": "-207.101013,310.447754,32.5"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "caf984f2-4c63-48cf-94c9-333161a67256": "9fc7c6dc-7e50-4028-bc6b-b0ae9eb2770e",
+        "30ee111d-da90-4369-84e9-f0571d217078": "211a6fd9-ada1-4a03-a4cd-09f8ede73745",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "3e86c376-537e-415d-b9cb-0acfd89e3eba",
+        "2b2e7d02-2f6e-496e-abde-e954f8430685": "1d4bc19f-dcfd-460c-9df2-ab6c7f634686"
+      }
+    },
+    {
+      "__guid": "28073b43-8090-48ea-a979-81eeb9d0dc65",
+      "__version": 2,
+      "__Prefab": "prefabs/generic_interactable.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Name",
+            "Value": "generic_interactable (2)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Position",
+            "Value": "-166.312439,-244.763916,32.5"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "caf984f2-4c63-48cf-94c9-333161a67256": "28073b43-8090-48ea-a979-81eeb9d0dc65",
+        "30ee111d-da90-4369-84e9-f0571d217078": "3655e388-1a56-47fa-8862-0250960f75c7",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "79544a9b-1292-4412-9c70-1fba34817534",
+        "2b2e7d02-2f6e-496e-abde-e954f8430685": "c64bf074-e39e-4563-8961-d699ab3ed93d"
+      }
     }
   ],
   "SceneProperties": {

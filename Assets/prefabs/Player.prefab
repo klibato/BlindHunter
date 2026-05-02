@@ -258,6 +258,24 @@
           "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
           "component_type": "PlayerSetup"
         }
+      },
+      {
+        "__type": "Sandbox.InteractionPrompt",
+        "__guid": "030de11a-9d8a-4c76-8946-a623121e1609",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetInteractor": {
+          "_type": "component",
+          "component_id": "f0d390a3-6efc-4b36-9fce-82d1262e1d15",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerInteractor"
+        }
       }
     ],
     "Children": [

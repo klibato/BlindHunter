@@ -1,0 +1,28 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+	@if ( ShouldDisplay )
+	{
+		<div class="prompt">
+			@PromptText
+		</div>
+	}
+</root>
+
+@code
+{
+	[Property] public PlayerInteractor TargetInteractor { get; set; }
+
+	private bool ShouldDisplay => 
+		TargetInteractor != null 
+		&& !TargetInteractor.GameObject.IsProxy
+		&& TargetInteractor.CurrentTarget != null 
+		&& !TargetInteractor.CurrentTarget.IsCompleted;
+
+	private string PromptText => TargetInteractor?.CurrentTarget?.PromptText ?? "";
+
+	protected override int BuildHash() => HashCode.Combine( ShouldDisplay, PromptText );
+}
