@@ -223,24 +223,6 @@
         "ZIndex": 100
       },
       {
-        "__type": "Sandbox.RoleDisplay",
-        "__guid": "f0fbed6f-4640-4d07-a663-1cfd5b43af27",
-        "__enabled": true,
-        "Flags": 0,
-        "OnComponentDestroy": null,
-        "OnComponentDisabled": null,
-        "OnComponentEnabled": null,
-        "OnComponentFixedUpdate": null,
-        "OnComponentStart": null,
-        "OnComponentUpdate": null,
-        "TargetPlayer": {
-          "_type": "component",
-          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
-          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
-          "component_type": "PlayerSetup"
-        }
-      },
-      {
         "__type": "PlayerInteractor",
         "__guid": "f0d390a3-6efc-4b36-9fce-82d1262e1d15",
         "__enabled": true,
@@ -260,26 +242,28 @@
         }
       },
       {
-        "__type": "Sandbox.InteractionPrompt",
-        "__guid": "030de11a-9d8a-4c76-8946-a623121e1609",
+        "__type": "KillerAttack",
+        "__guid": "33a4f2e4-78bd-4dbe-a046-41ea7cfb139f",
         "__enabled": true,
         "Flags": 0,
+        "AttackCooldown": 1,
+        "AttackRange": 100,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "TargetInteractor": {
+        "TargetPlayer": {
           "_type": "component",
-          "component_id": "f0d390a3-6efc-4b36-9fce-82d1262e1d15",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
           "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
-          "component_type": "PlayerInteractor"
+          "component_type": "PlayerSetup"
         }
       },
       {
-        "__type": "Sandbox.QuestProgress",
-        "__guid": "2996c5ed-3f25-48d6-ba0d-1b22f6b2236d",
+        "__type": "Sandbox.UI.RoleDisplay",
+        "__guid": "8be16882-6eb8-4939-8fc7-cb8e2af2521b",
         "__enabled": true,
         "Flags": 0,
         "OnComponentDestroy": null,
@@ -296,8 +280,44 @@
         }
       },
       {
-        "__type": "Sandbox.GameOverScreen",
-        "__guid": "cb4e80f2-5c7e-4d70-a3fb-0b14ce632dfe",
+        "__type": "Sandbox.UI.QuestProgress",
+        "__guid": "4db18810-db67-4479-befa-3da3e50f6dbb",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        }
+      },
+      {
+        "__type": "Sandbox.UI.InteractionPrompt",
+        "__guid": "c50cfda8-e4a8-458c-9952-f0ab280941d1",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetInteractor": {
+          "_type": "component",
+          "component_id": "f0d390a3-6efc-4b36-9fce-82d1262e1d15",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerInteractor"
+        }
+      },
+      {
+        "__type": "Sandbox.UI.GameOverScreen",
+        "__guid": "853e3205-6167-46c0-b0fe-84335860b510",
         "__enabled": true,
         "Flags": 0,
         "OnComponentDestroy": null,
