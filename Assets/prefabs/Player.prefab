@@ -332,6 +332,34 @@
           "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
           "component_type": "PlayerSetup"
         }
+      },
+      {
+        "__type": "PlayerCarrier",
+        "__guid": "5e1330d5-f46b-41b3-b8fa-7c7d6cbae696",
+        "__enabled": true,
+        "Flags": 0,
+        "CarryDistance": 80,
+        "ImpactDetectionWindow": 10,
+        "NoiseIntensityOnImpact": 300,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetInteractor": {
+          "_type": "component",
+          "component_id": "f0d390a3-6efc-4b36-9fce-82d1262e1d15",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerInteractor"
+        },
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        },
+        "ThrowForce": 300
       }
     ],
     "Children": [
