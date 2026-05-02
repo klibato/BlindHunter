@@ -909,7 +909,36 @@
       "__version": 2,
       "__Prefab": "prefabs/generic_interactable.prefab",
       "__PrefabInstancePatch": {
-        "AddedObjects": [],
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "97938616-5722-433c-a811-8891eb40b7a5"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "2b2e7d02-2f6e-496e-abde-e954f8430685"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "ExitDoor",
+              "__guid": "97938616-5722-433c-a811-8891eb40b7a5",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          }
+        ],
         "RemovedObjects": [],
         "PropertyOverrides": [
           {
@@ -927,6 +956,14 @@
             },
             "Property": "Position",
             "Value": "-166.312439,-244.763916,32.5"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "IsQuestObject",
+            "Value": false
           },
           {
             "Target": {
@@ -965,6 +1002,37 @@
         {
           "__type": "QuestManager",
           "__guid": "292b7328-ba9c-4d1b-8d19-8b157548c908",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "6da0725c-a5f9-4b1a-ab66-2a9c674eb4e1",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "GameStateManager",
+      "Position": "-230.769684,204.811005,81.8883362",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "GameStateManager",
+          "__guid": "17c3867f-3156-4b4c-82c8-55ce7ba2fd15",
           "__enabled": true,
           "Flags": 0,
           "OnComponentDestroy": null,

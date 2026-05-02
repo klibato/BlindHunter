@@ -4,7 +4,7 @@ using System;
 public sealed class Interactable : Component
 {
     [Property] public string PromptText { get; set; } = "Press E to interact";
-
+    [Property] public bool IsQuestObject { get; set; } = true;
     [Sync(SyncFlags.FromHost)] public bool IsCompleted { get; set; }
 
     public event Action<PlayerSetup> OnInteracted;

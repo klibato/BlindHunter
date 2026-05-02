@@ -1,0 +1,69 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+	@if ( ShouldDisplay )
+	{
+		<div class="overlay">
+			<div class="message" style="color: @MessageColor;">
+				@MessageText
+			</div>
+		</div>
+	}
+</root>
+
+@code
+{
+	[Property] public PlayerSetup TargetPlayer { get; set; }
+
+	private bool ShouldDisplay => 
+		TargetPlayer != null 
+		&& !TargetPlayer.IsProxy 
+		&& GameStateManager.Instance != null
+		&& GameStateManager.Instance.CurrentState != GameState.Playing;
+
+	private string MessageText
+	{
+		get
+		{
+			if ( GameStateManager.Instance == null ) return "";
+			if ( TargetPlayer == null ) return "";
+
+			bool isKiller = TargetPlayer.Role == PlayerRole.Killer;
+			bool survivorsWon = GameStateManager.Instance.CurrentState == GameState.SurvivorsWon;
+
+			if ( survivorsWon )
+			{
+				return isKiller ? "THEY ESCAPED" : "YOU ESCAPED";
+			}
+			else
+			{
+				return isKiller ? "VICTORY" : "YOU DIED";
+			}
+		}
+	}
+
+	private string MessageColor
+	{
+		get
+		{
+			if ( GameStateManager.Instance == null ) return "#ffffff";
+			if ( TargetPlayer == null ) return "#ffffff";
+
+			bool isKiller = TargetPlayer.Role == PlayerRole.Killer;
+			bool survivorsWon = GameStateManager.Instance.CurrentState == GameState.SurvivorsWon;
+
+			// Vert si gagné, rouge si perdu
+			if ( (survivorsWon && !isKiller) || (!survivorsWon && isKiller) )
+				return "#33cc66";
+			else
+				return "#cc3333";
+		}
+	}
+
+	protected override int BuildHash() => HashCode.Combine( 
+		ShouldDisplay, MessageText, MessageColor 
+	);
+}
