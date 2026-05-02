@@ -1,5 +1,6 @@
-using Sandbox;
 using System;
+
+/// <summary>Casts a ray from the survivor's camera and handles interaction with <see cref="Interactable"/> objects.</summary>
 public sealed class PlayerInteractor : Component
 {
 	[Property] public PlayerSetup TargetPlayer { get; set; }
@@ -7,49 +8,51 @@ public sealed class PlayerInteractor : Component
 
 	public Interactable CurrentTarget { get; private set; }
 
+	private CameraComponent _camera;
+
+	protected override void OnStart()
+	{
+		_camera = GetComponentInChildren<CameraComponent>();
+	}
+
 	protected override void OnUpdate()
-{
-	if ( TargetPlayer == null || TargetPlayer.IsProxy )
-		return;
-
-	if ( TargetPlayer.Role != PlayerRole.Survivor )
-		return;
-
-	var camera = GetComponentInChildren<CameraComponent>();
-	if ( camera == null )
 	{
-		return;
-	}
-
-	var ray = new Ray( camera.WorldPosition, camera.WorldRotation.Forward );
-	var trace = Scene.Trace
-		.Ray( ray, InteractionRange )
-		.IgnoreGameObjectHierarchy( GameObject )
-		.Run();
-
-	if ( trace.Hit && trace.GameObject != null )
-	{
-		var interactable = trace.GameObject.GetComponent<Interactable>();
-
-		if ( interactable != null && !interactable.IsCompleted )
-		{
-			CurrentTarget = interactable;
-
-			if ( Input.Pressed( "Use" ) )
-			{
-				InteractRpc( interactable.GameObject.Id );
-			}
+		if ( TargetPlayer == null || TargetPlayer.IsProxy )
 			return;
+
+		if ( TargetPlayer.Role != PlayerRole.Survivor )
+			return;
+
+		if ( _camera == null )
+			return;
+
+		var ray = new Ray( _camera.WorldPosition, _camera.WorldRotation.Forward );
+		var trace = Scene.Trace
+			.Ray( ray, InteractionRange )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.Run();
+
+		if ( trace.Hit && trace.GameObject != null )
+		{
+			var interactable = trace.GameObject.GetComponent<Interactable>();
+
+			if ( interactable != null && !interactable.IsCompleted )
+			{
+				CurrentTarget = interactable;
+
+				if ( Input.Pressed( "Use" ) )
+					InteractRpc( interactable.GameObject.Id );
+
+				return;
+			}
 		}
+
+		CurrentTarget = null;
 	}
 
-	CurrentTarget = null;
-}
 	[Rpc.Broadcast]
 	private void InteractRpc( Guid interactableId )
 	{
-		// Cette méthode tourne sur tous les clients
-		// Mais seul le host fait l'action (autorité)
 		if ( !Networking.IsHost ) return;
 
 		var go = Scene.Directory.FindByGuid( interactableId );
