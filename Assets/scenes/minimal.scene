@@ -215,7 +215,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "Wall_North",
-          "Position": "485.360413,1208.30957,-255.938995",
+          "Position": "485.360413,1208.30957,-248",
           "Rotation": "0,0,0,1",
           "Scale": "20,0.5,4",
           "Tags": "",
@@ -291,7 +291,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "Wall_South",
-          "Position": "485.360413,233.161499,-255.938995",
+          "Position": "485.360413,233.161499,-248",
           "Rotation": "0,0,0,1",
           "Scale": "20,0.5,4",
           "Tags": "",
@@ -367,7 +367,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "Wall_East",
-          "Position": "972.860413,720.811768,-255.938995",
+          "Position": "972.860413,720.811768,-248",
           "Rotation": "0,0,0,1",
           "Scale": "0.5,20,4",
           "Tags": "",
@@ -443,7 +443,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "Wall_West",
-          "Position": "-2.1395874,720.811768,-255.938995",
+          "Position": "-2.1395874,720.811768,-248",
           "Rotation": "0,0,0,1",
           "Scale": "0.5,20,4",
           "Tags": "",
@@ -841,13 +841,18 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.SelectionSetsSystem": {
-        "Data": {
-          "SelectionSets": []
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "90406a03-e17b-49fb-9fcf-51cb65a1c5d7"
         }
       },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
+      },
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
+        }
       }
     }
   },
