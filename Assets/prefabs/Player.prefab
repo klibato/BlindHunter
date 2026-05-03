@@ -444,7 +444,54 @@
             "UseAnimGraph": true
           }
         ],
-        "Children": []
+        "Children": [
+          {
+            "__guid": "9e9bc375-27b8-41c5-90a3-18542a5b3fd3",
+            "__version": 2,
+            "Flags": 0,
+            "Name": "WorldFlashlight ",
+            "Position": "20,-15,30",
+            "Rotation": "0,0,0,1",
+            "Scale": "1,1,1",
+            "Tags": "",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkFlags": 0,
+            "NetworkOrphaned": 0,
+            "NetworkTransmit": true,
+            "OwnerTransfer": 1,
+            "Components": [
+              {
+                "__type": "Sandbox.ModelRenderer",
+                "__guid": "6b5ff14b-8743-45a9-906d-c9e86a8acf1b",
+                "__enabled": true,
+                "Flags": 0,
+                "BodyGroups": 18446744073709551615,
+                "CreateAttachments": false,
+                "LodOverride": null,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
+                "Materials": null,
+                "Model": "models/crueltysquad/flashlight.vmdl",
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ],
+            "Children": []
+          }
+        ]
       },
       {
         "__guid": "70f0c15e-2511-495b-ba93-dd3bd99b70db",
@@ -569,8 +616,8 @@
             "__guid": "a411629f-2b40-4689-adf1-e2ec33af825a",
             "__version": 2,
             "Flags": 0,
-            "Name": "Flashlight",
-            "Position": "0,0,0",
+            "Name": "ViewFlashlight",
+            "Position": "3.54199123,-10.0869637,26.8648777",
             "Rotation": "0,0,0,1",
             "Scale": "1,1,1",
             "Tags": "light_spot,light",
@@ -620,7 +667,46 @@
                   "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
                   "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
                   "component_type": "PlayerSetup"
+                },
+                "ViewModel": {
+                  "_type": "component",
+                  "component_id": "38201a15-92d3-4917-8fe1-421ce48d1ca3",
+                  "go": "a411629f-2b40-4689-adf1-e2ec33af825a",
+                  "component_type": "ModelRenderer"
+                },
+                "WorldModel": {
+                  "_type": "component",
+                  "component_id": "6b5ff14b-8743-45a9-906d-c9e86a8acf1b",
+                  "go": "9e9bc375-27b8-41c5-90a3-18542a5b3fd3",
+                  "component_type": "ModelRenderer"
                 }
+              },
+              {
+                "__type": "Sandbox.ModelRenderer",
+                "__guid": "38201a15-92d3-4917-8fe1-421ce48d1ca3",
+                "__enabled": true,
+                "Flags": 0,
+                "BodyGroups": 18446744073709551615,
+                "CreateAttachments": false,
+                "LodOverride": null,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
+                "Materials": null,
+                "Model": "models/crueltysquad/flashlight.vmdl",
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
               }
             ],
             "Children": []
@@ -655,6 +741,8 @@
   "MenuPath": null,
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
-  "__references": [],
+  "__references": [
+    "greg.flashlightcs#36195"
+  ],
   "__version": 2
 }

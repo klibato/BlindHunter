@@ -1,10 +1,13 @@
-/// <summary>Controls the survivor's spotlight, toggled with the Flashlight input action.</summary>
+/// <summary>Controls the survivor's spotlight, view-model and world-model. Toggled with the Flashlight input action.</summary>
 public sealed class Flashlight : Component
 {
 	[Property] public PlayerSetup TargetPlayer { get; set; }
+	[Property] public ModelRenderer ViewModel { get; set; }
+	[Property] public ModelRenderer WorldModel { get; set; }
 
 	private SpotLight _spotLight;
-	private bool _isOn;
+
+	[Sync] public bool IsOn { get; set; }
 
 	protected override void OnStart()
 	{
@@ -13,19 +16,40 @@ public sealed class Flashlight : Component
 
 	protected override void OnUpdate()
 	{
-		if ( _spotLight == null ) return;
-		if ( TargetPlayer == null || TargetPlayer.IsProxy ) return;
+		if (TargetPlayer == null) return;
+		if (_spotLight == null) return;
 
-		// Killer has no flashlight.
-		if ( TargetPlayer.Role == PlayerRole.Killer )
+		// Killer has no flashlight at all
+		if (TargetPlayer.Role == PlayerRole.Killer)
 		{
 			_spotLight.Enabled = false;
+			if (ViewModel != null) ViewModel.Enabled = false;
+			if (WorldModel != null) WorldModel.Enabled = false;
 			return;
 		}
 
-		if ( Input.Pressed( "Flashlight" ) )
-			_isOn = !_isOn;
+		// Toggle handled by local player only
+		if (!TargetPlayer.IsProxy && Input.Pressed("Flashlight"))
+		{
+			IsOn = !IsOn;
+		}
 
-		_spotLight.Enabled = _isOn;
+		// Apply EyeRotation so the cone follows the head direction across all clients
+		WorldRotation = TargetPlayer.EyeRotation;
+
+		// SpotLight visible to everyone when ON
+		_spotLight.Enabled = IsOn;
+
+		// View-model : visible uniquement par le joueur local (toujours, lampe allumée ou non)
+		if (ViewModel != null)
+		{
+			ViewModel.Enabled = !TargetPlayer.IsProxy;
+		}
+
+		// World-model : visible uniquement par les autres (proxy)
+		if (WorldModel != null)
+		{
+			WorldModel.Enabled = TargetPlayer.IsProxy;
+		}
 	}
 }

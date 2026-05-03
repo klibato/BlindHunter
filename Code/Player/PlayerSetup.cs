@@ -6,15 +6,18 @@ public sealed class PlayerSetup : Component
 
 	[Sync(SyncFlags.FromHost)] public PlayerRole Role { get; set; } = PlayerRole.None;
 	[Sync(SyncFlags.FromHost)] public bool IsAlive { get; set; } = true;
+	[Sync] public Rotation EyeRotation { get; set; }
 
 	private float _noiseTimer;
 	private SkinnedModelRenderer _bodyRenderer;
 	private PlayerController _controller;
+	private CameraComponent _camera;
 
 	protected override void OnStart()
 	{
 		_bodyRenderer = GetComponentInChildren<SkinnedModelRenderer>();
 		_controller = GetComponent<PlayerController>();
+		_camera = GetComponentInChildren<CameraComponent>();
 
 		if (Networking.IsHost)
 		{
@@ -25,9 +28,8 @@ public sealed class PlayerSetup : Component
 
 		if (IsProxy)
 		{
-			var camera = GetComponentInChildren<CameraComponent>();
-			if (camera != null)
-				camera.Enabled = false;
+			if (_camera != null)
+				_camera.Enabled = false;
 		}
 	}
 
@@ -36,15 +38,22 @@ public sealed class PlayerSetup : Component
 		if (!IsAlive)
 		{
 			HandleDeathState();
-			return; // skip le reste si mort
+			return;
 		}
+
+		// Sync de la rotation de la tête (uniquement pour le joueur local)
+		if (!IsProxy && _camera != null)
+		{
+			EyeRotation = _camera.WorldRotation;
+		}
+
 		ApplyRoleColor();
 		HandleNoiseEmission();
 	}
 
 	private void HandleNoiseEmission()
 	{
-		if ( !IsAlive ) return;
+		if (!IsAlive) return;
 		if (IsProxy) return;
 		if (_controller == null) return;
 
@@ -88,7 +97,6 @@ public sealed class PlayerSetup : Component
 		IsAlive = false;
 		Log.Info($"{GameObject.Name} was killed");
 
-		// Vérifier si tous les survivants sont morts
 		CheckSurvivorsAllDead();
 	}
 
@@ -105,15 +113,12 @@ public sealed class PlayerSetup : Component
 			GameStateManager.Instance?.DeclareKillerVictory();
 		}
 	}
+
 	private void HandleDeathState()
 	{
-		// Désactive le PlayerController pour empêcher le mouvement
 		if (_controller != null)
 		{
 			_controller.Enabled = false;
 		}
-
-		// Optionnel : faire le corps "tomber" en désactivant la collision
-		// Pour l'instant on laisse simple, le corps reste en place
 	}
 }
