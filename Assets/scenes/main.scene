@@ -206,6 +206,310 @@
         "7e074844-9de6-4028-ac6c-791bfb21bc44": "54c6407d-c00f-4f64-bf68-cd142464b02e",
         "2b2e7d02-2f6e-496e-abde-e954f8430685": "e696dfd6-70fd-4eda-9b06-84cb066b5c35"
       }
+    },
+    {
+      "__guid": "b22f7aea-4fe4-4bb3-ad63-c127a4168dcb",
+      "__version": 2,
+      "__Prefab": "prefabs/generic_interactable.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "fcd7f13d-67cc-4b94-a10a-e6042996ae74"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "2b2e7d02-2f6e-496e-abde-e954f8430685"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Pickable",
+              "__guid": "fcd7f13d-67cc-4b94-a10a-e6042996ae74",
+              "__enabled": true,
+              "Flags": 0,
+              "ItemKind": "Stone",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          }
+        ],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Name",
+            "Value": "Stone"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Position",
+            "Value": "246.075058,-108.703545,0"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "IsQuestObject",
+            "Value": false
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "caf984f2-4c63-48cf-94c9-333161a67256": "b22f7aea-4fe4-4bb3-ad63-c127a4168dcb",
+        "30ee111d-da90-4369-84e9-f0571d217078": "2436c4a6-6a96-4d5d-a664-920eea226cdb",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "263c84a1-de67-4f71-83d3-7b564884613d",
+        "2b2e7d02-2f6e-496e-abde-e954f8430685": "44061549-b18d-4b0a-9ebb-d2712f88667e"
+      }
+    },
+    {
+      "__guid": "03d678fc-af54-44c7-b477-382d522c7919",
+      "__version": 2,
+      "__Prefab": "prefabs/generic_interactable.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "db920851-90bb-4c38-8042-3784b9342abf"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "2b2e7d02-2f6e-496e-abde-e954f8430685"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Pickable",
+              "__guid": "db920851-90bb-4c38-8042-3784b9342abf",
+              "__enabled": true,
+              "Flags": 0,
+              "ItemKind": "Keycard",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          }
+        ],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Name",
+            "Value": "PickableKeycard"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Position",
+            "Value": "589.28717,672,224.725372"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "IsQuestObject",
+            "Value": false
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "caf984f2-4c63-48cf-94c9-333161a67256": "03d678fc-af54-44c7-b477-382d522c7919",
+        "30ee111d-da90-4369-84e9-f0571d217078": "7fd93d3d-5f28-42b5-b457-1db4fd0636fa",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "060965d9-8c2d-4ec9-a4a7-f3b599ee83a6",
+        "2b2e7d02-2f6e-496e-abde-e954f8430685": "ff04fd7d-db44-40a2-832d-33f56602068c"
+      }
+    },
+    {
+      "__guid": "19138820-56a4-4219-85ce-0206da6ede41",
+      "__version": 2,
+      "__Prefab": "prefabs/generic_interactable.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "2dd5a1fe-7b56-4908-8eb2-d4e77394d475"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "2b2e7d02-2f6e-496e-abde-e954f8430685"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "KeycardReader",
+              "__guid": "2dd5a1fe-7b56-4908-8eb2-d4e77394d475",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "PromptWithKeycard": "Use Keycard",
+              "PromptWithoutKeycard": "Need Keycard equipped"
+            }
+          }
+        ],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Name",
+            "Value": "KeycardReader_Door"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Position",
+            "Value": "-1223,537.54895,74.3220901"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Rotation",
+            "Value": "0,0.707106769,0,0.707106769"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "PromptText",
+            "Value": "Use Keycard"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "caf984f2-4c63-48cf-94c9-333161a67256": "19138820-56a4-4219-85ce-0206da6ede41",
+        "30ee111d-da90-4369-84e9-f0571d217078": "a7f1be40-1548-4516-8813-966fdb1d4ecb",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "6f9c92dc-7a6b-49d7-8c1b-bdbc74976d73",
+        "2b2e7d02-2f6e-496e-abde-e954f8430685": "2bd4da61-65f4-41d0-b705-e7ae0d24b4fe"
+      }
+    },
+    {
+      "__guid": "1927fba7-ef05-4e83-9ced-f35a52e55256",
+      "__version": 2,
+      "__Prefab": "prefabs/generic_interactable.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "2f6ad22e-1eee-4423-ba89-574f9cb0baf5"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "2b2e7d02-2f6e-496e-abde-e954f8430685"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "ExitDoor",
+              "__guid": "2f6ad22e-1eee-4423-ba89-574f9cb0baf5",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          }
+        ],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Name",
+            "Value": "ExitDoor"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Position",
+            "Value": "-1292.1698,470.119904,32.5"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "IsQuestObject",
+            "Value": false
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "PromptText",
+            "Value": "Open the exit door"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "caf984f2-4c63-48cf-94c9-333161a67256": "1927fba7-ef05-4e83-9ced-f35a52e55256",
+        "30ee111d-da90-4369-84e9-f0571d217078": "93425fc0-63e6-4c69-ae8d-c22b1a550df6",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "88e7a140-b365-4a12-8430-fcadbca60ff8",
+        "2b2e7d02-2f6e-496e-abde-e954f8430685": "0a06c0cf-bb6c-4196-a77d-da3904a30e6b"
+      }
     }
   ],
   "SceneProperties": {
@@ -231,14 +535,14 @@
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
       },
-      "Sandbox.SelectionSetsSystem": {
-        "Data": {
-          "SelectionSets": []
-        }
-      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "9f90672f-64de-4fbe-8fd9-d84f136ea3b7"
+        }
+      },
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
         }
       }
     }

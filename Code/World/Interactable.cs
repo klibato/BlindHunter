@@ -7,6 +7,11 @@ public sealed class Interactable : Component
 	[Property] public bool IsQuestObject { get; set; } = true;
 	[Sync( SyncFlags.FromHost )] public bool IsCompleted { get; set; }
 
+	/// <summary>
+	/// Callback de validation custom. Si set, retourne false pour bloquer l'interaction silencieusement.
+	/// </summary>
+	public Func<PlayerSetup, bool> CanInteract { get; set; }
+
 	public event Action<PlayerSetup> OnInteracted;
 
 	private ModelRenderer _renderer;
@@ -21,6 +26,12 @@ public sealed class Interactable : Component
 	{
 		if ( IsCompleted ) return;
 		if ( !Networking.IsHost ) return;
+
+		// Validation custom : si le callback dit non, on bloque l'interaction silencieusement
+		if ( CanInteract != null && !CanInteract( interactor ) )
+		{
+			return;
+		}
 
 		IsCompleted = true;
 		OnInteracted?.Invoke( interactor );

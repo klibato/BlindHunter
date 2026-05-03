@@ -335,7 +335,7 @@
       },
       {
         "__type": "PlayerInventory",
-        "__guid": "f0ec27bf-015e-4d1b-9047-226051f1b381",
+        "__guid": "4035c0d2-8519-479d-a6ce-8525cad0d574",
         "__enabled": true,
         "Flags": 0,
         "OnComponentDestroy": null,
@@ -344,16 +344,21 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
+        "StonePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/stone.prefab"
+        },
         "TargetPlayer": {
           "_type": "component",
           "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
           "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
           "component_type": "PlayerSetup"
-        }
+        },
+        "ThrowForce": 1500
       },
       {
         "__type": "Sandbox.UI.InventoryUI",
-        "__guid": "d8d5693a-eeba-4c9d-a477-5746866c715b",
+        "__guid": "dafdadea-3721-4361-a5fa-cb36fd1a65a1",
         "__enabled": true,
         "Flags": 0,
         "OnComponentDestroy": null,
@@ -364,7 +369,7 @@
         "OnComponentUpdate": null,
         "TargetInventory": {
           "_type": "component",
-          "component_id": "f0ec27bf-015e-4d1b-9047-226051f1b381",
+          "component_id": "4035c0d2-8519-479d-a6ce-8525cad0d574",
           "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
           "component_type": "PlayerInventory"
         },

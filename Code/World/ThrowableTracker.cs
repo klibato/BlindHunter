@@ -2,7 +2,8 @@
 /// Component temporaire ajouté à un objet quand il est lancé.
 /// Écoute les collisions et émet un noise event au premier impact, puis se retire.
 /// </summary>
- using System.Linq;
+using System.Linq;
+using System.Threading.Tasks;
 public sealed class ThrowableTracker : Component, Component.ICollisionListener
 {
 	[Property] public float NoiseIntensity { get; set; } = 300f;
@@ -33,17 +34,23 @@ public sealed class ThrowableTracker : Component, Component.ICollisionListener
 		if (!Networking.IsHost) return;
 		if (_impacted) return;
 
-		// Filtre : on ne veut pas déclencher sur les collisions avec des Players
 		var hitPlayer = other.Other.GameObject?.GetComponentInParent<PlayerSetup>();
 		if (hitPlayer != null) return;
 
 		_impacted = true;
 		EmitNoiseRpc(WorldPosition, NoiseIntensity);
 
-		// Plus besoin du tracker, on se retire (mais on laisse le cube)
-		Destroy();
+		// Détruit le cube entier (pas juste le tracker) après un court délai
+		DestroyGameObjectDelayed(); // 2 secondes après l'impact
 	}
-
+	private async void DestroyGameObjectDelayed()
+	{
+		await Task.Delay(2000);
+		if (GameObject.IsValid())
+		{
+			GameObject.Destroy();
+		}
+	}
 	public void OnCollisionUpdate(Collision other) { }
 	public void OnCollisionStop(CollisionStop other) { }
 
