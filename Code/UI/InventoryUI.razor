@@ -1,0 +1,54 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+	@if ( ShouldDisplay )
+	{
+		<div class="inventory">
+			<div class="slot @(IsActive(0) ? "active" : "")">
+				<div class="slot-number">1</div>
+				<div class="slot-content">@GetSlotLabel(0)</div>
+			</div>
+			<div class="slot @(IsActive(1) ? "active" : "")">
+				<div class="slot-number">2</div>
+				<div class="slot-content">@GetSlotLabel(1)</div>
+			</div>
+			<div class="slot @(IsActive(2) ? "active" : "")">
+				<div class="slot-number">3</div>
+				<div class="slot-content">@GetSlotLabel(2)</div>
+			</div>
+		</div>
+	}
+</root>
+
+@code
+{
+	[Property] public PlayerSetup TargetPlayer { get; set; }
+	[Property] public PlayerInventory TargetInventory { get; set; }
+
+	private bool ShouldDisplay =>
+		TargetPlayer != null
+		&& !TargetPlayer.IsProxy
+		&& TargetPlayer.Role == PlayerRole.Survivor
+		&& TargetPlayer.IsAlive
+		&& TargetInventory != null;
+
+	private bool IsActive(int slot) => TargetInventory?.ActiveSlot == slot;
+
+	private string GetSlotLabel(int slot)
+	{
+		if (TargetInventory == null) return "";
+		var item = TargetInventory.GetSlot(slot);
+		return item == ItemType.None ? "—" : item.ToString();
+	}
+
+	protected override int BuildHash() => HashCode.Combine(
+		ShouldDisplay,
+		TargetInventory?.ActiveSlot ?? -1,
+		TargetInventory?.Slot0 ?? ItemType.None,
+		TargetInventory?.Slot1 ?? ItemType.None,
+		TargetInventory?.Slot2 ?? ItemType.None
+	);
+}

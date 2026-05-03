@@ -1,0 +1,251 @@
+{
+  "__guid": "b96b1f01-0adc-498d-9eba-3c1995ee42e8",
+  "GameObjects": [
+    {
+      "__guid": "d139d254-0cfe-4bcb-a497-106f4bebe836",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Map",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "c8f1268f-9393-45de-98ea-03613bbb0c18",
+          "__enabled": true,
+          "Flags": 0,
+          "__version": 1,
+          "EnableCollision": true,
+          "MapName": "despawn.fracture",
+          "NoOrigin": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": false
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "b70fda7c-4b41-4f9d-b648-5815462a3219",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "GameManager",
+      "Position": "-526.619446,-76.415123,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "GameManager",
+          "__guid": "4d3e361b-6c4f-4c32-b612-2f4d454c6593",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "PlayerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/player.prefab"
+          },
+          "SpawnPosition": "0,0,50"
+        },
+        {
+          "__type": "NoiseVisualizer",
+          "__guid": "c83fb8e7-49cd-4ae0-b8bf-ccd2e433a485",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "f0a7bcbe-be3c-4379-aa90-9cf4c446d6fe",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "QuestManager",
+      "Position": "-230.769684,204.811005,81.8883362",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "QuestManager",
+          "__guid": "425810fa-57a7-408a-b77c-43214ef0d193",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "f4ad56e5-8ecd-4bf3-821d-63c1dfe24067",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "GameStateManager",
+      "Position": "-230.769684,204.811005,81.8883362",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "GameStateManager",
+          "__guid": "87af16f4-1b7b-4648-a426-5113da09da17",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "e9851a18-cd86-4103-ae72-58195727d7d8",
+      "__version": 2,
+      "__Prefab": "prefabs/generic_interactable.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Name",
+            "Value": "Generator"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Position",
+            "Value": "-1184.35828,348.40921,33.66745"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+            },
+            "Property": "Scale",
+            "Value": "0.952545345,1,1.2483114"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "30ee111d-da90-4369-84e9-f0571d217078"
+            },
+            "Property": "Tint",
+            "Value": "1,1,1,0"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "PromptText",
+            "Value": "Activate the generator"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "caf984f2-4c63-48cf-94c9-333161a67256": "e9851a18-cd86-4103-ae72-58195727d7d8",
+        "30ee111d-da90-4369-84e9-f0571d217078": "15a17942-7381-4fef-b968-5642cbf4de6f",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "54c6407d-c00f-4f64-bf68-cd142464b02e",
+        "2b2e7d02-2f6e-496e-abde-e954f8430685": "e696dfd6-70fd-4eda-9b06-84cb066b5c35"
+      }
+    }
+  ],
+  "SceneProperties": {
+    "NetworkInterpolation": true,
+    "TimeScale": 1,
+    "WantsSystemScene": true,
+    "Metadata": {},
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": false,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": "",
+      "DeferGeneration": false,
+      "CustomBounds": false
+    },
+    "GameObjectSystems": {
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
+        }
+      },
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "9f90672f-64de-4fbe-8fd9-d84f136ea3b7"
+        }
+      }
+    }
+  },
+  "ResourceVersion": 3,
+  "Title": null,
+  "Description": null,
+  "__references": [],
+  "__version": 3
+}
