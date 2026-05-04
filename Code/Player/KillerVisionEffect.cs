@@ -8,11 +8,10 @@ public sealed class KillerVisionEffect : BasePostProcess<KillerVisionEffect>
 
 	public override void Render()
 	{
-		// FILTRE DÉSACTIVÉ POUR DEBUG
-		// if (TargetPlayer == null) return;
-		// if (TargetPlayer.Role != PlayerRole.Killer) return;
+		if (TargetPlayer == null) return;
+		if (TargetPlayer.Role != PlayerRole.Killer) return;
 
-		var shader = Material.FromShader("shaders/pp_test_white.shader");
+		var shader = Material.FromShader("shaders/pp_grayscale.shader"); 
 		if (shader == null) return;
 
 		var blit = BlitMode.WithBackbuffer(shader, Stage.AfterPostProcess, 200, false);
