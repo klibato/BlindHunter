@@ -11,7 +11,7 @@ public sealed class KillerVisionEffect : BasePostProcess<KillerVisionEffect>
 		if (TargetPlayer == null) return;
 		if (TargetPlayer.Role != PlayerRole.Killer) return;
 
-		var shader = Material.FromShader("shaders/pp_grayscale.shader"); 
+		var shader = Material.FromShader("shaders/pp_edge_detect.shader"); 
 		if (shader == null) return;
 
 		var blit = BlitMode.WithBackbuffer(shader, Stage.AfterPostProcess, 200, false);
