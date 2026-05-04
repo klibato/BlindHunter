@@ -143,7 +143,14 @@ PS
         float br = SampleDepth(screenPos + float2(1, 1));
 
         // Skip le ciel / hors map
+        // Skip le ciel / hors map
         if (center > 5000.0)
+        {
+            return float4(0.0, 0.0, 0.0, 1.0);
+        }
+
+        // Skip les pixels trop proches de la caméra (anti-AA)
+        if (center < 30.0)
         {
             return float4(0.0, 0.0, 0.0, 1.0);
         }
@@ -153,8 +160,12 @@ PS
 
         float depthEdge = sqrt(sobelX * sobelX + sobelY * sobelY);
 
-        // C'est-il un contour ? (1 ou 0)
-        float edge = step(10.0, depthEdge);
+        // Le seuil augmente avec la distance (plus strict de loin, plus permissif de près)
+        // À 100 unités → seuil 30. À 1000 unités → seuil 100.
+        float threshold = 20.0 + center * 0.05;
+
+        // C'est-il un contour ?
+        float edge = step(threshold, depthEdge);
 
         // Le pixel est-il sur le front d'onde 3D ? (0 à 1)
         float inSphere = 0.0;
