@@ -640,7 +640,9 @@
               "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
               "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
               "component_type": "PlayerSetup"
-            }
+            },
+            "WaveSpeedFactor": 1.5,
+            "WaveThickness": 65
           }
         ],
         "Children": [
