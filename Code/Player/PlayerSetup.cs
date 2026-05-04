@@ -93,7 +93,8 @@ public sealed class PlayerSetup : Component
 	{
 		if (!Networking.IsHost) return;
 		if (!IsAlive) return;
-
+		
+		NoiseVisualizer.AddNoise(WorldPosition, 400f);
 		IsAlive = false;
 		Log.Info($"{GameObject.Name} was killed");
 
