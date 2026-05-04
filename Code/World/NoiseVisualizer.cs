@@ -1,7 +1,7 @@
 /// <summary>Tracks active noise events for the Killer's vision shader. No visual artifacts in world space.</summary>
 public sealed class NoiseVisualizer : Component
 {
-	private const float NoiseLifetime = 2.0f;
+	private const float NoiseLifetime = 1.5f;
 
 	public class NoiseEntry
 	{

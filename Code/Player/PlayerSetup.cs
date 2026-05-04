@@ -1,8 +1,8 @@
 /// <summary>Assigns Killer/Survivor role on spawn and emits positional noise when the player moves.</summary>
 public sealed class PlayerSetup : Component
 {
-	private const float NoiseInterval = 0.5f;
-	private const float MovementThreshold = 50f;
+	private const float NoiseInterval = 1.2f;
+	private const float MovementThreshold = 100f;
 
 	[Sync(SyncFlags.FromHost)] public PlayerRole Role { get; set; } = PlayerRole.None;
 	[Sync(SyncFlags.FromHost)] public bool IsAlive { get; set; } = true;
@@ -93,7 +93,7 @@ public sealed class PlayerSetup : Component
 	{
 		if (!Networking.IsHost) return;
 		if (!IsAlive) return;
-		
+
 		NoiseVisualizer.AddNoise(WorldPosition, 400f);
 		IsAlive = false;
 		Log.Info($"{GameObject.Name} was killed");

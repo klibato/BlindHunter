@@ -87,9 +87,11 @@ PS
 
         float inWave = 1.0 - smoothstep( 0.0, g_WaveThickness, distFromWaveFront );
 
-        float ageFactor = saturate( 1.0 - ( age / lifetime ) );
+        // Décline lentement : les contours restent visibles longtemps
+        float ageFactor = saturate(1.0 - (age / lifetime));
+        ageFactor = pow(ageFactor, 0.4); // courbe plus douce
 
-        float maxRange = intensity * 2.5;
+        float maxRange = intensity * 1.5;
         float distFactor = 1.0 / (1.0 + (distToSource * distToSource) / (maxRange * maxRange));
         distFactor = saturate(distFactor);
 
@@ -110,9 +112,11 @@ PS
         // Anneau plus fin que le mask de révélation
         float onRing = 1.0 - smoothstep( 0.0, g_RingThickness, distFromWaveFront );
 
-        float ageFactor = saturate( 1.0 - ( age / lifetime ) );
+        // Décline vite : l'anneau ping et disparaît
+        float ageFactor = saturate(1.0 - (age / lifetime));
+        ageFactor = pow(ageFactor, 2); // courbe agressive
 
-        float maxRange = intensity * 2.5;
+        float maxRange = intensity * 1.5;
         float distFactor = 1.0 / (1.0 + (distToSource * distToSource) / (maxRange * maxRange));
         distFactor = saturate(distFactor);
 
