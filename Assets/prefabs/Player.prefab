@@ -248,6 +248,8 @@
         "Flags": 0,
         "AttackCooldown": 1,
         "AttackRange": 100,
+        "HitNoiseIntensity": 350,
+        "MissNoiseIntensity": 200,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -611,20 +613,6 @@
             "ZNear": 10
           },
           {
-            "__type": "Sandbox.FilmGrain",
-            "__guid": "f6eeca11-f372-42f3-9287-9421cb5d532b",
-            "__enabled": false,
-            "Flags": 0,
-            "Intensity": 1,
-            "OnComponentDestroy": null,
-            "OnComponentDisabled": null,
-            "OnComponentEnabled": null,
-            "OnComponentFixedUpdate": null,
-            "OnComponentStart": null,
-            "OnComponentUpdate": null,
-            "Response": 1
-          },
-          {
             "__type": "KillerVisionEffect",
             "__guid": "d30e2ec6-4bbf-483a-9df3-aca235f1e7c2",
             "__enabled": true,
@@ -642,7 +630,7 @@
               "component_type": "PlayerSetup"
             },
             "WaveSpeedFactor": 1.5,
-            "WaveThickness": 65
+            "WaveThickness": 60
           }
         ],
         "Children": [
