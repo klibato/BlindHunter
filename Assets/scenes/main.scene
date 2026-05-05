@@ -150,64 +150,6 @@
       "Children": []
     },
     {
-      "__guid": "e9851a18-cd86-4103-ae72-58195727d7d8",
-      "__version": 2,
-      "__Prefab": "prefabs/generic_interactable.prefab",
-      "__PrefabInstancePatch": {
-        "AddedObjects": [],
-        "RemovedObjects": [],
-        "PropertyOverrides": [
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
-            },
-            "Property": "Name",
-            "Value": "Generator"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
-            },
-            "Property": "Position",
-            "Value": "-1184.35828,348.40921,33.66745"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
-            },
-            "Property": "Scale",
-            "Value": "0.952545345,1,1.2483114"
-          },
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "30ee111d-da90-4369-84e9-f0571d217078"
-            },
-            "Property": "Tint",
-            "Value": "1,1,1,0"
-          },
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
-            },
-            "Property": "PromptText",
-            "Value": "Activate the generator"
-          }
-        ],
-        "MovedObjects": []
-      },
-      "__PrefabIdToInstanceId": {
-        "caf984f2-4c63-48cf-94c9-333161a67256": "e9851a18-cd86-4103-ae72-58195727d7d8",
-        "30ee111d-da90-4369-84e9-f0571d217078": "15a17942-7381-4fef-b968-5642cbf4de6f",
-        "7e074844-9de6-4028-ac6c-791bfb21bc44": "54c6407d-c00f-4f64-bf68-cd142464b02e",
-        "2b2e7d02-2f6e-496e-abde-e954f8430685": "e696dfd6-70fd-4eda-9b06-84cb066b5c35"
-      }
-    },
-    {
       "__guid": "b22f7aea-4fe4-4bb3-ad63-c127a4168dcb",
       "__version": 2,
       "__Prefab": "prefabs/generic_interactable.prefab",
@@ -670,6 +612,272 @@
         }
       ],
       "Children": []
+    },
+    {
+      "__guid": "66a9fee0-5c0d-4854-8d74-0fa3ea8129bb",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "QuestGroup_Generators",
+      "Position": "-1310.97827,290.051392,48.1034927",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "QuestGroup",
+          "__guid": "a15986f3-04c0-4e63-afda-f01a24dcd895",
+          "__enabled": true,
+          "Flags": 0,
+          "GroupName": "Generators",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "SubQuests": []
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "e9851a18-cd86-4103-ae72-58195727d7d8",
+          "__version": 2,
+          "__Prefab": "prefabs/generic_interactable.prefab",
+          "__PrefabInstancePatch": {
+            "AddedObjects": [],
+            "RemovedObjects": [],
+            "PropertyOverrides": [
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Name",
+                "Value": "Generator_1"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Position",
+                "Value": "126.619995,58.3578186,-14.4360428"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Scale",
+                "Value": "0.67599088,1,1.09806788"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "30ee111d-da90-4369-84e9-f0571d217078"
+                },
+                "Property": "Tint",
+                "Value": "1,1,1,0"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+                },
+                "Property": "PromptText",
+                "Value": "Activate the generator"
+              }
+            ],
+            "MovedObjects": []
+          },
+          "__PrefabIdToInstanceId": {
+            "caf984f2-4c63-48cf-94c9-333161a67256": "e9851a18-cd86-4103-ae72-58195727d7d8",
+            "30ee111d-da90-4369-84e9-f0571d217078": "15a17942-7381-4fef-b968-5642cbf4de6f",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "54c6407d-c00f-4f64-bf68-cd142464b02e",
+            "2b2e7d02-2f6e-496e-abde-e954f8430685": "e696dfd6-70fd-4eda-9b06-84cb066b5c35"
+          }
+        },
+        {
+          "__guid": "602e39b3-3023-48d9-8856-2a0fca8bf0e7",
+          "__version": 2,
+          "__Prefab": "prefabs/generic_interactable.prefab",
+          "__PrefabInstancePatch": {
+            "AddedObjects": [],
+            "RemovedObjects": [],
+            "PropertyOverrides": [
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Name",
+                "Value": "Generator_2"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Position",
+                "Value": "937.660828,-1623.57751,-16.8950729"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Scale",
+                "Value": "0.952545345,1,1.2483114"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "30ee111d-da90-4369-84e9-f0571d217078"
+                },
+                "Property": "Tint",
+                "Value": "1,1,1,0"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+                },
+                "Property": "PromptText",
+                "Value": "Activate the generator"
+              }
+            ],
+            "MovedObjects": []
+          },
+          "__PrefabIdToInstanceId": {
+            "caf984f2-4c63-48cf-94c9-333161a67256": "602e39b3-3023-48d9-8856-2a0fca8bf0e7",
+            "30ee111d-da90-4369-84e9-f0571d217078": "794ad8f7-e24e-4587-b1a8-461fad4ebf0b",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "6d53f4fd-efb1-45d6-ab34-9effc65d14f4",
+            "2b2e7d02-2f6e-496e-abde-e954f8430685": "9cbcc712-8a45-4657-889a-64ea65e00e44"
+          }
+        },
+        {
+          "__guid": "96926838-5054-465b-b59d-c1b8c5fddb72",
+          "__version": 2,
+          "__Prefab": "prefabs/generic_interactable.prefab",
+          "__PrefabInstancePatch": {
+            "AddedObjects": [],
+            "RemovedObjects": [],
+            "PropertyOverrides": [
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Name",
+                "Value": "Generator_3"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Position",
+                "Value": "2473.41602,-1834.38721,-13.6299133"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Scale",
+                "Value": "0.952545345,1,1.2483114"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "30ee111d-da90-4369-84e9-f0571d217078"
+                },
+                "Property": "Tint",
+                "Value": "1,1,1,0"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+                },
+                "Property": "PromptText",
+                "Value": "Activate the generator"
+              }
+            ],
+            "MovedObjects": []
+          },
+          "__PrefabIdToInstanceId": {
+            "caf984f2-4c63-48cf-94c9-333161a67256": "96926838-5054-465b-b59d-c1b8c5fddb72",
+            "30ee111d-da90-4369-84e9-f0571d217078": "342ed641-2de7-43be-9076-68f068001a18",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "47b390a9-9441-45b7-9a94-84aa19ce93d0",
+            "2b2e7d02-2f6e-496e-abde-e954f8430685": "793a1201-65c5-4711-93ca-05164685308b"
+          }
+        },
+        {
+          "__guid": "71c7cf4f-389a-48df-a4ff-bd373da0258e",
+          "__version": 2,
+          "__Prefab": "prefabs/generic_interactable.prefab",
+          "__PrefabInstancePatch": {
+            "AddedObjects": [],
+            "RemovedObjects": [],
+            "PropertyOverrides": [
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Name",
+                "Value": "Generator_4"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Position",
+                "Value": "651.722229,-167.756592,104.029762"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "Property": "Scale",
+                "Value": "0.270152003,0.628355742,1.10927343"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "30ee111d-da90-4369-84e9-f0571d217078"
+                },
+                "Property": "Tint",
+                "Value": "1,1,1,0"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+                },
+                "Property": "PromptText",
+                "Value": "Activate the generator"
+              }
+            ],
+            "MovedObjects": []
+          },
+          "__PrefabIdToInstanceId": {
+            "caf984f2-4c63-48cf-94c9-333161a67256": "71c7cf4f-389a-48df-a4ff-bd373da0258e",
+            "30ee111d-da90-4369-84e9-f0571d217078": "9458f5b9-a18a-4cf6-8530-24e212c9b0bf",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "896be044-bee4-46be-a32d-c7e14032e1b9",
+            "2b2e7d02-2f6e-496e-abde-e954f8430685": "b015e67d-3ccb-4f24-a904-4b766a7ae5b4"
+          }
+        }
+      ]
     }
   ],
   "SceneProperties": {

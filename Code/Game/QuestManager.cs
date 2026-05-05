@@ -1,42 +1,60 @@
+using System.Linq;
+
 /// <summary>
-/// Tracks quest completion. Subscribes to each <see cref="Interactable.OnInteracted"/> event on the
-/// host instead of scanning the scene every frame.
+/// Tracks completion of all quests (Interactable + QuestGroup) in the scene.
 /// </summary>
 public sealed class QuestManager : Component
 {
-	[Sync( SyncFlags.FromHost )] public int CompletedQuests { get; set; }
+	[Sync(SyncFlags.FromHost)] public int CompletedQuests { get; set; }
+	[Sync(SyncFlags.FromHost)] public int TotalQuests { get; set; }
 
-	public int TotalQuests { get; private set; }
+	public bool AllQuestsCompleted => TotalQuests > 0 && CompletedQuests >= TotalQuests;
 
 	public static QuestManager Instance { get; private set; }
 
-	public bool AllQuestsCompleted => CompletedQuests >= TotalQuests && TotalQuests > 0;
-
 	protected override void OnAwake()
 	{
-		GameObject.NetworkMode = NetworkMode.Object;
 		Instance = this;
 	}
 
 	protected override void OnStart()
 	{
-		var questObjects = Scene.GetAllComponents<Interactable>()
-			.Where( q => q.IsQuestObject )
+		if ( !Networking.IsHost ) return;
+
+		// Compte les Interactable standalone (avec IsQuestObject = true)
+		var standaloneInteractables = Scene.GetAllComponents<Interactable>()
+			.Where( i => i.IsQuestObject )
 			.ToList();
 
-		TotalQuests = questObjects.Count;
+		// Compte les QuestGroup (chaque groupe = 1 quête)
+		var questGroups = Scene.GetAllComponents<QuestGroup>().ToList();
 
-		// Only the host maintains CompletedQuests; subscribe to events here so the
-		// count is incremented exactly once per completion rather than polled every tick.
-		if ( Networking.IsHost )
+		TotalQuests = standaloneInteractables.Count + questGroups.Count;
+
+		// Subscribe aux events
+		foreach ( var i in standaloneInteractables )
 		{
-			foreach ( var interactable in questObjects )
-				interactable.OnInteracted += OnQuestCompleted;
+			i.OnInteracted += OnQuestCompleted;
 		}
+		foreach ( var g in questGroups )
+		{
+			g.OnGroupCompleted += OnGroupCompleted;
+		}
+
+		Log.Info( $"QuestManager initialized: {TotalQuests} total quests ({standaloneInteractables.Count} standalone + {questGroups.Count} groups)" );
 	}
 
-	private void OnQuestCompleted( PlayerSetup _ )
+	private void OnQuestCompleted( PlayerSetup interactor )
 	{
+		if ( !Networking.IsHost ) return;
 		CompletedQuests++;
+		Log.Info( $"Quest completed: {CompletedQuests}/{TotalQuests}" );
+	}
+
+	private void OnGroupCompleted()
+	{
+		if ( !Networking.IsHost ) return;
+		CompletedQuests++;
+		Log.Info( $"Quest group completed: {CompletedQuests}/{TotalQuests}" );
 	}
 }
