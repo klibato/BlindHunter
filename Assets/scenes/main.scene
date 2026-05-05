@@ -60,6 +60,7 @@
           "__guid": "4d3e361b-6c4f-4c32-b612-2f4d454c6593",
           "__enabled": true,
           "Flags": 0,
+          "FallbackSpawnPosition": "0,0,50",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -69,8 +70,7 @@
           "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
-          },
-          "SpawnPosition": "0,0,50"
+          }
         },
         {
           "__type": "NoiseVisualizer",
@@ -510,6 +510,166 @@
         "7e074844-9de6-4028-ac6c-791bfb21bc44": "88e7a140-b365-4a12-8430-fcadbca60ff8",
         "2b2e7d02-2f6e-496e-abde-e954f8430685": "0a06c0cf-bb6c-4196-a77d-da3904a30e6b"
       }
+    },
+    {
+      "__guid": "93193eac-8423-4ea8-926d-155a1a90b6af",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Spawn_Killer",
+      "Position": "890.671265,135.713608,24.68853",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "SpawnPoint",
+          "__guid": "ee9e67ad-01f1-40bd-90c7-31a7d8c961ac",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Role": "Killer"
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "3497e87d-7fb5-4125-a9c1-5939ae82dc6f",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Spawn_Survivor_1",
+      "Position": "-39.5294189,-1902.45142,173.055984",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "SpawnPoint",
+          "__guid": "9cd1f63a-1924-449d-bfce-bdd041fa1f64",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Role": "Survivor"
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "bf3e7975-9ccb-4c83-97aa-8d33b4289a02",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Spawn_Survivor_2",
+      "Position": "711.085083,-1406.3479,30.491333",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "SpawnPoint",
+          "__guid": "235a59a9-c4cc-4add-a1f9-a2ec16584135",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Role": "Survivor"
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "9450f58c-d029-4537-b783-2e05d59b39f3",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Spawn_Survivor_3",
+      "Position": "-574.078003,591.559387,32.0529785",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "SpawnPoint",
+          "__guid": "803e0034-73a1-4a50-bb3c-35190f9a283c",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Role": "Survivor"
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "a7823079-4267-4432-882f-c643b195e3c2",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Spawn_Survivor_4",
+      "Position": "-1075.47021,-305.93811,41.2677536",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "SpawnPoint",
+          "__guid": "1caa82fb-3853-4026-9b9d-77d8083dc5e2",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Role": "Survivor"
+        }
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {
@@ -532,18 +692,18 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
+        }
       },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "9f90672f-64de-4fbe-8fd9-d84f136ea3b7"
         }
       },
-      "Sandbox.SelectionSetsSystem": {
-        "Data": {
-          "SelectionSets": []
-        }
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
       }
     }
   },

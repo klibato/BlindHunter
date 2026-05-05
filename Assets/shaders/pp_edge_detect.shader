@@ -89,7 +89,7 @@ PS
 
         // Décline lentement : les contours restent visibles longtemps
         float ageFactor = saturate(1.0 - (age / lifetime));
-        ageFactor = pow(ageFactor, 0.4); // courbe plus douce
+        ageFactor = pow(ageFactor, 1); // courbe plus douce
 
         float maxRange = intensity * 1.5;
         float distFactor = 1.0 / (1.0 + (distToSource * distToSource) / (maxRange * maxRange));
@@ -114,7 +114,7 @@ PS
 
         // Décline vite : l'anneau ping et disparaît
         float ageFactor = saturate(1.0 - (age / lifetime));
-        ageFactor = pow(ageFactor, 2); // courbe agressive
+        ageFactor = pow(ageFactor, 1); // courbe agressive
 
         float maxRange = intensity * 1.5;
         float distFactor = 1.0 / (1.0 + (distToSource * distToSource) / (maxRange * maxRange));

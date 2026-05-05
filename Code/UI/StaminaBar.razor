@@ -1,0 +1,32 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+	@if ( ShouldDisplay )
+	{
+		<div class="stamina-container">
+			<div class="stamina-fill" style="width: @(Percent)%"></div>
+		</div>
+	}
+</root>
+
+@code
+{
+	[Property] public PlayerSetup TargetPlayer { get; set; }
+	[Property] public PlayerStamina TargetStamina { get; set; }
+
+	private bool ShouldDisplay =>
+		TargetPlayer != null
+		&& !TargetPlayer.IsProxy
+		&& TargetPlayer.IsAlive
+		&& TargetStamina != null
+		&& TargetPlayer.Role == PlayerRole.Survivor;
+	private int Percent => TargetStamina != null ? (int)(TargetStamina.StaminaPercent * 100) : 0;
+
+	protected override int BuildHash() => HashCode.Combine(
+		ShouldDisplay,
+		Percent
+	);
+}

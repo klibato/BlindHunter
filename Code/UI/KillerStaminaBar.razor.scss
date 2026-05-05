@@ -1,0 +1,18 @@
+.killer-stamina-container {
+	position: absolute;
+	bottom: 130px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 200px;
+	height: 8px;
+	background-color: rgba(0, 0, 0, 0.6);
+	border: 1px solid rgba(180, 0, 0, 0.6);
+	border-radius: 4px;
+	overflow: hidden;
+
+	.killer-stamina-fill {
+		height: 100%;
+		background: linear-gradient(to right, #aa0000, #ff3333);
+		transition: width 0.1s ease-out;
+	}
+}

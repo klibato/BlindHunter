@@ -44,7 +44,7 @@
         },
         "DeaccelerationTime": 0,
         "DuckedHeight": 36,
-        "DuckedSpeed": 70,
+        "DuckedSpeed": 50,
         "EnableFootstepSounds": true,
         "EnablePressing": true,
         "EyeDistanceFromTop": 8,
@@ -74,7 +74,7 @@
         "RotationAngleLimit": 45,
         "RotationSpeed": 1,
         "RunByDefault": false,
-        "RunSpeed": 320,
+        "RunSpeed": 200,
         "ShowColliderComponents": false,
         "ShowRigidbodyComponent": false,
         "ThirdPerson": false,
@@ -85,7 +85,7 @@
         "UseFovFromPreferences": true,
         "UseInputControls": true,
         "UseLookControls": true,
-        "WalkSpeed": 110
+        "WalkSpeed": 100
       },
       {
         "__type": "Sandbox.Rigidbody",
@@ -246,9 +246,10 @@
         "__guid": "33a4f2e4-78bd-4dbe-a046-41ea7cfb139f",
         "__enabled": true,
         "Flags": 0,
-        "AttackCooldown": 1,
         "AttackRange": 100,
         "HitNoiseIntensity": 350,
+        "MaxStamina": 3,
+        "MinStaminaToAttack": 1,
         "MissNoiseIntensity": 200,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -256,6 +257,8 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
+        "StaminaCost": 1,
+        "StaminaRegen": 0.4,
         "TargetPlayer": {
           "_type": "component",
           "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
@@ -374,6 +377,77 @@
           "component_id": "4035c0d2-8519-479d-a6ce-8525cad0d574",
           "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
           "component_type": "PlayerInventory"
+        },
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        }
+      },
+      {
+        "__type": "Sandbox.UI.StaminaBar",
+        "__guid": "f0ba4962-175b-4a31-95a7-bba43a08b670",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        },
+        "TargetStamina": {
+          "_type": "component",
+          "component_id": "e7bad442-5c86-461f-9c82-f8822190d7d3",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerStamina"
+        }
+      },
+      {
+        "__type": "PlayerStamina",
+        "__guid": "e7bad442-5c86-461f-9c82-f8822190d7d3",
+        "__enabled": true,
+        "Flags": 0,
+        "MaxStamina": 100,
+        "MinStaminaToRun": 10,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "RegenDelayAfterUse": 1,
+        "RegenRate": 15,
+        "RunDrainRate": 25,
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        }
+      },
+      {
+        "__type": "Sandbox.UI.KillerStaminaBar",
+        "__guid": "6cdedae7-04d7-426a-97c0-2af800195d9d",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetAttack": {
+          "_type": "component",
+          "component_id": "33a4f2e4-78bd-4dbe-a046-41ea7cfb139f",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "KillerAttack"
         },
         "TargetPlayer": {
           "_type": "component",
@@ -614,7 +688,7 @@
           },
           {
             "__type": "KillerVisionEffect",
-            "__guid": "d30e2ec6-4bbf-483a-9df3-aca235f1e7c2",
+            "__guid": "351e2c9a-ad3b-46b5-8bed-e5c86d92a7ef",
             "__enabled": true,
             "Flags": 0,
             "OnComponentDestroy": null,
