@@ -4,7 +4,6 @@ using System.Linq;
 
 /// <summary>
 /// Groupe de sous-quêtes. La quête principale est complétée quand toutes les sous-quêtes le sont.
-/// Les sous-quêtes sont les Interactable enfants de ce GameObject (ou listés manuellement).
 /// </summary>
 public sealed class QuestGroup : Component
 {
@@ -15,21 +14,33 @@ public sealed class QuestGroup : Component
 
 	public event Action OnGroupCompleted;
 
-	protected override void OnStart()
+	protected override void OnAwake()
 	{
-		// Auto-detect sub-quests si la liste est vide : prend tous les Interactable enfants
+		// Auto-detect si vide
 		if ( SubQuests.Count == 0 )
 		{
 			SubQuests = GetComponentsInChildren<Interactable>().ToList();
 		}
 
-		// Force IsQuestObject = false sur les sous-quêtes
-		// (pour qu'elles ne comptent PAS individuellement dans QuestManager)
+		// IMPORTANT : marquer les sous-quêtes comme non-quêtes AVANT que QuestManager les compte
 		foreach ( var sub in SubQuests )
 		{
 			if ( sub != null )
 			{
 				sub.IsQuestObject = false;
+			}
+		}
+	}
+
+	protected override void OnStart()
+	{
+		// Subscribe aux events des sous-quêtes (host only pour éviter doublon)
+		if ( !Networking.IsHost ) return;
+
+		foreach ( var sub in SubQuests )
+		{
+			if ( sub != null )
+			{
 				sub.OnInteracted += OnSubQuestCompleted;
 			}
 		}
@@ -39,7 +50,6 @@ public sealed class QuestGroup : Component
 	{
 		if ( !Networking.IsHost ) return;
 
-		// Vérifie si toutes les sous-quêtes sont done
 		bool allDone = SubQuests.All( s => s != null && s.IsCompleted );
 
 		if ( allDone && !IsCompleted )

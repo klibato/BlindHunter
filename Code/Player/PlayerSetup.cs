@@ -121,5 +121,16 @@ public sealed class PlayerSetup : Component
 		{
 			_controller.Enabled = false;
 		}
+		// Désactive le PlayerInteractor (le joueur mort ne peut plus interagir)
+		var interactor = GameObject.GetComponent<PlayerInteractor>();
+		if (interactor != null) interactor.Enabled = false;
+
+		// Désactive l'inventaire
+		var inventory = GameObject.GetComponent<PlayerInventory>();
+		if (inventory != null) inventory.Enabled = false;
+
+		// Désactive la flashlight
+		var flashlight = GameObject.GetComponentInChildren<Flashlight>();
+		if (flashlight != null) flashlight.Enabled = false;
 	}
 }

@@ -1,16 +1,37 @@
 .progress {
 	position: absolute;
-	top: 30px;
+	top: 80px;
 	right: 30px;
-	background-color: rgba(0, 0, 0, 0.6);
-	border-radius: 8px;
-	padding: 12px 20px;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 4px;
 
-	.label {
+	.main-label {
 		color: white;
-		font-size: 22px;
+		font-size: 18px;
 		font-weight: bold;
-		font-family: Arial;
-		letter-spacing: 1px;
+		background-color: rgba(0, 0, 0, 0.6);
+		padding: 6px 12px;
+		border-radius: 4px;
+	}
+
+	.subquests {
+		flex-direction: column;
+		gap: 2px;
+		margin-top: 6px;
+
+		.subquest {
+			color: rgba(255, 255, 255, 0.7);
+			font-size: 14px;
+			background-color: rgba(0, 0, 0, 0.5);
+			padding: 4px 8px;
+			border-radius: 3px;
+
+			&.done {
+				color: #4caf50;
+				text-decoration: line-through;
+				opacity: 0.6;
+			}
+		}
 	}
 }

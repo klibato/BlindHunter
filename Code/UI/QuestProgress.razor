@@ -1,40 +1,62 @@
 @using Sandbox;
 @using Sandbox.UI;
 @using System;
+@using System.Linq;
 @inherits PanelComponent
 
 <root>
-    @if (ShouldDisplay)
-    {
-        <div class="progress">
-            <div class="label">@LabelText</div>
-        </div>
-    }
+	@if (ShouldDisplay)
+	{
+		<div class="progress">
+			<div class="main-label">@MainLabelText</div>
+			
+			@if (QuestManager.Instance != null && QuestManager.Instance.QuestGroups.Count > 0)
+			{
+				<div class="subquests">
+					@foreach (var group in QuestManager.Instance.QuestGroups)
+					{
+						<div class="subquest @(group.IsCompleted ? "done" : "")">
+							@group.GroupName : @group.CompletedCount / @group.TotalCount
+						</div>
+					}
+				</div>
+			}
+		</div>
+	}
 </root>
 
 @code
 {
-    [Property] public PlayerSetup TargetPlayer { get; set; }
+	[Property] public PlayerSetup TargetPlayer { get; set; }
 
-    private bool ShouldDisplay =>
-        TargetPlayer != null
-        && !TargetPlayer.IsProxy
-        && TargetPlayer.Role == PlayerRole.Survivor
-        && QuestManager.Instance != null;
+	private bool ShouldDisplay =>
+		TargetPlayer != null
+		&& !TargetPlayer.IsProxy
+		&& TargetPlayer.Role == PlayerRole.Survivor
+		&& QuestManager.Instance != null;
 
-    private string LabelText
-    {
-        get
-        {
-            if (QuestManager.Instance == null)
-            {
-                return "(no manager)";
-            }
-            var text = $"Quêtes : {QuestManager.Instance.CompletedQuests}/{QuestManager.Instance.TotalQuests}";
-            return text;
-        }
-    }
+	private string MainLabelText
+	{
+		get
+		{
+			if (QuestManager.Instance == null) return "(no manager)";
+			return $"Quêtes : {QuestManager.Instance.CompletedQuests}/{QuestManager.Instance.TotalQuests}";
+		}
+	}
 
-    protected override int BuildHash() => HashCode.Combine(ShouldDisplay, LabelText);
+	private int SubProgressHash
+	{
+		get
+		{
+			if (QuestManager.Instance == null) return 0;
+			int hash = 0;
+			foreach (var g in QuestManager.Instance.QuestGroups)
+			{
+				hash = HashCode.Combine(hash, g.CompletedCount, g.IsCompleted);
+			}
+			return hash;
+		}
+	}
 
+	protected override int BuildHash() => HashCode.Combine(ShouldDisplay, MainLabelText, SubProgressHash);
 }

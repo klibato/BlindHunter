@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 /// <summary>
@@ -12,6 +13,9 @@ public sealed class QuestManager : Component
 
 	public static QuestManager Instance { get; private set; }
 
+	private List<QuestGroup> _questGroups = new();
+	public IReadOnlyList<QuestGroup> QuestGroups => _questGroups;
+
 	protected override void OnAwake()
 	{
 		Instance = this;
@@ -19,42 +23,37 @@ public sealed class QuestManager : Component
 
 	protected override void OnStart()
 	{
+		_questGroups = Scene.GetAllComponents<QuestGroup>().ToList();
+
 		if ( !Networking.IsHost ) return;
 
-		// Compte les Interactable standalone (avec IsQuestObject = true)
 		var standaloneInteractables = Scene.GetAllComponents<Interactable>()
 			.Where( i => i.IsQuestObject )
 			.ToList();
 
-		// Compte les QuestGroup (chaque groupe = 1 quête)
-		var questGroups = Scene.GetAllComponents<QuestGroup>().ToList();
+		TotalQuests = standaloneInteractables.Count + _questGroups.Count;
 
-		TotalQuests = standaloneInteractables.Count + questGroups.Count;
-
-		// Subscribe aux events
 		foreach ( var i in standaloneInteractables )
 		{
 			i.OnInteracted += OnQuestCompleted;
 		}
-		foreach ( var g in questGroups )
+		foreach ( var g in _questGroups )
 		{
 			g.OnGroupCompleted += OnGroupCompleted;
 		}
 
-		Log.Info( $"QuestManager initialized: {TotalQuests} total quests ({standaloneInteractables.Count} standalone + {questGroups.Count} groups)" );
+		Log.Info( $"QuestManager initialized: {TotalQuests} total quests ({standaloneInteractables.Count} standalone + {_questGroups.Count} groups)" );
 	}
 
 	private void OnQuestCompleted( PlayerSetup interactor )
 	{
 		if ( !Networking.IsHost ) return;
 		CompletedQuests++;
-		Log.Info( $"Quest completed: {CompletedQuests}/{TotalQuests}" );
 	}
 
 	private void OnGroupCompleted()
 	{
 		if ( !Networking.IsHost ) return;
 		CompletedQuests++;
-		Log.Info( $"Quest group completed: {CompletedQuests}/{TotalQuests}" );
 	}
 }

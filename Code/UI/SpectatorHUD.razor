@@ -1,0 +1,38 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+	@if ( ShouldDisplay )
+	{
+		<div class="spectator-overlay">
+			<div class="spectator-text">
+				Spectating: @TargetName
+			</div>
+			<div class="spectator-hint">
+				Press E to switch
+			</div>
+		</div>
+	}
+</root>
+
+@code
+{
+	[Property] public PlayerSetup TargetPlayer { get; set; }
+	[Property] public SpectatorCamera TargetSpectator { get; set; }
+
+	private bool ShouldDisplay =>
+		TargetPlayer != null
+		&& !TargetPlayer.IsProxy
+		&& !TargetPlayer.IsAlive
+		&& TargetSpectator != null
+		&& TargetSpectator.IsSpectating;
+
+	private string TargetName => TargetSpectator?.GetCurrentTargetName() ?? "Unknown";
+
+	protected override int BuildHash() => HashCode.Combine(
+		ShouldDisplay,
+		TargetName
+	);
+}

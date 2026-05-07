@@ -425,12 +425,14 @@
         "RegenDelayAfterUse": 1,
         "RegenRate": 15,
         "RunDrainRate": 25,
+        "RunSpeed": 220,
         "TargetPlayer": {
           "_type": "component",
           "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
           "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
           "component_type": "PlayerSetup"
-        }
+        },
+        "WalkSpeed": 100
       },
       {
         "__type": "Sandbox.UI.KillerStaminaBar",
@@ -454,6 +456,48 @@
           "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
           "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
           "component_type": "PlayerSetup"
+        }
+      },
+      {
+        "__type": "SpectatorCamera",
+        "__guid": "77ad4270-bba4-4b22-acad-f7367bd0560e",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        }
+      },
+      {
+        "__type": "Sandbox.UI.SpectatorHUD",
+        "__guid": "921ff651-a163-4371-92d3-f8ee6242ed43",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        },
+        "TargetSpectator": {
+          "_type": "component",
+          "component_id": "77ad4270-bba4-4b22-acad-f7367bd0560e",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "SpectatorCamera"
         }
       }
     ],
