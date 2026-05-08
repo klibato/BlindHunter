@@ -1,7 +1,7 @@
 {
   "UI": true,
-  "Volume": "0.800000012",
-  "Pitch": "0.800000012",
+  "Volume": "0.600000024",
+  "Pitch": "0.600000024",
   "Decibels": 70,
   "SelectionMode": "Forward",
   "Sounds": [
@@ -44,8 +44,8 @@
     }
   ],
   "DefaultMixer": {
-    "Name": "unknown",
-    "Id": "00000000-0000-0000-0000-000000000000"
+    "Name": "game",
+    "Id": "fbd739b7-9cf7-451e-82d8-15a95673dd1e"
   },
   "__references": [],
   "__version": 1

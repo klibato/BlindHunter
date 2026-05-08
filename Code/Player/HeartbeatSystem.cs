@@ -6,7 +6,13 @@ public sealed class HeartbeatSystem : Component
 
 	[Property] public float CloseDistance { get; set; } = 800f;
 	[Property] public float MediumDistance { get; set; } = 1500f;
-    [Property] public float SafeDistance { get; set; } = 2500f; // ← nouveau
+    [Property] public float SafeDistance { get; set; } = 2500f;
+    // Si la LOS killer↔survivor est bloquée par un mur, on multiplie la distance
+    // perçue par ce coefficient → le coeur tombe d'un cran (Close→Medium, etc).
+    [Property] public float WallPenaltyMultiplier { get; set; } = 2.2f;
+    // Rayon du sphere cast pour le check LOS. Plus c'est épais, moins le check
+    // peut traverser un trou (aération, fente, gap entre 2 murs).
+    [Property] public float SightCheckRadius { get; set; } = 40f;
 
 	[Property] public SoundEvent HeartbeatFar { get; set; }
 	[Property] public SoundEvent HeartbeatMedium { get; set; }
@@ -51,7 +57,7 @@ public sealed class HeartbeatSystem : Component
 			return;
 		}
 
-		float distance = Vector3.DistanceBetween( TargetPlayer.WorldPosition, killer.WorldPosition );
+		float distance = ComputeEffectiveDistance( killer );
 		SetZone( ResolveZone( distance ) );
 
 		// Si on a un son qui joue, on track sa durée pour le relancer en boucle
@@ -132,6 +138,32 @@ public sealed class HeartbeatSystem : Component
 		if ( distance < MediumDistance ) return HeartbeatZone.Medium;
         if ( distance < SafeDistance ) return HeartbeatZone.Far;
 		return HeartbeatZone.None;
+	}
+
+	private float ComputeEffectiveDistance( PlayerSetup killer )
+	{
+		// Trace de tête à tête (offset Z) pour éviter les faux positifs avec le sol
+		Vector3 from = TargetPlayer.WorldPosition + Vector3.Up * 64f;
+		Vector3 to = killer.WorldPosition + Vector3.Up * 64f;
+
+		float raw = Vector3.DistanceBetween( from, to );
+
+		// Sphere cast au lieu de raycast : la sphère ne peut pas se faufiler par
+		// les aérations / petits trous → check beaucoup plus strict.
+		var trace = Scene.Trace
+			.Sphere( SightCheckRadius, from, to )
+			.IgnoreGameObjectHierarchy( TargetPlayer.GameObject )
+			.Run();
+
+		// Hit du killer lui-même = pas un mur → LOS clear
+		bool losBlocked = trace.Hit;
+		if ( trace.Hit )
+		{
+			var hitPlayer = trace.GameObject?.GetComponentInParent<PlayerSetup>();
+			if ( hitPlayer == killer ) losBlocked = false;
+		}
+
+		return losBlocked ? raw * WallPenaltyMultiplier : raw;
 	}
 
 	private PlayerSetup FindKiller()
