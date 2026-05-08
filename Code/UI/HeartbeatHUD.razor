@@ -1,0 +1,44 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+	@if ( ShouldDisplay )
+	{
+		<div class="heartbeat-container">
+			<div class="heart @ZoneClass">♥</div>
+		</div>
+	}
+</root>
+
+@code
+{
+	[Property] public HeartbeatSystem TargetSystem { get; set; }
+
+	private bool ShouldDisplay
+	{
+		get
+		{
+			if ( TargetSystem == null ) return false;
+			return TargetSystem.CurrentZone != HeartbeatZone.None;
+		}
+	}
+
+	private string ZoneClass
+	{
+		get
+		{
+			if ( TargetSystem == null ) return "far";
+			return TargetSystem.CurrentZone switch
+			{
+				HeartbeatZone.Close => "close",
+				HeartbeatZone.Medium => "medium",
+				HeartbeatZone.Far => "far",
+				_ => "far"
+			};
+		}
+	}
+
+	protected override int BuildHash() => HashCode.Combine( ShouldDisplay, ZoneClass );
+}

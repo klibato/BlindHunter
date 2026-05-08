@@ -524,6 +524,47 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null
+      },
+      {
+        "__type": "Sandbox.UI.HeartbeatHUD",
+        "__guid": "31c142d7-3734-4b14-bbf0-b47c25c396b7",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetSystem": {
+          "_type": "component",
+          "component_id": "2c1a8c8c-acea-4c32-a3b9-0217f78d29ab",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "HeartbeatSystem"
+        }
+      },
+      {
+        "__type": "HeartbeatSystem",
+        "__guid": "2c1a8c8c-acea-4c32-a3b9-0217f78d29ab",
+        "__enabled": true,
+        "Flags": 0,
+        "CloseDistance": 800,
+        "HeartbeatClose": "sound/heartbeat_close.sound",
+        "HeartbeatFar": "sound/heartbeat_far.sound",
+        "HeartbeatMedium": "sound/heartbeat_medium.sound",
+        "MediumDistance": 1500,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        }
       }
     ],
     "Children": [
