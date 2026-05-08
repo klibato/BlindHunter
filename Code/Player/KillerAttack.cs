@@ -8,9 +8,9 @@ public sealed class KillerAttack : Component
 	[Property] public float MissNoiseIntensity { get; set; } = 200f;
 	[Property] public float HitNoiseIntensity { get; set; } = 350f;
 
-	[Property] public float MaxStamina { get; set; } = 3f; // 3 attaques avant épuisement
-	[Property] public float StaminaCost { get; set; } = 1f; // par attaque
-	[Property] public float StaminaRegen { get; set; } = 0.4f; // par seconde
+	[Property] public float MaxStamina { get; set; } = 3f;
+	[Property] public float StaminaCost { get; set; } = 1f;
+	[Property] public float StaminaRegen { get; set; } = 0.4f;
 	[Property] public float MinStaminaToAttack { get; set; } = 1f;
 
 	[Sync] public float CurrentStamina { get; set; }
@@ -29,14 +29,12 @@ public sealed class KillerAttack : Component
 		if ( TargetPlayer.Role != PlayerRole.Killer ) return;
 		if ( !TargetPlayer.IsAlive ) return;
 
-		// Regen stamina
 		if ( CurrentStamina < MaxStamina )
 		{
 			CurrentStamina += StaminaRegen * Time.Delta;
 			CurrentStamina = MathF.Min( CurrentStamina, MaxStamina );
 		}
 
-		// Attaque
 		if ( !Input.Pressed( "Attack1" ) ) return;
 		if ( CurrentStamina < MinStaminaToAttack ) return;
 

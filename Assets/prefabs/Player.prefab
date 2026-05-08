@@ -549,22 +549,28 @@
         "__enabled": true,
         "Flags": 0,
         "CloseDistance": 800,
+        "CloseLoopDuration": 14,
+        "FarLoopDuration": 30,
         "HeartbeatClose": "sound/heartbeat_close.sound",
         "HeartbeatFar": "sound/heartbeat_far.sound",
         "HeartbeatMedium": "sound/heartbeat_medium.sound",
         "MediumDistance": 1500,
+        "MediumLoopDuration": 15.4,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
+        "SafeDistance": 2500,
+        "SightCheckRadius": 40,
         "TargetPlayer": {
           "_type": "component",
           "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
           "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
           "component_type": "PlayerSetup"
-        }
+        },
+        "WallPenaltyMultiplier": 3
       }
     ],
     "Children": [
@@ -636,7 +642,7 @@
             "__version": 2,
             "Flags": 0,
             "Name": "WorldFlashlight ",
-            "Position": "20,-15,30",
+            "Position": "3.60710835,-10.1427126,26.8920574",
             "Rotation": "0,0,0,1",
             "Scale": "1,1,1",
             "Tags": "",

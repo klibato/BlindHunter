@@ -7,15 +7,6 @@ public sealed class SpawnPoint : Component
 
 	protected override void OnUpdate()
 	{
-		if (Role == PlayerRole.Killer)
-		{
-			Gizmo.Draw.Color = Color.Red;
-		}
-		else
-		{
-			Gizmo.Draw.Color = Color.Blue;
-		}
-		Gizmo.Draw.LineSphere(WorldPosition, 30f);
-		Gizmo.Draw.Line(WorldPosition, WorldPosition + WorldRotation.Forward * 50f);
+
 	}
 }
