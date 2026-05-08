@@ -1,0 +1,59 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+	@if ( IsOpen )
+	{
+		<div class="pause-overlay">
+			<div class="pause-panel">
+				<div class="pause-title">MENU</div>
+				
+				<div class="pause-buttons">
+					<div class="pause-button" @onclick=@OnResumeClick>RESUME</div>
+					<div class="pause-button danger" @onclick=@OnDisconnectClick>DISCONNECT</div>
+				</div>
+			</div>
+		</div>
+	}
+</root>
+
+@code
+{
+	private bool IsOpen { get; set; } = false;
+
+	protected override void OnUpdate()
+	{
+		if ( Input.Pressed( "PauseMenu" ) )
+		{
+			IsOpen = !IsOpen;
+		}
+
+		if ( IsOpen )
+		{
+			Mouse.Visible = true;
+		}
+	}
+
+	private void OnResumeClick()
+	{
+		IsOpen = false;
+	}
+
+	private void OnDisconnectClick()
+	{
+		if ( Networking.IsActive )
+		{
+			Game.Disconnect();
+		}
+		Game.ActiveScene.LoadFromFile( "scenes/mainmenu.scene" );
+	}
+
+	private void OnQuitClick()
+	{
+		Game.Close();
+	}
+
+	protected override int BuildHash() => HashCode.Combine( IsOpen );
+}

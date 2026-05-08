@@ -1,0 +1,101 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@using System.Linq;
+@inherits PanelComponent
+
+<root>
+	@if ( IsOpen )
+	{
+		<div class="scoreboard-overlay">
+			<div class="scoreboard">
+				<div class="header-bar">
+					<div class="title">PLAYERS</div>
+					<div class="time">@TimeElapsed</div>
+				</div>
+
+				<div class="quest-progress">
+					QUESTS : @GetQuestProgress()
+				</div>
+
+				<div class="column-headers">
+					<div class="col col-name">PLAYER</div>
+					<div class="col col-role">ROLE</div>
+					<div class="col col-status">STATUS</div>
+				</div>
+
+				<div class="player-list">
+					@foreach ( var player in GetPlayers() )
+					{
+						<div class="player-row @GetRowClass(player)">
+							<div class="col col-name">@GetPlayerName(player)</div>
+							<div class="col col-role">@GetDisplayRole(player)</div>
+							<div class="col col-status">@GetStatus(player)</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	}
+</root>
+
+@code
+{
+	private bool IsOpen => Input.Down( "Score" );
+
+	private List<PlayerSetup> GetPlayers()
+	{
+		return Scene.GetAllComponents<PlayerSetup>().ToList();
+	}
+
+	private string GetPlayerName( PlayerSetup player )
+	{
+		return player.GameObject.Name?.Replace( "Player - ", "" ) ?? "Unknown";
+	}
+
+	private string GetDisplayRole( PlayerSetup player )
+	{
+		if ( player.Role == PlayerRole.None ) return "—";
+		return player.Role.ToString();
+	}
+
+	private string GetStatus( PlayerSetup player )
+	{
+		bool inGame = GameManager.Instance != null && GameManager.Instance.State == LobbyState.InGame;
+		if ( !inGame ) return "Ready";
+		return player.IsAlive ? "Alive" : "Dead";
+	}
+
+	private string GetRowClass( PlayerSetup player )
+	{
+		if ( !player.IsAlive ) return "dead";
+		if ( player.Role == PlayerRole.Killer ) return "killer";
+		if ( player.Role == PlayerRole.Survivor ) return "survivor";
+		return "lobby";
+	}
+
+	private string GetQuestProgress()
+	{
+		var manager = QuestManager.Instance;
+		if ( manager == null ) return "—";
+		return $"{manager.CompletedQuests} / {manager.TotalQuests}";
+	}
+
+	private string TimeElapsed
+	{
+		get
+		{
+			float elapsed = Time.Now;
+			int minutes = (int)( elapsed / 60f );
+			int seconds = (int)( elapsed % 60f );
+			return $"{minutes:00}:{seconds:00}";
+		}
+	}
+
+	protected override int BuildHash() => HashCode.Combine(
+		IsOpen,
+		GetPlayers().Count,
+		GetQuestProgress(),
+		TimeElapsed
+	);
+}

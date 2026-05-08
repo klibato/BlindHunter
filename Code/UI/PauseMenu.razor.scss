@@ -1,0 +1,62 @@
+.pause-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.85);
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+	pointer-events: all;
+
+	.pause-panel {
+		flex-direction: column;
+		align-items: center;
+		background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(40, 10, 10, 0.95) 100%);
+		border: 2px solid rgba(255, 255, 255, 0.2);
+		padding: 48px 64px;
+		min-width: 380px;
+
+		.pause-title {
+			color: white;
+			font-size: 56px;
+			font-weight: 900;
+			letter-spacing: 12px;
+			text-shadow: 4px 4px 0 #ff0000;
+			margin-bottom: 40px;
+		}
+
+		.pause-buttons {
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+
+			.pause-button {
+				width: 280px;
+				padding: 14px 24px;
+				background-color: rgba(255, 255, 255, 0.05);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				color: white;
+				font-size: 18px;
+				font-weight: bold;
+				letter-spacing: 4px;
+				text-align: center;
+				cursor: pointer;
+				margin-bottom: 12px;
+				transition: all 0.15s ease;
+
+				&:hover {
+					background-color: rgba(255, 255, 255, 0.15);
+					border-color: rgba(255, 255, 255, 0.7);
+				}
+
+				&.danger:hover {
+					background-color: rgba(255, 0, 0, 0.3);
+					border-color: rgba(255, 50, 50, 0.8);
+				}
+			}
+		}
+	}
+}

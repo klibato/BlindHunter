@@ -1,0 +1,127 @@
+.scoreboard-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+}
+
+.scoreboard {
+	width: 720px;
+	flex-direction: column;
+	background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 10, 10, 0.95) 100%);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	padding: 24px;
+
+	.header-bar {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding-bottom: 16px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+		margin-bottom: 16px;
+
+		.title {
+			color: white;
+			font-size: 28px;
+			font-weight: 900;
+			letter-spacing: 8px;
+			text-shadow: 2px 2px 0 #ff0000;
+		}
+
+		.time {
+			color: rgba(255, 255, 255, 0.7);
+			font-size: 18px;
+			font-family: monospace;
+			letter-spacing: 2px;
+		}
+	}
+
+	.quest-progress {
+		color: #ffcc44;
+		font-size: 16px;
+		font-weight: bold;
+		letter-spacing: 4px;
+		margin-bottom: 16px;
+		padding: 8px 12px;
+		background-color: rgba(255, 200, 0, 0.1);
+		border-left: 3px solid #ffcc44;
+	}
+
+	.column-headers {
+		flex-direction: row;
+		padding: 8px 12px;
+		background-color: rgba(255, 255, 255, 0.05);
+		margin-bottom: 4px;
+
+		.col {
+			color: rgba(255, 255, 255, 0.5);
+			font-size: 12px;
+			font-weight: bold;
+			letter-spacing: 3px;
+		}
+	}
+
+	.player-list {
+		flex-direction: column;
+
+		.player-row {
+			flex-direction: row;
+			align-items: center;
+			padding: 12px;
+			background-color: rgba(255, 255, 255, 0.05);
+			margin-bottom: 4px;
+			color: white;
+			font-size: 16px;
+
+			&.lobby {
+				background-color: rgba(255, 255, 255, 0.05);
+				border-left: 3px solid rgba(255, 255, 255, 0.2);
+			}
+
+			&.survivor {
+				background-color: rgba(0, 150, 255, 0.1);
+				border-left: 3px solid rgba(100, 200, 255, 0.6);
+			}
+
+			&.killer {
+				background-color: rgba(255, 0, 0, 0.15);
+				border-left: 3px solid rgba(255, 50, 50, 0.8);
+			}
+
+			&.dead {
+				background-color: rgba(0, 0, 0, 0.4);
+				border-left: 3px solid rgba(120, 120, 120, 0.5);
+				opacity: 0.5;
+			}
+		}
+	}
+
+	.col {
+		text-align: left;
+	}
+
+	.col-name {
+		flex-grow: 2;
+		flex-shrink: 0;
+		min-width: 240px;
+	}
+
+	.col-role {
+		flex-grow: 1;
+		flex-shrink: 0;
+		min-width: 120px;
+		text-align: center;
+	}
+
+	.col-status {
+		flex-grow: 1;
+		flex-shrink: 0;
+		min-width: 120px;
+		text-align: right;
+	}
+}
