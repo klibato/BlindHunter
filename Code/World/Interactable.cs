@@ -1,61 +1,53 @@
 using System;
 using System.Linq;
+using Sandbox; // Assure-toi d'avoir les bons namespaces pour S&box
 
 /// <summary>Marks a GameObject as interactable by survivors. Can optionally count as a quest objective.</summary>
 public sealed class Interactable : Component
 {
-	[Property] public string PromptText { get; set; } = "Press E to interact";
-	[Property] public bool IsQuestObject { get; set; } = true;
-	[Property] public float NoiseIntensity { get; set; } = 200f;
-	[Sync( SyncFlags.FromHost )] public bool IsCompleted { get; set; }
+    [Property] public string PromptText { get; set; } = "Press E to interact";
+    [Property] public bool IsQuestObject { get; set; } = true;
+    [Property] public float NoiseIntensity { get; set; } = 200f;
+    
+    // On expose la LED pour pouvoir la glisser-déposer dans l'éditeur
+    [Property] public ModelRenderer LedRenderer { get; set; }
 
-	/// <summary>
-	/// Callback de validation custom. Si set, retourne false pour bloquer l'interaction silencieusement.
-	/// </summary>
-	public Func<PlayerSetup, bool> CanInteract { get; set; }
+    [Sync( SyncFlags.FromHost )] public bool IsCompleted { get; set; }
 
-	public event Action<PlayerSetup> OnInteracted;
+    public Func<PlayerSetup, bool> CanInteract { get; set; }
+    public event Action<PlayerSetup> OnInteracted;
 
-	private ModelRenderer _renderer;
+    // Plus besoin de OnStart pour récupérer le composant localement
+    
+    public void Interact( PlayerSetup interactor )
+    {
+        if ( IsCompleted ) return;
+        if ( !Networking.IsHost ) return;
 
-	protected override void OnStart()
-	{
-		_renderer = GetComponent<ModelRenderer>();
-	}
+        if ( CanInteract != null && !CanInteract( interactor ) ) return;
 
-	/// <summary>Completes this object and fires <see cref="OnInteracted"/>. Host only.</summary>
-	public void Interact( PlayerSetup interactor )
-	{
-		if ( IsCompleted ) return;
-		if ( !Networking.IsHost ) return;
+        IsCompleted = true;
+        OnInteracted?.Invoke( interactor );
 
-		// Validation custom : si le callback dit non, on bloque l'interaction silencieusement
-		if ( CanInteract != null && !CanInteract( interactor ) )
-		{
-			return;
-		}
+        EmitNoiseRpc( WorldPosition, NoiseIntensity );
+    }
 
-		IsCompleted = true;
-		OnInteracted?.Invoke( interactor );
+    [Rpc.Broadcast]
+    private void EmitNoiseRpc( Vector3 position, float intensity )
+    {
+        var localPlayer = Scene.GetAllComponents<PlayerSetup>()
+            .FirstOrDefault( p => !p.IsProxy );
+            
+        if ( localPlayer == null || localPlayer.Role != PlayerRole.Killer ) return;
 
-		// Émet un bruit à la position de l'interaction
-		EmitNoiseRpc( WorldPosition, NoiseIntensity );
-	}
+        NoiseVisualizer.AddNoise( position, intensity );
+    }
 
-	[Rpc.Broadcast]
-	private void EmitNoiseRpc( Vector3 position, float intensity )
-	{
-		var localPlayer = Scene.GetAllComponents<PlayerSetup>()
-			.FirstOrDefault( p => !p.IsProxy );
-		if ( localPlayer == null ) return;
-		if ( localPlayer.Role != PlayerRole.Killer ) return;
+    protected override void OnUpdate()
+    {
+        if ( LedRenderer == null ) return;
 
-		NoiseVisualizer.AddNoise( position, intensity );
-	}
-
-	protected override void OnUpdate()
-	{
-		if ( _renderer == null ) return;
-		_renderer.Tint = IsCompleted ? Color.Green : Color.Yellow;
-	}
+        // Rouge si pas fait, Vert si terminé
+        LedRenderer.Tint = IsCompleted ? Color.Green : Color.Red;
+    }
 }

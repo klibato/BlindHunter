@@ -7,7 +7,7 @@ public sealed class PlayerSetup : Component
 	[Sync(SyncFlags.FromHost)] public PlayerRole Role { get; set; } = PlayerRole.None;
 	[Sync(SyncFlags.FromHost)] public bool IsAlive { get; set; } = true;
 	[Sync] public Rotation EyeRotation { get; set; }
-
+	public PlayerRole AssignedRole { get; set; } = PlayerRole.None;
 	private float _noiseTimer;
 	private SkinnedModelRenderer _bodyRenderer;
 	private PlayerController _controller;
@@ -18,13 +18,6 @@ public sealed class PlayerSetup : Component
 		_bodyRenderer = GetComponentInChildren<SkinnedModelRenderer>();
 		_controller = GetComponent<PlayerController>();
 		_camera = GetComponentInChildren<CameraComponent>();
-
-		if (Networking.IsHost)
-		{
-			int killersCount = Scene.GetAllComponents<PlayerSetup>().Count(p => p.Role == PlayerRole.Killer);
-			Role = killersCount == 0 ? PlayerRole.Killer : PlayerRole.Survivor;
-			Log.Info($"Player '{GameObject.Name}' assigned role: {Role}");
-		}
 
 		if (IsProxy)
 		{

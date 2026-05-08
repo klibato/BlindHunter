@@ -1,0 +1,105 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@using System.Linq;
+@inherits PanelComponent
+
+<root>
+    @if (ShouldDisplay)
+    {
+        <div class="lobby-room">
+            <div class="lobby-title">LOBBY</div>
+
+            @if (State == LobbyState.Starting)
+            {
+                <div class="countdown-display">
+                    Starting in @CountdownText
+                </div>
+            }
+
+            <div class="player-list">
+                <div class="list-header">
+                    Players : @PlayerCount
+                </div>
+                @foreach (var player in GetPlayers())
+                {
+                    <div class="player-row">
+                        <div class="player-name">@GetPlayerName(player)</div>
+                        @if (player.Network.IsOwner)
+                        {
+                            <div class="player-tag you">YOU</div>
+                        }
+                        @if (player.Network.Owner.IsHost)
+                        {
+                            <div class="player-tag host">HOST</div>
+                        }
+                    </div>
+                }
+            </div>
+
+            @if (IsHost && State == LobbyState.Lobby)
+            {
+                <div class="start-button" @onclick=@OnStartClick>
+                    START GAME
+                </div>
+            }
+
+            @if (!IsHost && State == LobbyState.Lobby)
+            {
+                <div class="waiting-text">
+                    Waiting for host to start the game...
+                </div>
+            }
+        </div>
+    }
+</root>
+
+@code
+{
+    private bool IsHost => Networking.IsHost;
+    private LobbyState State => GameManager.Instance?.State ?? LobbyState.Lobby;
+    private int PlayerCount => GameManager.Instance?.GetAllPlayers().Count ?? 0;
+
+    private bool ShouldDisplay
+    {
+        get
+        {
+            if (GameManager.Instance == null) return false;
+            return GameManager.Instance.State == LobbyState.Lobby
+                || GameManager.Instance.State == LobbyState.Starting;
+        }
+    }
+
+    private string CountdownText
+    {
+        get
+        {
+            if (GameManager.Instance == null) return "—";
+            int seconds = (int)Math.Ceiling(GameManager.Instance.CountdownTimer);
+            return seconds.ToString();
+        }
+    }
+
+    private List<PlayerSetup> GetPlayers()
+    {
+        return GameManager.Instance?.GetAllPlayers() ?? new List<PlayerSetup>();
+    }
+
+    private string GetPlayerName(PlayerSetup player)
+    {
+        return player.GameObject.Name?.Replace("Player - ", "") ?? "Unknown";
+    }
+
+    private void OnStartClick()
+    {
+        if (!IsHost) return;
+        GameManager.Instance?.RequestStartGame();
+    }
+    protected override int BuildHash() => HashCode.Combine(
+        ShouldDisplay,
+        State,
+        PlayerCount,
+        CountdownText,
+        IsHost
+    );
+}

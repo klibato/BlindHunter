@@ -1,0 +1,59 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+    <div class="main-menu">
+        <div class="logo-container">
+            <div class="logo-title">BLINDHUNTER</div>
+            <div class="logo-subtitle">A horror echolocation experience</div>
+        </div>
+		
+        <div class="button-container">
+            <div class="menu-button play-button" @onclick=@OnPlayClick>
+                PLAY
+            </div>
+            <div class="menu-button" @onclick=@OnSettingsClick>
+                SETTINGS
+            </div>
+            <div class="menu-button" @onclick=@OnQuitClick>
+                QUIT
+            </div>
+        </div>
+
+        <div class="footer">
+            <div>BlindHunter v0.1 — by Klibato</div>
+        </div>
+    </div>
+</root>
+
+@code
+{
+    [Property] public string GameplaySceneFile { get; set; } = "scenes/gameplay.scene";
+    protected override void OnUpdate()
+    {
+        // Libère la souris pour qu'on puisse cliquer sur les boutons
+        Mouse.Visible = true;
+    }
+    private void OnPlayClick()
+    {
+        // Charge la scène de jeu
+        Game.ActiveScene.LoadFromFile(GameplaySceneFile);
+    }
+
+    private void OnSettingsClick()
+    {
+        
+        // TODO: ouvrir un panneau settings
+        Log.Info("Settings clicked");
+    }
+
+    private void OnQuitClick()
+    {
+        // Quit l'application
+        Game.Close();
+    }
+
+    protected override int BuildHash() => 0;
+}
