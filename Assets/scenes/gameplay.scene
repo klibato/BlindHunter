@@ -37,7 +37,26 @@
           "UseMapFromLaunch": false
         }
       ],
-      "Children": []
+      "Children": [
+        {
+          "__guid": "f346df79-4856-4a89-bd29-79234b148001",
+          "__version": 2,
+          "Flags": 0,
+          "Name": "PostProcess",
+          "Position": "0,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkFlags": 0,
+          "NetworkOrphaned": 0,
+          "NetworkTransmit": true,
+          "OwnerTransfer": 1,
+          "Components": [],
+          "Children": []
+        }
+      ]
     },
     {
       "__guid": "b70fda7c-4b41-4f9d-b648-5815462a3219",
@@ -1859,6 +1878,61 @@
           "Children": []
         }
       ]
+    },
+    {
+      "__guid": "d35f2942-3f1f-4cbe-bb79-a64de293c62c",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Fog",
+      "Position": "-18.3162537,-210.512405,68.5331421",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.GradientFog",
+          "__guid": "ce353eaf-f977-4add-8fb5-369b59c674b0",
+          "__enabled": true,
+          "Flags": 0,
+          "Color": "1,1,1,1",
+          "EndDistance": 1024,
+          "FalloffExponent": 1.5,
+          "Height": 100,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "StartDistance": 1,
+          "VerticalFalloffExponent": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "9678d982-6df6-457a-9ffa-22d0a54e7a1f",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Object",
+      "Position": "268.136749,-600.671265,26.1887207",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [],
+      "Children": []
     }
   ],
   "SceneProperties": {
