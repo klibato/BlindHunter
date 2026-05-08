@@ -20,26 +20,31 @@ public sealed class SpectatorCamera : Component
 
 	protected override void OnUpdate()
 	{
-		if ( TargetPlayer == null || TargetPlayer.IsProxy ) return;
-		if ( TargetPlayer.Role != PlayerRole.Survivor ) return;
-		if ( _camera == null ) return;
+		if (GameStateManager.Instance != null
+		&& GameStateManager.Instance.CurrentState != GameState.Playing)
+		{
+			return;
+		}
+		if (TargetPlayer == null || TargetPlayer.IsProxy) return;
+		if (TargetPlayer.Role != PlayerRole.Survivor) return;
+		if (_camera == null) return;
 
 		// Transition alive → dead
-		if ( _wasAlive && !TargetPlayer.IsAlive )
+		if (_wasAlive && !TargetPlayer.IsAlive)
 		{
 			_wasAlive = false;
 			ChooseInitialTarget();
 		}
 
 		// Si vivant, on désactive le mode spectateur et on restaure le body si caché
-		if ( TargetPlayer.IsAlive )
+		if (TargetPlayer.IsAlive)
 		{
 			_wasAlive = true;
 			RestoreHiddenBody();
 			return;
 		}
 
-		if ( Input.Pressed( "Use" ) )
+		if (Input.Pressed("Use"))
 		{
 			CycleNextTarget();
 		}
@@ -51,29 +56,29 @@ public sealed class SpectatorCamera : Component
 	private void ChooseInitialTarget()
 	{
 		var alive = GetAliveSurvivors();
-		if ( alive.Count == 0 ) return;
+		if (alive.Count == 0) return;
 		CurrentTargetId = alive[0].GameObject.Id;
 	}
 
 	private void CycleNextTarget()
 	{
 		var alive = GetAliveSurvivors();
-		if ( alive.Count == 0 ) return;
+		if (alive.Count == 0) return;
 
 		// Restaure l'ancien body avant de switcher
 		RestoreHiddenBody();
 
-		int currentIndex = alive.FindIndex( p => p.GameObject.Id == CurrentTargetId );
-		int nextIndex = ( currentIndex + 1 ) % alive.Count;
+		int currentIndex = alive.FindIndex(p => p.GameObject.Id == CurrentTargetId);
+		int nextIndex = (currentIndex + 1) % alive.Count;
 		CurrentTargetId = alive[nextIndex].GameObject.Id;
 	}
 
 	private void FollowTarget()
 	{
 		var target = GetTargetPlayer();
-		if ( target == null ) return;
+		if (target == null) return;
 
-		Vector3 headOffset = new Vector3( 0, 0, HeadHeightOffset );
+		Vector3 headOffset = new Vector3(0, 0, HeadHeightOffset);
 		_camera.WorldPosition = target.WorldPosition + headOffset;
 		_camera.WorldRotation = target.EyeRotation;
 	}
@@ -81,13 +86,13 @@ public sealed class SpectatorCamera : Component
 	private void HideTargetBody()
 	{
 		var target = GetTargetPlayer();
-		if ( target == null ) return;
+		if (target == null) return;
 
 		var renderer = target.GameObject.GetComponentInChildren<SkinnedModelRenderer>();
-		if ( renderer == null ) return;
+		if (renderer == null) return;
 
 		// Si on a changé de cible, restaure l'ancien
-		if ( _hiddenRenderer != renderer )
+		if (_hiddenRenderer != renderer)
 		{
 			RestoreHiddenBody();
 			_hiddenRenderer = renderer;
@@ -98,7 +103,7 @@ public sealed class SpectatorCamera : Component
 
 	private void RestoreHiddenBody()
 	{
-		if ( _hiddenRenderer != null )
+		if (_hiddenRenderer != null)
 		{
 			_hiddenRenderer.Enabled = true;
 			_hiddenRenderer = null;
@@ -112,14 +117,14 @@ public sealed class SpectatorCamera : Component
 
 	private PlayerSetup GetTargetPlayer()
 	{
-		var go = Scene.Directory.FindByGuid( CurrentTargetId );
+		var go = Scene.Directory.FindByGuid(CurrentTargetId);
 		return go?.GetComponent<PlayerSetup>();
 	}
 
 	private List<PlayerSetup> GetAliveSurvivors()
 	{
 		return Scene.GetAllComponents<PlayerSetup>()
-			.Where( p => p.Role == PlayerRole.Survivor && p.IsAlive )
+			.Where(p => p.Role == PlayerRole.Survivor && p.IsAlive)
 			.ToList();
 	}
 

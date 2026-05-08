@@ -36,4 +36,12 @@ public sealed class GameStateManager : Component
 		CurrentState = GameState.KillerWon;
 		Log.Info( "Game over: Killer won!" );
 	}
+
+	/// <summary>Resets the game state to Playing for a new round. Host only.</summary>
+	public void ResetToPlaying()
+	{
+		if ( !Networking.IsHost ) return;
+		CurrentState = GameState.Playing;
+		Log.Info( "GameState reset to Playing" );
+	}
 }

@@ -10,6 +10,19 @@
 			<div class="message" style="color: @MessageColor;">
 				@MessageText
 			</div>
+
+			@if ( IsHost )
+			{
+				<div class="return-button" @onclick=@OnReturnClick>
+					RETURN TO LOBBY
+				</div>
+			}
+			else
+			{
+				<div class="waiting-text">
+					Waiting for host...
+				</div>
+			}
 		</div>
 	}
 </root>
@@ -18,9 +31,11 @@
 {
 	[Property] public PlayerSetup TargetPlayer { get; set; }
 
-	private bool ShouldDisplay => 
-		TargetPlayer != null 
-		&& !TargetPlayer.IsProxy 
+	private bool IsHost => Networking.IsHost;
+
+	private bool ShouldDisplay =>
+		TargetPlayer != null
+		&& !TargetPlayer.IsProxy
 		&& GameStateManager.Instance != null
 		&& GameStateManager.Instance.CurrentState != GameState.Playing;
 
@@ -55,7 +70,6 @@
 			bool isKiller = TargetPlayer.Role == PlayerRole.Killer;
 			bool survivorsWon = GameStateManager.Instance.CurrentState == GameState.SurvivorsWon;
 
-			// Vert si gagné, rouge si perdu
 			if ( (survivorsWon && !isKiller) || (!survivorsWon && isKiller) )
 				return "#33cc66";
 			else
@@ -63,7 +77,13 @@
 		}
 	}
 
-	protected override int BuildHash() => HashCode.Combine( 
-		ShouldDisplay, MessageText, MessageColor 
+	private void OnReturnClick()
+	{
+		if ( !IsHost ) return;
+		GameManager.Instance?.RequestReturnToLobby();
+	}
+
+	protected override int BuildHash() => HashCode.Combine(
+		ShouldDisplay, MessageText, MessageColor, IsHost
 	);
 }

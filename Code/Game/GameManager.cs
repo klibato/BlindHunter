@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Sandbox;
 
 public sealed class GameManager : Component, Component.INetworkListener
 {
@@ -120,7 +121,53 @@ public sealed class GameManager : Component, Component.INetworkListener
 
 		Log.Info("Game started!");
 	}
+	/// <summary>
+	/// Appelé quand le host clique "Return to Lobby" sur l'écran de fin.
+	/// Reset tout l'état et téléporte les joueurs au lobby.
+	/// </summary>
+	public void RequestReturnToLobby()
+	{
+		if (!Networking.IsHost) return;
+		if (State != LobbyState.InGame) return;
 
+		Log.Info("Returning to lobby...");
+
+		// 1. Reset le state global
+		State = LobbyState.Lobby;
+		CountdownTimer = 0f;
+		GameStateManager.Instance?.ResetToPlaying();
+
+		// 2. Reset tous les joueurs (rôle, vie, composants, inventaire) + téléporte au lobby
+		var players = GetAllPlayers();
+		foreach (var p in players)
+		{
+			p.ResetForLobby();
+			TeleportPlayerRpc(p.GameObject.Id, LobbySpawnPosition, Rotation.Identity);
+		}
+
+		// 3. Reset toutes les quêtes
+		foreach (var interactable in Scene.GetAllComponents<Interactable>())
+		{
+			interactable.IsCompleted = false;
+		}
+		foreach (var group in Scene.GetAllComponents<QuestGroup>())
+		{
+			group.IsCompleted = false;
+		}
+		if (QuestManager.Instance != null)
+		{
+			QuestManager.Instance.CompletedQuests = 0;
+		}
+
+		// 4. Cleanup des stones / objets jetés (tout objet avec ThrowableTracker)
+		var trackers = Scene.GetAllComponents<ThrowableTracker>().ToList();
+		foreach (var t in trackers)
+		{
+			t.GameObject.Destroy();
+		}
+
+		Log.Info("Back to lobby.");
+	}
 	[Rpc.Broadcast]
 	private void TeleportPlayerRpc(Guid playerId, Vector3 pos, Rotation rot)
 	{

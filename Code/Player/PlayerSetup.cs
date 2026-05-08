@@ -28,13 +28,29 @@ public sealed class PlayerSetup : Component
 
 	protected override void OnUpdate()
 	{
+		bool gameOver = GameStateManager.Instance != null
+			&& GameStateManager.Instance.CurrentState != GameState.Playing;
+
+		if (gameOver)
+		{
+			return;
+		}
+
 		if (!IsAlive)
 		{
 			HandleDeathState();
 			return;
 		}
 
-		// Sync de la rotation de la tête (uniquement pour le joueur local)
+		// Si on était mort et qu'on revit (reset lobby), réactive les composants côté local
+		if (_controller != null && !_controller.Enabled) _controller.Enabled = true;
+		var interactor = GameObject.GetComponent<PlayerInteractor>();
+		if (interactor != null && !interactor.Enabled) interactor.Enabled = true;
+		var inventory = GameObject.GetComponent<PlayerInventory>();
+		if (inventory != null && !inventory.Enabled) inventory.Enabled = true;
+		var flashlight = GameObject.GetComponentInChildren<Flashlight>();
+		if (flashlight != null && !flashlight.Enabled) flashlight.Enabled = true;
+
 		if (!IsProxy && _camera != null)
 		{
 			EyeRotation = _camera.WorldRotation;
@@ -125,5 +141,33 @@ public sealed class PlayerSetup : Component
 		// Désactive la flashlight
 		var flashlight = GameObject.GetComponentInChildren<Flashlight>();
 		if (flashlight != null) flashlight.Enabled = false;
+	}
+	public void ResetForLobby()
+	{
+		if (!Networking.IsHost) return;
+
+		Role = PlayerRole.None;
+		AssignedRole = PlayerRole.None;
+		IsAlive = true;
+
+		// Réactive les composants désactivés par HandleDeathState
+		if (_controller != null) _controller.Enabled = true;
+
+		var interactor = GameObject.GetComponent<PlayerInteractor>();
+		if (interactor != null) interactor.Enabled = true;
+
+		var inventory = GameObject.GetComponent<PlayerInventory>();
+		if (inventory != null)
+		{
+			inventory.Enabled = true;
+			// Vide les 3 slots
+			inventory.Slot0 = ItemType.None;
+			inventory.Slot1 = ItemType.None;
+			inventory.Slot2 = ItemType.None;
+			inventory.ActiveSlot = 0;
+		}
+
+		var flashlight = GameObject.GetComponentInChildren<Flashlight>();
+		if (flashlight != null) flashlight.Enabled = true;
 	}
 }
