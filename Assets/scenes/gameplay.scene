@@ -655,6 +655,38 @@
             "AddedObjects": [
               {
                 "Id": {
+                  "Type": "Component",
+                  "IdValue": "5a1e086b-7599-4a24-9542-5b5f276e7552"
+                },
+                "Parent": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "PreviousElement": {
+                  "Type": "Component",
+                  "IdValue": "2b2e7d02-2f6e-496e-abde-e954f8430685"
+                },
+                "ContainerProperty": "Components",
+                "IsContainerArray": true,
+                "Data": {
+                  "__type": "GeneratorNoiseEmitter",
+                  "__guid": "5a1e086b-7599-4a24-9542-5b5f276e7552",
+                  "__enabled": true,
+                  "Flags": 0,
+                  "HumLoopDuration": 60,
+                  "HumSound": "sound/generator_on.sound",
+                  "NoiseIntensity": 150,
+                  "NoiseInterval": 2,
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null
+                }
+              },
+              {
+                "Id": {
                   "Type": "GameObject",
                   "IdValue": "15eebe26-d7da-4f66-a0ec-b0ac94cd434c"
                 },
@@ -809,6 +841,38 @@
           "__Prefab": "prefabs/generic_interactable.prefab",
           "__PrefabInstancePatch": {
             "AddedObjects": [
+              {
+                "Id": {
+                  "Type": "Component",
+                  "IdValue": "97f8630e-b38a-406d-a2ef-82f8c6eabe9b"
+                },
+                "Parent": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "PreviousElement": {
+                  "Type": "Component",
+                  "IdValue": "2b2e7d02-2f6e-496e-abde-e954f8430685"
+                },
+                "ContainerProperty": "Components",
+                "IsContainerArray": true,
+                "Data": {
+                  "__type": "GeneratorNoiseEmitter",
+                  "__guid": "97f8630e-b38a-406d-a2ef-82f8c6eabe9b",
+                  "__enabled": true,
+                  "Flags": 0,
+                  "HumLoopDuration": 60,
+                  "HumSound": "sound/generator_on.sound",
+                  "NoiseIntensity": 600,
+                  "NoiseInterval": 2,
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null
+                }
+              },
               {
                 "Id": {
                   "Type": "GameObject",
@@ -967,6 +1031,38 @@
             "AddedObjects": [
               {
                 "Id": {
+                  "Type": "Component",
+                  "IdValue": "1c2e548f-0217-4b01-aee0-f0f948ed3a2d"
+                },
+                "Parent": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "PreviousElement": {
+                  "Type": "Component",
+                  "IdValue": "2b2e7d02-2f6e-496e-abde-e954f8430685"
+                },
+                "ContainerProperty": "Components",
+                "IsContainerArray": true,
+                "Data": {
+                  "__type": "GeneratorNoiseEmitter",
+                  "__guid": "1c2e548f-0217-4b01-aee0-f0f948ed3a2d",
+                  "__enabled": true,
+                  "Flags": 0,
+                  "HumLoopDuration": 60,
+                  "HumSound": "sound/generator_on.sound",
+                  "NoiseIntensity": 600,
+                  "NoiseInterval": 2,
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null
+                }
+              },
+              {
+                "Id": {
                   "Type": "GameObject",
                   "IdValue": "2c41a715-d517-437e-8584-5122aff70c44"
                 },
@@ -1121,6 +1217,38 @@
           "__Prefab": "prefabs/generic_interactable.prefab",
           "__PrefabInstancePatch": {
             "AddedObjects": [
+              {
+                "Id": {
+                  "Type": "Component",
+                  "IdValue": "9570234b-f553-4380-926a-8c2f311a8812"
+                },
+                "Parent": {
+                  "Type": "GameObject",
+                  "IdValue": "caf984f2-4c63-48cf-94c9-333161a67256"
+                },
+                "PreviousElement": {
+                  "Type": "Component",
+                  "IdValue": "2b2e7d02-2f6e-496e-abde-e954f8430685"
+                },
+                "ContainerProperty": "Components",
+                "IsContainerArray": true,
+                "Data": {
+                  "__type": "GeneratorNoiseEmitter",
+                  "__guid": "9570234b-f553-4380-926a-8c2f311a8812",
+                  "__enabled": true,
+                  "Flags": 0,
+                  "HumLoopDuration": 60,
+                  "HumSound": "sound/generator_on.sound",
+                  "NoiseIntensity": 150,
+                  "NoiseInterval": 2,
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null
+                }
+              },
               {
                 "Id": {
                   "Type": "GameObject",
@@ -1960,13 +2088,13 @@
           "$blob": "ae09e18f-a0bc-4d64-bcf7-bd7141cb0895"
         }
       },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
           "SelectionSets": []
         }
-      },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
       }
     }
   },
