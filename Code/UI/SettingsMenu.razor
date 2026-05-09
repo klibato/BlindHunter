@@ -1,0 +1,101 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+	@if ( IsOpen )
+	{
+		<div class="settings-overlay">
+			<div class="settings-panel">
+				<div class="settings-title">SETTINGS</div>
+
+				<div class="setting-row">
+					<div class="setting-label">MASTER VOLUME</div>
+					<div class="preset-group">
+						<div class="preset-button @(IsVolumePreset(0f) ? "active" : "")" @onclick=@(() => SetMasterVolume(0f))>MUTE</div>
+						<div class="preset-button @(IsVolumePreset(0.33f) ? "active" : "")" @onclick=@(() => SetMasterVolume(0.33f))>LOW</div>
+						<div class="preset-button @(IsVolumePreset(0.66f) ? "active" : "")" @onclick=@(() => SetMasterVolume(0.66f))>MED</div>
+						<div class="preset-button @(IsVolumePreset(1f) ? "active" : "")" @onclick=@(() => SetMasterVolume(1f))>FULL</div>
+					</div>
+				</div>
+
+				<div class="setting-row">
+					<div class="setting-label">SFX VOLUME</div>
+					<div class="preset-group">
+						<div class="preset-button @(IsSfxPreset(0f) ? "active" : "")" @onclick=@(() => SetSfxVolume(0f))>MUTE</div>
+						<div class="preset-button @(IsSfxPreset(0.33f) ? "active" : "")" @onclick=@(() => SetSfxVolume(0.33f))>LOW</div>
+						<div class="preset-button @(IsSfxPreset(0.66f) ? "active" : "")" @onclick=@(() => SetSfxVolume(0.66f))>MED</div>
+						<div class="preset-button @(IsSfxPreset(1f) ? "active" : "")" @onclick=@(() => SetSfxVolume(1f))>FULL</div>
+					</div>
+				</div>
+
+				<div class="setting-row">
+					<div class="setting-label">MUSIC VOLUME</div>
+					<div class="preset-group">
+						<div class="preset-button @(IsMusicPreset(0f) ? "active" : "")" @onclick=@(() => SetMusicVolume(0f))>MUTE</div>
+						<div class="preset-button @(IsMusicPreset(0.33f) ? "active" : "")" @onclick=@(() => SetMusicVolume(0.33f))>LOW</div>
+						<div class="preset-button @(IsMusicPreset(0.66f) ? "active" : "")" @onclick=@(() => SetMusicVolume(0.66f))>MED</div>
+						<div class="preset-button @(IsMusicPreset(1f) ? "active" : "")" @onclick=@(() => SetMusicVolume(1f))>FULL</div>
+					</div>
+				</div>
+
+				<div class="settings-footer">
+					<div class="footer-note">Volume changes apply in V1.1 (sounds not yet routed through master)</div>
+				</div>
+
+				<div class="back-button" @onclick=@OnBackClick>BACK</div>
+			</div>
+		</div>
+	}
+</root>
+
+@code
+{
+	[Property] public bool IsOpen { get; set; } = false;
+
+	public Action OnClose { get; set; }
+
+	private bool IsVolumePreset( float val ) => MathF.Abs( GameSettings.MasterVolume - val ) < 0.05f;
+	private bool IsSfxPreset( float val ) => MathF.Abs( GameSettings.SfxVolume - val ) < 0.05f;
+	private bool IsMusicPreset( float val ) => MathF.Abs( GameSettings.MusicVolume - val ) < 0.05f;
+
+	private void SetMasterVolume( float val )
+	{
+		GameSettings.MasterVolume = val;
+		Log.Info( $"MasterVolume set to {val:F2}" );
+	}
+
+	private void SetSfxVolume( float val )
+	{
+		GameSettings.SfxVolume = val;
+		Log.Info( $"SfxVolume set to {val:F2}" );
+	}
+
+	private void SetMusicVolume( float val )
+	{
+		GameSettings.MusicVolume = val;
+		Log.Info( $"MusicVolume set to {val:F2}" );
+	}
+
+	private void OnBackClick()
+	{
+		IsOpen = false;
+		OnClose?.Invoke();
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( IsOpen )
+		{
+			Mouse.Visible = true;
+		}
+	}
+
+	protected override int BuildHash() => HashCode.Combine(
+		IsOpen,
+		GameSettings.MasterVolume,
+		GameSettings.SfxVolume,
+		GameSettings.MusicVolume
+	);
+}

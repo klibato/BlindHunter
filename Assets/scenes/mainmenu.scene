@@ -99,7 +99,68 @@
           "OnComponentEnabled": null,
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "SettingsPanel": {
+            "_type": "component",
+            "component_id": "208d5cfb-9b28-497c-9895-7e05e14bf7d8",
+            "go": "cddb3000-d3d3-45e5-a3c6-b84d5a6ef6df",
+            "component_type": "SettingsMenu"
+          }
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "cddb3000-d3d3-45e5-a3c6-b84d5a6ef6df",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "SettingsUI",
+      "Position": "150.348969,15.845089,21.9227829",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.UI.SettingsMenu",
+          "__guid": "208d5cfb-9b28-497c-9895-7e05e14bf7d8",
+          "__enabled": true,
+          "Flags": 0,
+          "IsOpen": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
           "OnComponentUpdate": null
+        },
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "c542f4e8-3715-4a8b-b634-976fa73a4f19",
+          "__enabled": true,
+          "Flags": 0,
+          "AutoScreenScale": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Opacity": 1,
+          "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
+          "TargetCamera": {
+            "_type": "component",
+            "component_id": "3871e0a3-bbe5-4f1d-a008-a488d8400505",
+            "go": "9360b12c-d694-4b04-9713-cc2b799a536b",
+            "component_type": "CameraComponent"
+          },
+          "ZIndex": 200
         }
       ],
       "Children": []
@@ -125,13 +186,18 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "2b831b3a-a8a2-4f0d-adb9-170c3af7c9b8"
+        }
+      },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
           "SelectionSets": []
         }
-      },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
       }
     }
   },
