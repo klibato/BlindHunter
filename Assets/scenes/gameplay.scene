@@ -282,7 +282,8 @@
               "OnComponentEnabled": null,
               "OnComponentFixedUpdate": null,
               "OnComponentStart": null,
-              "OnComponentUpdate": null
+              "OnComponentUpdate": null,
+              "PickupSound": null
             }
           }
         ],
@@ -380,6 +381,7 @@
               "__guid": "2dd5a1fe-7b56-4908-8eb2-d4e77394d475",
               "__enabled": true,
               "Flags": 0,
+              "InsertSound": "sound/keyreader_on.sound",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
               "OnComponentEnabled": null,
@@ -490,7 +492,8 @@
               "OnComponentEnabled": null,
               "OnComponentFixedUpdate": null,
               "OnComponentStart": null,
-              "OnComponentUpdate": null
+              "OnComponentUpdate": null,
+              "OpenSound": "sound/exit_door.sound"
             }
           }
         ],
@@ -1450,7 +1453,8 @@
                   "OnComponentEnabled": null,
                   "OnComponentFixedUpdate": null,
                   "OnComponentStart": null,
-                  "OnComponentUpdate": null
+                  "OnComponentUpdate": null,
+                  "PickupSound": null
                 }
               }
             ],
@@ -1538,7 +1542,8 @@
                   "OnComponentEnabled": null,
                   "OnComponentFixedUpdate": null,
                   "OnComponentStart": null,
-                  "OnComponentUpdate": null
+                  "OnComponentUpdate": null,
+                  "PickupSound": null
                 }
               }
             ],
@@ -1626,7 +1631,8 @@
                   "OnComponentEnabled": null,
                   "OnComponentFixedUpdate": null,
                   "OnComponentStart": null,
-                  "OnComponentUpdate": null
+                  "OnComponentUpdate": null,
+                  "PickupSound": null
                 }
               }
             ],
@@ -1714,7 +1720,8 @@
                   "OnComponentEnabled": null,
                   "OnComponentFixedUpdate": null,
                   "OnComponentStart": null,
-                  "OnComponentUpdate": null
+                  "OnComponentUpdate": null,
+                  "PickupSound": null
                 }
               }
             ],
@@ -1802,7 +1809,8 @@
                   "OnComponentEnabled": null,
                   "OnComponentFixedUpdate": null,
                   "OnComponentStart": null,
-                  "OnComponentUpdate": null
+                  "OnComponentUpdate": null,
+                  "PickupSound": null
                 }
               }
             ],
@@ -2083,13 +2091,13 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "ae09e18f-a0bc-4d64-bcf7-bd7141cb0895"
         }
-      },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
       },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
