@@ -1,0 +1,116 @@
+// =============================================================================
+// BlindHunter — Design System (theme partial)
+// Importé par tous les .razor.scss : @import "_theme";
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// PALETTE
+// -----------------------------------------------------------------------------
+$bg-pure: #000;
+$bg-overlay: rgba(0, 0, 0, 0.85);
+$bg-panel: rgba(8, 8, 8, 0.92);
+
+$text-primary: #f0f0f0;
+$text-secondary: #888;
+$text-dim: #444;
+
+$line-faint: rgba(255, 255, 255, 0.08);
+$line-base: rgba(255, 255, 255, 0.18);
+$line-strong: rgba(255, 255, 255, 0.5);
+$line-active: rgba(255, 255, 255, 0.85);
+
+// Accents — usage strict, chaque couleur porte un sens
+$color-danger: #cc1818;        // RÉSERVÉ au heartbeat uniquement
+$color-killer: #c8d4e0;        // blanc froid
+$color-survivor: #e0d4b8;      // blanc chaud
+$color-warning: #d4a017;       // gold mat (quest progress)
+$color-success: #6ba65d;       // vert sauge mat (quête validée)
+
+// -----------------------------------------------------------------------------
+// TYPOGRAPHIE
+// -----------------------------------------------------------------------------
+$font-display: "Oswald", "Impact", "Bebas Neue", sans-serif;  // titres condensés
+$font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+$font-mono: "JetBrains Mono", "Consolas", monospace;
+
+// Type scale (ratio 1.4)
+$text-xs: 11px;
+$text-sm: 13px;
+$text-base: 15px;
+$text-md: 18px;
+$text-lg: 24px;
+$text-xl: 32px;
+$text-2xl: 48px;
+$text-3xl: 72px;
+
+$tracking-tight: 1px;
+$tracking-base: 2px;
+$tracking-wide: 4px;
+$tracking-wider: 8px;
+
+// -----------------------------------------------------------------------------
+// SPACING (rythme 4px)
+// -----------------------------------------------------------------------------
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 24px;
+$space-6: 32px;
+$space-7: 48px;
+$space-8: 64px;
+
+// -----------------------------------------------------------------------------
+// MOTION
+// -----------------------------------------------------------------------------
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$transition-fast: 150ms $ease-out;
+$transition-base: 250ms $ease-out;
+$transition-slow: 400ms $ease-out;
+
+// =============================================================================
+// ANIMATIONS — keyframes globales
+// =============================================================================
+@keyframes scan-reveal {
+	0% {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes scan-line-sweep {
+	0% { transform: translateX(-100%); opacity: 0; }
+	20% { opacity: 0.6; }
+	80% { opacity: 0.6; }
+	100% { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes edge-pulse {
+	0%, 100% { opacity: 0.5; }
+	50% { opacity: 1; }
+}
+
+@keyframes heartbeat-far {
+	0%, 100% { transform: scale(1); }
+	30% { transform: scale(1.12); }
+}
+
+@keyframes heartbeat-medium {
+	0%, 100% { transform: scale(1); }
+	25% { transform: scale(1.25); }
+	50% { transform: scale(1); }
+	75% { transform: scale(1.12); }
+}
+
+@keyframes heartbeat-close {
+	0%, 100% { transform: scale(1); }
+	18% { transform: scale(1.45); }
+	36% { transform: scale(1); }
+	54% { transform: scale(1.35); }
+	72% { transform: scale(1); }
+}

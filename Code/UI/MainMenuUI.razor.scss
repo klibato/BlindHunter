@@ -1,73 +1,93 @@
+@import "theme";
+
 .main-menu {
 	width: 100%;
 	height: 100%;
-	background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 100%);
+	background-color: $bg-pure;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	padding: 40px;
-	font-family: "Arial Black", sans-serif;
-    pointer-events: all;
+	padding: $space-7;
+	pointer-events: all;
+	font-family: $font-body;
 
 	.logo-container {
 		flex-direction: column;
 		align-items: center;
-		margin-top: 100px;
+		margin-top: 140px;
+		animation: scan-reveal 800ms ease-out;
 
 		.logo-title {
-			font-size: 96px;
-			font-weight: 900;
-			color: white;
-			text-shadow: 4px 4px 0 #ff0000;
-			letter-spacing: 8px;
+			font-family: $font-body;
+			font-size: $text-3xl;
+			font-weight: 800;
+			color: $text-primary;
+			letter-spacing: 18px;
+			text-transform: uppercase;
+			text-shadow:
+				0 0 20px rgba(255, 255, 255, 0.15),
+				0 0 60px rgba(204, 24, 24, 0.25);
 		}
 
 		.logo-subtitle {
-			font-size: 18px;
-			color: rgba(255, 255, 255, 0.6);
-			margin-top: 16px;
-			letter-spacing: 4px;
+			font-family: $font-mono;
+			font-size: $text-sm;
+			color: $text-secondary;
+			margin-top: $space-4;
+			letter-spacing: $tracking-wider;
+			text-transform: uppercase;
+			opacity: 0.7;
 		}
 	}
 
 	.button-container {
 		flex-direction: column;
 		align-items: center;
-		gap: 16px;
-		margin-bottom: 100px;
+		gap: $space-4;
+		margin-bottom: 140px;
+		animation: scan-reveal 1000ms ease-out;
 
 		.menu-button {
 			width: 280px;
-			padding: 16px 32px;
-			background-color: rgba(0, 0, 0, 0.7);
-			border: 2px solid rgba(255, 255, 255, 0.4);
-			color: white;
-			font-size: 24px;
-			font-weight: bold;
+			padding: $space-4 $space-6;
+			color: rgba(255, 255, 255, 0.55);
+			font-family: $font-body;
+			font-size: $text-md;
+			font-weight: 700;
+			letter-spacing: $tracking-wider;
 			text-align: center;
-			letter-spacing: 4px;
+			text-transform: uppercase;
 			cursor: pointer;
-			transition: all 0.2s ease;
+			background-color: rgba(0, 0, 0, 0.4);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+			transition: all 200ms ease-out;
 
 			&:hover {
-				background-color: rgba(255, 0, 0, 0.3);
-				border-color: rgba(255, 0, 0, 0.8);
-				transform: translateY(-2px);
+				color: $text-primary;
+				background-color: rgba(255, 255, 255, 0.05);
+				border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+				transform: scale(1.03);
+				text-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
 			}
 
 			&.play-button {
-				border-color: rgba(255, 0, 0, 0.6);
-				
+				color: $text-primary;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
 				&:hover {
-					background-color: rgba(255, 0, 0, 0.4);
-					box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+					border-bottom: 1px solid rgba(204, 24, 24, 0.85);
+					text-shadow: 0 0 20px rgba(204, 24, 24, 0.5);
 				}
 			}
 		}
 	}
 
 	.footer {
-		color: rgba(255, 255, 255, 0.4);
-		font-size: 12px;
+		color: $text-dim;
+		font-family: $font-mono;
+		font-size: $text-xs;
+		letter-spacing: $tracking-base;
+		text-transform: uppercase;
+		opacity: 0.5;
 	}
 }

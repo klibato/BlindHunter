@@ -1,25 +1,36 @@
+@import "theme";
+
 .spectator-overlay {
 	position: absolute;
-	top: 80px;
+	top: $space-7;
 	left: 0;
 	right: 0;
 	flex-direction: column;
 	align-items: center;
 	pointer-events: none;
+	animation: scan-reveal 400ms ease-out;
 
 	.spectator-text {
-		color: white;
-		font-size: 24px;
-		font-weight: bold;
+		color: $text-primary;
+		font-family: $font-body;
+		font-size: $text-md;
+		font-weight: 700;
+		letter-spacing: $tracking-base;
+		text-transform: uppercase;
+		padding: $space-2 $space-5;
 		background-color: rgba(0, 0, 0, 0.7);
-		padding: 8px 16px;
-		border-radius: 4px;
-		text-shadow: 1px 1px 2px black;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+		text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
 	}
 
 	.spectator-hint {
-		color: rgba(255, 255, 255, 0.7);
-		font-size: 14px;
-		margin-top: 8px;
+		color: $text-secondary;
+		font-family: $font-mono;
+		font-size: $text-xs;
+		font-weight: 500;
+		letter-spacing: $tracking-base;
+		text-transform: uppercase;
+		margin-top: $space-2;
+		opacity: 0.7;
 	}
 }

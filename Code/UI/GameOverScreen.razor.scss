@@ -1,46 +1,59 @@
+@import "theme";
+
 .overlay {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.92);
+	backdrop-filter: blur(16px);
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	pointer-events: all;
+	font-family: $font-body;
+	animation: scan-reveal 500ms ease-out;
 
 	.message {
-		font-size: 96px;
-		font-weight: bold;
-		font-family: Arial;
-		text-shadow: 0px 6px 12px rgba(0, 0, 0, 1);
-		letter-spacing: 8px;
-		margin-bottom: 60px;
+		font-family: $font-body;
+		font-size: $text-3xl;
+		font-weight: 800;
+		letter-spacing: 14px;
+		text-transform: uppercase;
+		margin-bottom: $space-8;
+		text-shadow:
+			0 0 24px rgba(0, 0, 0, 0.95),
+			0 0 60px rgba(204, 24, 24, 0.25);
 	}
 
 	.return-button {
-		padding: 20px 60px;
-		background-color: rgba(255, 255, 255, 0.1);
-		border: 2px solid #ffffff;
-		color: #ffffff;
-		font-size: 28px;
-		font-weight: bold;
-		font-family: Arial;
-		letter-spacing: 4px;
+		padding: $space-4 $space-8;
+		color: $text-primary;
+		font-family: $font-body;
+		font-size: $text-md;
+		font-weight: 700;
+		letter-spacing: $tracking-wider;
+		text-transform: uppercase;
 		cursor: pointer;
-		transition: all 0.15s;
+		background-color: rgba(0, 0, 0, 0.5);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+		transition: all 200ms ease-out;
 
 		&:hover {
-			background-color: #ffffff;
-			color: #000000;
+			background-color: rgba(255, 255, 255, 0.07);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.85);
+			transform: scale(1.04);
+			text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
 		}
 	}
 
 	.waiting-text {
-		color: #aaaaaa;
-		font-size: 22px;
-		font-family: Arial;
-		letter-spacing: 2px;
+		color: $text-secondary;
+		font-family: $font-mono;
+		font-size: $text-sm;
+		letter-spacing: $tracking-base;
+		text-transform: uppercase;
+		opacity: 0.7;
 	}
 }

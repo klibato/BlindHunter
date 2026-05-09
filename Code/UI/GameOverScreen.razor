@@ -60,20 +60,21 @@
 		}
 	}
 
+	// Aligné sur le theme.scss : success vert sauge / danger rouge mat
 	private string MessageColor
 	{
 		get
 		{
-			if ( GameStateManager.Instance == null ) return "#ffffff";
-			if ( TargetPlayer == null ) return "#ffffff";
+			if ( GameStateManager.Instance == null ) return "#f0f0f0";
+			if ( TargetPlayer == null ) return "#f0f0f0";
 
 			bool isKiller = TargetPlayer.Role == PlayerRole.Killer;
 			bool survivorsWon = GameStateManager.Instance.CurrentState == GameState.SurvivorsWon;
 
 			if ( (survivorsWon && !isKiller) || (!survivorsWon && isKiller) )
-				return "#33cc66";
+				return "#6ba65d"; // $color-success
 			else
-				return "#cc3333";
+				return "#cc1818"; // $color-danger
 		}
 	}
 

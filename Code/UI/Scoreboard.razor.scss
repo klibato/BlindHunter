@@ -1,3 +1,5 @@
+@import "theme";
+
 .scoreboard-overlay {
 	position: absolute;
 	top: 0;
@@ -8,61 +10,70 @@
 	justify-content: center;
 	align-items: center;
 	pointer-events: none;
+	font-family: $font-body;
 }
 
 .scoreboard {
 	width: 720px;
 	flex-direction: column;
-	background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 10, 10, 0.95) 100%);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	padding: 24px;
+	background-color: rgba(0, 0, 0, 0.85);
+	backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	padding: $space-6;
+	animation: scan-reveal 350ms ease-out;
 
 	.header-bar {
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
-		padding-bottom: 16px;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-		margin-bottom: 16px;
+		padding-bottom: $space-4;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+		margin-bottom: $space-4;
 
 		.title {
-			color: white;
-			font-size: 28px;
-			font-weight: 900;
-			letter-spacing: 8px;
-			text-shadow: 2px 2px 0 #ff0000;
+			font-family: $font-body;
+			color: $text-primary;
+			font-size: $text-lg;
+			font-weight: 800;
+			letter-spacing: $tracking-wider;
+			text-transform: uppercase;
+			text-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
 		}
 
 		.time {
-			color: rgba(255, 255, 255, 0.7);
-			font-size: 18px;
-			font-family: monospace;
-			letter-spacing: 2px;
+			color: $text-secondary;
+			font-family: $font-mono;
+			font-size: $text-md;
+			letter-spacing: $tracking-base;
 		}
 	}
 
 	.quest-progress {
-		color: #ffcc44;
-		font-size: 16px;
-		font-weight: bold;
-		letter-spacing: 4px;
-		margin-bottom: 16px;
-		padding: 8px 12px;
-		background-color: rgba(255, 200, 0, 0.1);
-		border-left: 3px solid #ffcc44;
+		color: $color-warning;
+		font-family: $font-mono;
+		font-size: $text-sm;
+		font-weight: 600;
+		letter-spacing: $tracking-wide;
+		text-transform: uppercase;
+		margin-bottom: $space-4;
+		padding: $space-2 $space-3;
+		background-color: rgba(212, 160, 23, 0.06);
+		border-left: 2px solid $color-warning;
 	}
 
 	.column-headers {
 		flex-direction: row;
-		padding: 8px 12px;
-		background-color: rgba(255, 255, 255, 0.05);
-		margin-bottom: 4px;
+		padding: $space-2 $space-3;
+		background-color: rgba(255, 255, 255, 0.03);
+		margin-bottom: $space-1;
 
 		.col {
-			color: rgba(255, 255, 255, 0.5);
-			font-size: 12px;
-			font-weight: bold;
-			letter-spacing: 3px;
+			color: $text-secondary;
+			font-family: $font-mono;
+			font-size: $text-xs;
+			font-weight: 600;
+			letter-spacing: $tracking-wide;
+			text-transform: uppercase;
 		}
 	}
 
@@ -72,31 +83,30 @@
 		.player-row {
 			flex-direction: row;
 			align-items: center;
-			padding: 12px;
-			background-color: rgba(255, 255, 255, 0.05);
-			margin-bottom: 4px;
-			color: white;
-			font-size: 16px;
+			padding: $space-3;
+			background-color: rgba(255, 255, 255, 0.02);
+			margin-bottom: $space-1;
+			color: $text-primary;
+			font-size: $text-base;
+			font-weight: 500;
+			transition: opacity 200ms ease-out;
 
 			&.lobby {
-				background-color: rgba(255, 255, 255, 0.05);
-				border-left: 3px solid rgba(255, 255, 255, 0.2);
+				border-left: 2px solid rgba(255, 255, 255, 0.15);
 			}
 
 			&.survivor {
-				background-color: rgba(0, 150, 255, 0.1);
-				border-left: 3px solid rgba(100, 200, 255, 0.6);
+				border-left: 2px solid $color-survivor;
 			}
 
 			&.killer {
-				background-color: rgba(255, 0, 0, 0.15);
-				border-left: 3px solid rgba(255, 50, 50, 0.8);
+				border-left: 2px solid $color-killer;
 			}
 
 			&.dead {
-				background-color: rgba(0, 0, 0, 0.4);
-				border-left: 3px solid rgba(120, 120, 120, 0.5);
-				opacity: 0.5;
+				border-left: 2px solid $text-dim;
+				opacity: 0.45;
+				color: $text-secondary;
 			}
 		}
 	}

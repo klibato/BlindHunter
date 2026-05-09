@@ -28,10 +28,11 @@ PlayerRole.None && !TargetPlayer.IsProxy;
 		_ => ""
 	};
 
+	// Aligné sur le theme.scss : killer = blanc froid, survivor = blanc chaud
 	private string TextColor => TargetPlayer?.Role switch
 	{
-		PlayerRole.Killer => "#ff3333",
-		PlayerRole.Survivor => "#3399ff",
+		PlayerRole.Killer => "#c8d4e0",
+		PlayerRole.Survivor => "#e0d4b8",
 		_ => "#ffffff"
 	};
 

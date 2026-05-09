@@ -7,7 +7,14 @@
 	@if ( ShouldDisplay )
 	{
 		<div class="heartbeat-container">
-			<div class="heart @ZoneClass">♥</div>
+			<div class="danger-vignette @ZoneClass"></div>
+
+			<div class="heart-cluster">
+				<div class="ring ring-1 @ZoneClass"></div>
+				<div class="ring ring-2 @ZoneClass"></div>
+				<div class="ring ring-3 @ZoneClass"></div>
+				<div class="heart-icon @ZoneClass">♥</div>
+			</div>
 		</div>
 	}
 </root>
