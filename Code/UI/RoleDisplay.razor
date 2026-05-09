@@ -15,8 +15,10 @@
 @code
 {
 	[Property] public PlayerSetup TargetPlayer { get; set; }
+	[Property] public float DisplayDuration { get; set; } = 4f;
 
 	private float DisplayUntil { get; set; }
+	private PlayerRole _lastRole = PlayerRole.None;
 
 	private bool ShouldDisplay => RealTime.Now < DisplayUntil && TargetPlayer != null && TargetPlayer.Role !=
 PlayerRole.None && !TargetPlayer.IsProxy;
@@ -36,10 +38,20 @@ PlayerRole.None && !TargetPlayer.IsProxy;
 		_ => "#ffffff"
 	};
 
-	protected override void OnStart()
+	protected override void OnUpdate()
 	{
-		// Affiche pendant 3 secondes après le start
-		DisplayUntil = RealTime.Now + 3f;
+		if (TargetPlayer == null) return;
+
+		// Trigger le banner à chaque transition None → Killer/Survivor
+		// (au démarrage de la game, ou au retour de lobby)
+		if (TargetPlayer.Role != _lastRole)
+		{
+			if (_lastRole == PlayerRole.None && TargetPlayer.Role != PlayerRole.None)
+			{
+				DisplayUntil = RealTime.Now + DisplayDuration;
+			}
+			_lastRole = TargetPlayer.Role;
+		}
 	}
 
 	protected override int BuildHash() => HashCode.Combine(ShouldDisplay, RoleText, TextColor);
