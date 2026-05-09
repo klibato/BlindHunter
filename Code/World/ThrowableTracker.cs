@@ -8,6 +8,7 @@ public sealed class ThrowableTracker : Component, Component.ICollisionListener
 {
 	[Property] public float NoiseIntensity { get; set; } = 300f;
 	[Property] public float Lifetime { get; set; } = 5f;
+	[Property] public SoundEvent ImpactSound { get; set; }
 
 	private float _spawnTime;
 	private bool _impacted;
@@ -39,9 +40,21 @@ public sealed class ThrowableTracker : Component, Component.ICollisionListener
 
 		_impacted = true;
 		EmitNoiseRpc(WorldPosition, NoiseIntensity);
+		PlayImpactSoundRpc(WorldPosition);
 
 		// Détruit le cube entier (pas juste le tracker) après un court délai
 		DestroyGameObjectDelayed(); // 2 secondes après l'impact
+	}
+
+	[Rpc.Broadcast]
+	private void PlayImpactSoundRpc(Vector3 position)
+	{
+		// Audio entendu par tous (pas de filter killer/survivor) : c'est un son
+		// 3D positionnel qui sert à la fois aux survivors (feedback) et au killer (indice spatial).
+		if (ImpactSound != null)
+		{
+			Sound.Play(ImpactSound, position);
+		}
 	}
 	private async void DestroyGameObjectDelayed()
 	{
