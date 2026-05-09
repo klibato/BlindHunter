@@ -247,10 +247,10 @@
         "__enabled": true,
         "Flags": 0,
         "AttackRange": 100,
-        "HitNoiseIntensity": 350,
+        "HitSound": null,
         "MaxStamina": 3,
         "MinStaminaToAttack": 1,
-        "MissNoiseIntensity": 200,
+        "MissSound": null,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -571,6 +571,27 @@
           "component_type": "PlayerSetup"
         },
         "WallPenaltyMultiplier": 3
+      },
+      {
+        "__type": "KillerEchoActive",
+        "__guid": "1c89f062-a0b1-4b75-8a91-f5ce56aa3d3b",
+        "__enabled": true,
+        "Flags": 0,
+        "EchoCooldown": 0.7,
+        "EchoNoiseIntensity": 250,
+        "EchoSound": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "TargetPlayer": {
+          "_type": "component",
+          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
+          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
+          "component_type": "PlayerSetup"
+        }
       }
     ],
     "Children": [

@@ -5,13 +5,14 @@ public sealed class KillerAttack : Component
 {
 	[Property] public PlayerSetup TargetPlayer { get; set; }
 	[Property] public float AttackRange { get; set; } = 100f;
-	[Property] public float MissNoiseIntensity { get; set; } = 200f;
-	[Property] public float HitNoiseIntensity { get; set; } = 350f;
 
 	[Property] public float MaxStamina { get; set; } = 3f;
 	[Property] public float StaminaCost { get; set; } = 1f;
 	[Property] public float StaminaRegen { get; set; } = 0.4f;
 	[Property] public float MinStaminaToAttack { get; set; } = 1f;
+
+	[Property] public SoundEvent HitSound { get; set; }   // joue quand le killer touche un survivor (impact)
+	[Property] public SoundEvent MissSound { get; set; }  // joue quand l'attaque rate (whoosh)
 
 	[Sync] public float CurrentStamina { get; set; }
 
@@ -64,19 +65,18 @@ public sealed class KillerAttack : Component
 			}
 		}
 
-		float noiseIntensity = hitSomeone ? HitNoiseIntensity : MissNoiseIntensity;
-		EmitAttackNoiseRpc( WorldPosition, noiseIntensity );
+		PlayAttackSoundRpc( WorldPosition, hitSomeone );
 	}
 
 	[Rpc.Broadcast]
-	private void EmitAttackNoiseRpc( Vector3 position, float intensity )
+	private void PlayAttackSoundRpc( Vector3 position, bool wasHit )
 	{
-		var localPlayer = Scene.GetAllComponents<PlayerSetup>()
-			.FirstOrDefault( p => !p.IsProxy );
-		if ( localPlayer == null ) return;
-		if ( localPlayer.Role != PlayerRole.Killer ) return;
-
-		NoiseVisualizer.AddNoise( position, intensity );
+		// Audio entendu par tous : hit = impact charnu, miss = whoosh
+		var sound = wasHit ? HitSound : MissSound;
+		if ( sound != null )
+		{
+			Sound.Play( sound, position );
+		}
 	}
 
 	[Rpc.Broadcast]
