@@ -1,6 +1,8 @@
 /// <summary>Requires all quests to be completed before triggering survivor victory.</summary>
 public sealed class ExitDoor : Component
 {
+	[Property] public SoundEvent OpenSound { get; set; }
+
 	private Interactable _interactable;
 
 	protected override void OnStart()
@@ -38,6 +40,13 @@ public sealed class ExitDoor : Component
 			return;
 		}
 
+		PlayOpenSoundRpc( WorldPosition );
 		GameStateManager.Instance?.DeclareSurvivorsVictory();
+	}
+
+	[Rpc.Broadcast]
+	private void PlayOpenSoundRpc( Vector3 position )
+	{
+		if ( OpenSound != null ) Sound.Play( OpenSound, position );
 	}
 }

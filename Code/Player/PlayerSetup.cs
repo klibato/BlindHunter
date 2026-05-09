@@ -8,6 +8,8 @@ public sealed class PlayerSetup : Component
 	[Sync(SyncFlags.FromHost)] public bool IsAlive { get; set; } = true;
 	[Sync] public Rotation EyeRotation { get; set; }
 	public PlayerRole AssignedRole { get; set; } = PlayerRole.None;
+
+	[Property] public SoundEvent DeathSound { get; set; }
 	private float _noiseTimer;
 	private SkinnedModelRenderer _bodyRenderer;
 	private PlayerController _controller;
@@ -104,10 +106,17 @@ public sealed class PlayerSetup : Component
 		if (!IsAlive) return;
 
 		NoiseVisualizer.AddNoise(WorldPosition, 400f);
+		PlayDeathSoundRpc(WorldPosition);
 		IsAlive = false;
 		Log.Info($"{GameObject.Name} was killed");
 
 		CheckSurvivorsAllDead();
+	}
+
+	[Rpc.Broadcast]
+	private void PlayDeathSoundRpc(Vector3 position)
+	{
+		if (DeathSound != null) Sound.Play(DeathSound, position);
 	}
 
 	private void CheckSurvivorsAllDead()

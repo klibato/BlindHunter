@@ -8,6 +8,7 @@ public sealed class KeycardReader : Component
 {
 	[Property] public string PromptWithKeycard { get; set; } = "Use Keycard";
 	[Property] public string PromptWithoutKeycard { get; set; } = "Need Keycard equipped";
+	[Property] public SoundEvent InsertSound { get; set; }
 
 	private Interactable _interactable;
 
@@ -59,6 +60,14 @@ public sealed class KeycardReader : Component
 		// Consomme la Keycard du slot actif
 		inventory.RemoveActiveItem();
 
+		PlayInsertSoundRpc(WorldPosition);
+
 		Log.Info($"Keycard consumed by {interactor.GameObject.Name}");
+	}
+
+	[Rpc.Broadcast]
+	private void PlayInsertSoundRpc(Vector3 position)
+	{
+		if (InsertSound != null) Sound.Play(InsertSound, position);
 	}
 }

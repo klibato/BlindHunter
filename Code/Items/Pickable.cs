@@ -4,6 +4,7 @@
 public sealed class Pickable : Component
 {
 	[Property] public ItemType ItemKind { get; set; } = ItemType.Stone;
+	[Property] public SoundEvent PickupSound { get; set; }
 
 	private Interactable _interactable;
 
@@ -37,7 +38,15 @@ public sealed class Pickable : Component
 			return;
 		}
 
+		PlayPickupSoundRpc(WorldPosition);
+
 		// Détruit le pickable une fois ramassé
 		GameObject.Destroy();
+	}
+
+	[Rpc.Broadcast]
+	private void PlayPickupSoundRpc(Vector3 position)
+	{
+		if (PickupSound != null) Sound.Play(PickupSound, position);
 	}
 }
