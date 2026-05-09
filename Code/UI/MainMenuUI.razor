@@ -5,6 +5,8 @@
 
 <root>
     <div class="main-menu">
+        <div class="dev-banner">STILL IN DEVELOPMENT</div>
+
         <div class="logo-container">
             <div class="logo-title">BLINDHUNTER</div>
             <div class="logo-subtitle">A horror echolocation experience</div>
@@ -22,6 +24,21 @@
             </div>
         </div>
 
+        <div class="discord-button" @onclick=@OnDiscordClick>
+            <div class="discord-icon">D</div>
+            <div class="discord-label">
+                @if (_showCopied)
+                {
+                    <span class="copied-feedback">LINK COPIED — PASTE IN BROWSER</span>
+                }
+                else
+                {
+                    <span>JOIN OUR DISCORD</span>
+                    <span class="discord-url">discord.gg/QFFGHJF3jr</span>
+                }
+            </div>
+        </div>
+
         <div class="footer">
             <div>BlindHunter v0.1 — by Klibato</div>
         </div>
@@ -32,6 +49,10 @@
 {
     [Property] public string GameplaySceneFile { get; set; } = "scenes/gameplay.scene";
     [Property] public SettingsMenu SettingsPanel { get; set; }
+
+    private const string DiscordUrl = "https://discord.gg/QFFGHJF3jr";
+    private float _copiedFeedbackUntil = 0f;
+    private bool _showCopied => RealTime.Now < _copiedFeedbackUntil;
 
     protected override void OnUpdate()
     {
@@ -63,7 +84,16 @@
         Game.Close();
     }
 
+    private void OnDiscordClick()
+    {
+        // Le sandbox s&box bloque Process.Start, donc on copie l'URL dans le clipboard
+        // et on affiche un feedback. L'utilisateur colle dans son navigateur.
+        Sandbox.UI.Clipboard.SetText(DiscordUrl);
+        _copiedFeedbackUntil = RealTime.Now + 2.5f;
+    }
+
     protected override int BuildHash() => HashCode.Combine(
-        SettingsPanel?.IsOpen ?? false
+        SettingsPanel?.IsOpen ?? false,
+        _showCopied
     );
 }

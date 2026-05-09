@@ -11,6 +11,88 @@
 	pointer-events: all;
 	font-family: $font-body;
 
+	.dev-banner {
+		position: absolute;
+		top: $space-5;
+		left: 0;
+		right: 0;
+		justify-content: center;
+		align-items: center;
+		font-family: $font-mono;
+		font-size: $text-xs;
+		font-weight: 700;
+		color: $color-warning;
+		letter-spacing: $tracking-wider;
+		text-transform: uppercase;
+		opacity: 0.85;
+		text-shadow: 0 0 12px rgba(212, 160, 23, 0.4);
+		animation: scan-reveal 600ms ease-out;
+	}
+
+	.discord-button {
+		position: absolute;
+		bottom: $space-5;
+		right: $space-5;
+		flex-direction: row;
+		align-items: center;
+		gap: $space-3;
+		padding: $space-3 $space-4;
+		background-color: rgba(88, 101, 242, 0.12);
+		border-bottom: 1px solid rgba(88, 101, 242, 0.5);
+		cursor: pointer;
+		transition: all 200ms ease-out;
+
+		.discord-icon {
+			width: 28px;
+			height: 28px;
+			justify-content: center;
+			align-items: center;
+			font-family: $font-body;
+			font-size: $text-md;
+			font-weight: 800;
+			color: #ffffff;
+			background-color: #5865f2;
+			border-radius: 4px;
+		}
+
+		.discord-label {
+			flex-direction: column;
+			font-family: $font-body;
+			font-size: $text-sm;
+			font-weight: 700;
+			color: rgba(255, 255, 255, 0.75);
+			letter-spacing: $tracking-wide;
+			text-transform: uppercase;
+
+			.discord-url {
+				font-family: $font-mono;
+				font-size: $text-xs;
+				font-weight: 400;
+				color: rgba(255, 255, 255, 0.45);
+				letter-spacing: $tracking-base;
+				text-transform: lowercase;
+				margin-top: 2px;
+			}
+
+			.copied-feedback {
+				color: $color-success;
+				text-shadow: 0 0 8px rgba(107, 166, 93, 0.6);
+				animation: scan-reveal 200ms ease-out;
+			}
+		}
+
+		&:hover {
+			background-color: rgba(88, 101, 242, 0.25);
+			border-bottom: 1px solid rgba(88, 101, 242, 0.95);
+			transform: scale(1.04);
+
+			.discord-label {
+				color: $text-primary;
+				text-shadow: 0 0 12px rgba(88, 101, 242, 0.6);
+			}
+		}
+	}
+
 	.logo-container {
 		flex-direction: column;
 		align-items: center;
