@@ -14,6 +14,7 @@ public sealed class PlayerSetup : Component
 	private SkinnedModelRenderer _bodyRenderer;
 	private PlayerController _controller;
 	private CameraComponent _camera;
+	private GameObject _ragdoll;
 
 	protected override void OnStart()
 	{
@@ -107,6 +108,7 @@ public sealed class PlayerSetup : Component
 
 		NoiseVisualizer.AddNoise(WorldPosition, 400f);
 		PlayDeathSoundRpc(WorldPosition);
+		SpawnRagdollRpc();
 		IsAlive = false;
 		Log.Info($"{GameObject.Name} was killed");
 
@@ -117,6 +119,62 @@ public sealed class PlayerSetup : Component
 	private void PlayDeathSoundRpc(Vector3 position)
 	{
 		if (DeathSound != null) Sound.Play(DeathSound, position);
+	}
+
+	[Rpc.Broadcast]
+	private void SpawnRagdollRpc()
+	{
+		if (_bodyRenderer == null) return;
+
+		// Désactive AVANT le spawn du ragdoll : sinon le Rigidbody/colliders du player
+		// (encore actifs sur le client owner ce frame) bloquent le corps en l'air
+		if (_controller != null) _controller.Enabled = false;
+		foreach (var rb in GameObject.GetComponentsInChildren<Rigidbody>())
+		{
+			rb.Enabled = false;
+		}
+		foreach (var collider in GameObject.GetComponentsInChildren<Collider>())
+		{
+			collider.Enabled = false;
+		}
+
+		var corpse = new GameObject(true, $"{GameObject.Name}_corpse");
+		corpse.WorldPosition = _bodyRenderer.WorldPosition;
+		corpse.WorldRotation = _bodyRenderer.WorldRotation;
+
+		var renderer = corpse.AddComponent<SkinnedModelRenderer>();
+		renderer.Model = _bodyRenderer.Model;
+		renderer.Tint = _bodyRenderer.Tint;
+		renderer.UseAnimGraph = false;
+
+		var physics = corpse.AddComponent<ModelPhysics>();
+		physics.Model = _bodyRenderer.Model;
+		physics.Renderer = renderer;
+		physics.MotionEnabled = true;
+
+		// Cache le corps debout pour pas voir 2 modèles superposés
+		_bodyRenderer.Enabled = false;
+
+		_ragdoll = corpse;
+	}
+
+	[Rpc.Broadcast]
+	private void CleanupRagdollRpc()
+	{
+		if (_ragdoll != null)
+		{
+			_ragdoll.Destroy();
+			_ragdoll = null;
+		}
+		if (_bodyRenderer != null) _bodyRenderer.Enabled = true;
+		foreach (var rb in GameObject.GetComponentsInChildren<Rigidbody>())
+		{
+			rb.Enabled = true;
+		}
+		foreach (var collider in GameObject.GetComponentsInChildren<Collider>())
+		{
+			collider.Enabled = true;
+		}
 	}
 
 	private void CheckSurvivorsAllDead()
@@ -158,6 +216,8 @@ public sealed class PlayerSetup : Component
 		Role = PlayerRole.None;
 		AssignedRole = PlayerRole.None;
 		IsAlive = true;
+
+		CleanupRagdollRpc();
 
 		// Réactive les composants désactivés par HandleDeathState
 		if (_controller != null) _controller.Enabled = true;
