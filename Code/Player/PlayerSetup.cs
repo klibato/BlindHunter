@@ -209,6 +209,16 @@ public sealed class PlayerSetup : Component
 		var flashlight = GameObject.GetComponentInChildren<Flashlight>();
 		if (flashlight != null) flashlight.Enabled = false;
 	}
+	[Rpc.Owner]
+	public void TeleportRpc(Vector3 pos, Rotation rot)
+	{
+		if (_controller != null)
+			_controller.Enabled = false;
+		WorldPosition = pos + Vector3.Up * 5f;
+		WorldRotation = rot;
+		if (_controller != null) _controller.Enabled = true;
+	}
+
 	public void ResetForLobby()
 	{
 		if (!Networking.IsHost) return;

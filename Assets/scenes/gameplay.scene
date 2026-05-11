@@ -81,6 +81,7 @@
           "Flags": 0,
           "FallbackSpawnPosition": "0,0,50",
           "LobbySpawnPosition": "0,0,100",
+          "MaxPlayers": 5,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -332,6 +333,14 @@
           {
             "Target": {
               "Type": "Component",
+              "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+            },
+            "Property": "PromptText",
+            "Value": "Press E to Grab"
+          },
+          {
+            "Target": {
+              "Type": "Component",
               "IdValue": "2b2e7d02-2f6e-496e-abde-e954f8430685"
             },
             "Property": "Center",
@@ -351,7 +360,7 @@
       "__PrefabIdToInstanceId": {
         "caf984f2-4c63-48cf-94c9-333161a67256": "03d678fc-af54-44c7-b477-382d522c7919",
         "30ee111d-da90-4369-84e9-f0571d217078": "7fd93d3d-5f28-42b5-b457-1db4fd0636fa",
-        "1e6a6d49-5eca-46c2-b97a-b39035025690": "7a4e8781-02dd-4043-992a-2ca57e7f16bd",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "db0d3046-fd8c-4dce-8034-ad16e4fd2142",
         "2b2e7d02-2f6e-496e-abde-e954f8430685": "ff04fd7d-db44-40a2-832d-33f56602068c"
       }
     },
@@ -457,7 +466,7 @@
       "__PrefabIdToInstanceId": {
         "caf984f2-4c63-48cf-94c9-333161a67256": "19138820-56a4-4219-85ce-0206da6ede41",
         "30ee111d-da90-4369-84e9-f0571d217078": "a7f1be40-1548-4516-8813-966fdb1d4ecb",
-        "1e6a6d49-5eca-46c2-b97a-b39035025690": "1556179c-fccd-4c45-a017-e8bc40787a97",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "b89254f8-e35d-434d-86a9-2a958671d439",
         "2b2e7d02-2f6e-496e-abde-e954f8430685": "2bd4da61-65f4-41d0-b705-e7ae0d24b4fe"
       }
     },
@@ -535,16 +544,16 @@
               "Type": "Component",
               "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
             },
-            "Property": "PromptText",
-            "Value": "Open the exit door"
+            "Property": "IsQuestObject",
+            "Value": false
           },
           {
             "Target": {
               "Type": "Component",
               "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
             },
-            "Property": "IsQuestObject",
-            "Value": false
+            "Property": "PromptText",
+            "Value": "Open the exit door"
           },
           {
             "Target": {
@@ -582,7 +591,7 @@
       "__PrefabIdToInstanceId": {
         "caf984f2-4c63-48cf-94c9-333161a67256": "1927fba7-ef05-4e83-9ced-f35a52e55256",
         "30ee111d-da90-4369-84e9-f0571d217078": "93425fc0-63e6-4c69-ae8d-c22b1a550df6",
-        "1e6a6d49-5eca-46c2-b97a-b39035025690": "b30065ae-4ca4-4a4d-a3d1-bdd8aaa929c4",
+        "7e074844-9de6-4028-ac6c-791bfb21bc44": "c6b868fc-c2dd-45af-aa24-6f44958e438b",
         "2b2e7d02-2f6e-496e-abde-e954f8430685": "0a06c0cf-bb6c-4196-a77d-da3904a30e6b"
       }
     },
@@ -591,7 +600,7 @@
       "__version": 2,
       "Flags": 0,
       "Name": "Spawn_Killer",
-      "Position": "890.671265,135.713608,24.68853",
+      "Position": "848.217773,156.150482,1.78723669",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
@@ -798,14 +807,6 @@
                   "Type": "Component",
                   "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
                 },
-                "Property": "PromptText",
-                "Value": "Activate the generator"
-              },
-              {
-                "Target": {
-                  "Type": "Component",
-                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
-                },
                 "Property": "LedRenderer",
                 "Value": {
                   "_type": "component",
@@ -813,6 +814,14 @@
                   "go": "15eebe26-d7da-4f66-a0ec-b0ac94cd434c",
                   "component_type": "ModelRenderer"
                 }
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+                },
+                "Property": "PromptText",
+                "Value": "Press E to activate the generator"
               }
             ],
             "MovedObjects": [
@@ -834,7 +843,7 @@
           "__PrefabIdToInstanceId": {
             "caf984f2-4c63-48cf-94c9-333161a67256": "e9851a18-cd86-4103-ae72-58195727d7d8",
             "30ee111d-da90-4369-84e9-f0571d217078": "15a17942-7381-4fef-b968-5642cbf4de6f",
-            "1e6a6d49-5eca-46c2-b97a-b39035025690": "aedb310c-2b6f-4777-a75c-4ca34d0e55ab",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "58197d9c-5b1b-428b-9258-6e7d11307352",
             "2b2e7d02-2f6e-496e-abde-e954f8430685": "e696dfd6-70fd-4eda-9b06-84cb066b5c35"
           }
         },
@@ -986,14 +995,6 @@
                   "Type": "Component",
                   "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
                 },
-                "Property": "PromptText",
-                "Value": "Activate the generator"
-              },
-              {
-                "Target": {
-                  "Type": "Component",
-                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
-                },
                 "Property": "LedRenderer",
                 "Value": {
                   "_type": "component",
@@ -1001,6 +1002,14 @@
                   "go": "0071ee88-d3f2-4b85-8f82-8bd0ecc3dce5",
                   "component_type": "ModelRenderer"
                 }
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+                },
+                "Property": "PromptText",
+                "Value": "Press E to activate the generator"
               }
             ],
             "MovedObjects": [
@@ -1022,7 +1031,7 @@
           "__PrefabIdToInstanceId": {
             "caf984f2-4c63-48cf-94c9-333161a67256": "602e39b3-3023-48d9-8856-2a0fca8bf0e7",
             "30ee111d-da90-4369-84e9-f0571d217078": "794ad8f7-e24e-4587-b1a8-461fad4ebf0b",
-            "1e6a6d49-5eca-46c2-b97a-b39035025690": "f9683a03-e54b-4077-94cc-00d85823bfa3",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "545cbfa9-cb78-4815-96f4-b7f394542d2b",
             "2b2e7d02-2f6e-496e-abde-e954f8430685": "9cbcc712-8a45-4657-889a-64ea65e00e44"
           }
         },
@@ -1174,14 +1183,6 @@
                   "Type": "Component",
                   "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
                 },
-                "Property": "PromptText",
-                "Value": "Activate the generator"
-              },
-              {
-                "Target": {
-                  "Type": "Component",
-                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
-                },
                 "Property": "LedRenderer",
                 "Value": {
                   "_type": "component",
@@ -1189,6 +1190,14 @@
                   "go": "2c41a715-d517-437e-8584-5122aff70c44",
                   "component_type": "ModelRenderer"
                 }
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+                },
+                "Property": "PromptText",
+                "Value": "Press E to activate the generator"
               }
             ],
             "MovedObjects": [
@@ -1210,7 +1219,7 @@
           "__PrefabIdToInstanceId": {
             "caf984f2-4c63-48cf-94c9-333161a67256": "96926838-5054-465b-b59d-c1b8c5fddb72",
             "30ee111d-da90-4369-84e9-f0571d217078": "342ed641-2de7-43be-9076-68f068001a18",
-            "1e6a6d49-5eca-46c2-b97a-b39035025690": "af0ed71b-42b1-470b-8b55-49cee33f48cb",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "68d80763-d997-4565-9edf-9fa7f14a7f70",
             "2b2e7d02-2f6e-496e-abde-e954f8430685": "793a1201-65c5-4711-93ca-05164685308b"
           }
         },
@@ -1362,14 +1371,6 @@
                   "Type": "Component",
                   "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
                 },
-                "Property": "PromptText",
-                "Value": "Activate the generator"
-              },
-              {
-                "Target": {
-                  "Type": "Component",
-                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
-                },
                 "Property": "LedRenderer",
                 "Value": {
                   "_type": "component",
@@ -1377,6 +1378,14 @@
                   "go": "85ad54da-e580-41f1-ac7f-ff382bf79fbb",
                   "component_type": "ModelRenderer"
                 }
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "7e074844-9de6-4028-ac6c-791bfb21bc44"
+                },
+                "Property": "PromptText",
+                "Value": "Press E to activate the generator"
               }
             ],
             "MovedObjects": [
@@ -1398,7 +1407,7 @@
           "__PrefabIdToInstanceId": {
             "caf984f2-4c63-48cf-94c9-333161a67256": "71c7cf4f-389a-48df-a4ff-bd373da0258e",
             "30ee111d-da90-4369-84e9-f0571d217078": "9458f5b9-a18a-4cf6-8530-24e212c9b0bf",
-            "1e6a6d49-5eca-46c2-b97a-b39035025690": "d1ef4564-a8a3-409f-ab79-251106a1966c",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "faaf3541-7846-4a59-8143-5bd9bbf43561",
             "2b2e7d02-2f6e-496e-abde-e954f8430685": "b015e67d-3ccb-4f24-a904-4b766a7ae5b4"
           }
         }
@@ -1506,7 +1515,7 @@
           "__PrefabIdToInstanceId": {
             "caf984f2-4c63-48cf-94c9-333161a67256": "ffeac6e4-44c5-4f3f-8e91-b3697dc3c2bc",
             "30ee111d-da90-4369-84e9-f0571d217078": "15e82d6a-bd5a-4025-b257-e8af802cbd78",
-            "1e6a6d49-5eca-46c2-b97a-b39035025690": "3ea7e380-b4bb-4bae-9802-f28a26e48b07",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "774f0a47-693d-4b2c-bc85-6774bb41e64f",
             "2b2e7d02-2f6e-496e-abde-e954f8430685": "66579c81-c8aa-4410-9c3b-6c0fe7b79976"
           }
         },
@@ -1595,7 +1604,7 @@
           "__PrefabIdToInstanceId": {
             "caf984f2-4c63-48cf-94c9-333161a67256": "facd9316-48ba-4f20-b6c4-5e4403da889f",
             "30ee111d-da90-4369-84e9-f0571d217078": "f332ee31-01fb-44e7-b1d2-c7893f997d3b",
-            "1e6a6d49-5eca-46c2-b97a-b39035025690": "b1261eed-1554-42bd-b9bf-3b642e45a0e3",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "ce50479a-b704-457f-98d8-7bc9ae487a74",
             "2b2e7d02-2f6e-496e-abde-e954f8430685": "3375aee9-cc60-4a90-b21b-7b359f7b9385"
           }
         },
@@ -1684,7 +1693,7 @@
           "__PrefabIdToInstanceId": {
             "caf984f2-4c63-48cf-94c9-333161a67256": "01c6ffbc-dab8-48b9-9ff9-a637f0d57c30",
             "30ee111d-da90-4369-84e9-f0571d217078": "27c76017-ef69-4325-90fa-f879ff2eec8a",
-            "1e6a6d49-5eca-46c2-b97a-b39035025690": "11d9f0fa-5489-4379-9a2c-a9113cd4cd54",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "c9dbc657-884b-4170-a97c-2ab4c8ef4a30",
             "2b2e7d02-2f6e-496e-abde-e954f8430685": "5e22c101-a529-4953-b167-7f91f7d2fcd1"
           }
         },
@@ -1773,7 +1782,7 @@
           "__PrefabIdToInstanceId": {
             "caf984f2-4c63-48cf-94c9-333161a67256": "5a4f6670-5bbe-4efb-b923-98ba00ff614d",
             "30ee111d-da90-4369-84e9-f0571d217078": "b70370df-33d8-46da-ad3b-c3e20296ec37",
-            "1e6a6d49-5eca-46c2-b97a-b39035025690": "4b082395-eca1-42f4-9574-fac985520e7c",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "2ed1351d-298b-4b4d-b8cf-f28fbff173b3",
             "2b2e7d02-2f6e-496e-abde-e954f8430685": "9460c106-47ed-436a-841d-6b3e0dd252a9"
           }
         },
@@ -1862,7 +1871,7 @@
           "__PrefabIdToInstanceId": {
             "caf984f2-4c63-48cf-94c9-333161a67256": "b22f7aea-4fe4-4bb3-ad63-c127a4168dcb",
             "30ee111d-da90-4369-84e9-f0571d217078": "2436c4a6-6a96-4d5d-a664-920eea226cdb",
-            "1e6a6d49-5eca-46c2-b97a-b39035025690": "c35619b4-9487-4c2e-9381-481572072955",
+            "7e074844-9de6-4028-ac6c-791bfb21bc44": "ac498f5c-937d-493c-b2f8-319bc0cebf8e",
             "2b2e7d02-2f6e-496e-abde-e954f8430685": "44061549-b18d-4b0a-9ebb-d2712f88667e"
           }
         }
@@ -1890,7 +1899,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "Spawn_Survivor_1",
-          "Position": "748.001953,-2059.26025,-14.3358002",
+          "Position": "748.001953,-2071.72852,-17.8513641",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -1922,7 +1931,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "Spawn_Survivor_2",
-          "Position": "1498.61646,-1540.46362,-168.682343",
+          "Position": "1498.61646,-1524.12109,-176.302063",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -1986,7 +1995,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "Spawn_Survivor_4",
-          "Position": "-274.076782,-440.053864,-173.777863",
+          "Position": "-350.165894,-123.006935,-173.777863",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -2091,6 +2100,9 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
           "SelectionSets": []
@@ -2100,9 +2112,6 @@
         "Storage": {
           "$blob": "ae09e18f-a0bc-4d64-bcf7-bd7141cb0895"
         }
-      },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
       }
     }
   },

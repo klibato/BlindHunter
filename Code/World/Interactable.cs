@@ -24,9 +24,14 @@ public sealed class Interactable : Component
         if ( IsCompleted ) return;
         if ( !Networking.IsHost ) return;
 
-        if ( CanInteract != null && !CanInteract( interactor ) ) return;
+        if ( CanInteract != null && !CanInteract( interactor ) )
+        {
+            Log.Info( $"[Interactable] {GameObject.Name}: CanInteract returned false for {interactor?.GameObject.Name ?? "null"}" );
+            return;
+        }
 
         IsCompleted = true;
+        Log.Info( $"[Interactable] {GameObject.Name} completed by {interactor?.GameObject.Name ?? "null"}" );
         OnInteracted?.Invoke( interactor );
 
         EmitNoiseRpc( WorldPosition, NoiseIntensity );

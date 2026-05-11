@@ -3,6 +3,8 @@
 /// </summary>
 public sealed class Pickable : Component
 {
+	public static readonly List<Pickable> All = new();
+
 	[Property] public ItemType ItemKind { get; set; } = ItemType.Stone;
 	[Property] public SoundEvent PickupSound { get; set; }
 
@@ -10,6 +12,8 @@ public sealed class Pickable : Component
 
 	protected override void OnStart()
 	{
+		All.Add(this);
+
 		_interactable = GetComponent<Interactable>();
 		if (_interactable == null)
 		{
@@ -22,6 +26,11 @@ public sealed class Pickable : Component
 		_interactable.OnInteracted += OnPickedUp;
 	}
 
+	protected override void OnDestroy()
+	{
+		All.Remove(this);
+	}
+
 	private void OnPickedUp(PlayerSetup interactor)
 	{
 		if (!Networking.IsHost) return;
@@ -32,7 +41,6 @@ public sealed class Pickable : Component
 		bool added = inventory.TryAddItem(ItemKind);
 		if (!added)
 		{
-			// Inventaire plein, on annule la complétion pour pouvoir réessayer plus tard
 			_interactable.IsCompleted = false;
 			Log.Info($"Inventory full, can't pick up {ItemKind}");
 			return;
@@ -40,8 +48,15 @@ public sealed class Pickable : Component
 
 		PlayPickupSoundRpc(WorldPosition);
 
-		// Détruit le pickable une fois ramassé
-		GameObject.Destroy();
+		// Cache l'objet au lieu de le détruire pour pouvoir le réactiver au reset
+		GameObject.Enabled = false;
+	}
+
+	public void ResetPickable()
+	{
+		if (!Networking.IsHost) return;
+		GameObject.Enabled = true;
+		if (_interactable != null) _interactable.IsCompleted = false;
 	}
 
 	[Rpc.Broadcast]

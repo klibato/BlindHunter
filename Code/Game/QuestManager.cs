@@ -36,13 +36,15 @@ public sealed class QuestManager : Component
 		foreach ( var i in standaloneInteractables )
 		{
 			i.OnInteracted += OnQuestCompleted;
+			Log.Info( $"[QuestManager] standalone quest: {i.GameObject.Name}" );
 		}
 		foreach ( var g in _questGroups )
 		{
 			g.OnGroupCompleted += OnGroupCompleted;
+			Log.Info( $"[QuestManager] group: '{g.GroupName}' ({g.TotalCount} sub-quests)" );
 		}
 
-		Log.Info( $"QuestManager initialized: {TotalQuests} total quests ({standaloneInteractables.Count} standalone + {_questGroups.Count} groups)" );
+		Log.Info( $"[QuestManager] initialized: {TotalQuests} total ({standaloneInteractables.Count} standalone + {_questGroups.Count} groups)" );
 	}
 
 	private void OnQuestCompleted( PlayerSetup interactor )

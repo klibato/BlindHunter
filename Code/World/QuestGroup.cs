@@ -50,12 +50,15 @@ public sealed class QuestGroup : Component
 	{
 		if ( !Networking.IsHost ) return;
 
+		int done = CompletedCount;
+		Log.Info( $"[QuestGroup] '{GroupName}' sub-quest done: {done}/{TotalCount}" );
+
 		bool allDone = SubQuests.All( s => s != null && s.IsCompleted );
 
 		if ( allDone && !IsCompleted )
 		{
 			IsCompleted = true;
-			Log.Info( $"QuestGroup '{GroupName}' completed!" );
+			Log.Info( $"[QuestGroup] '{GroupName}' fully completed!" );
 			OnGroupCompleted?.Invoke();
 		}
 	}
