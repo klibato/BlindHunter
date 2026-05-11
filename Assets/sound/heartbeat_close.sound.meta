@@ -1,0 +1,21 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "Heartbeat Close",
+      "Type": "sound",
+      "Org": "klibatocorp",
+      "Ident": "heartbeatclose",
+      "Schema": 0,
+      "IncludeSourceFiles": false,
+      "Resources": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "Mounts": null,
+      "IsStandaloneOnly": false,
+      "Metadata": {
+        "SingleAssetSource": "sound/heartbeat_close.sound"
+      }
+    }
+  }
+}

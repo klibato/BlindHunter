@@ -70,9 +70,7 @@ public sealed class KillerEchoActive : Component
 		}
 
 		// Fade linéaire : commence à plein volume, descend en continu jusqu'à 0
-		// quand la wave visuelle s'éteint. Si tu veux que le son reste fort plus
-		// longtemps puis fade brutalement, remplace par une curve cube :
-		// _localEchoHandle.Volume = 1f - (t * t * t);
+		// quand la wave visuelle s'éteint. Le scaling Master/SFX est fait par le mixer engine.
 		_localEchoHandle.Volume = 1f - t;
 	}
 

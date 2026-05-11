@@ -26,7 +26,7 @@ public sealed class SpectatorCamera : Component
 			return;
 		}
 		if (TargetPlayer == null || TargetPlayer.IsProxy) return;
-		if (TargetPlayer.Role != PlayerRole.Survivor) return;
+		if (TargetPlayer.Role == PlayerRole.Killer) return; // le killer ne specte pas
 		if (_camera == null) return;
 
 		// Transition alive → dead

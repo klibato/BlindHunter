@@ -42,19 +42,56 @@ public sealed class GameManager : Component, Component.INetworkListener
 		if (!Networking.IsHost) return;
 		if (PlayerPrefab is null) return;
 
-		// Tous les joueurs spawnent dans la lobby zone, sans rôle
 		var playerObject = PlayerPrefab.Clone(LobbySpawnPosition);
 		playerObject.Name = $"Player - {channel.DisplayName}";
 
-		// Pas de rôle assigné → reste PlayerRole.None pendant le lobby
 		var setup = playerObject.GetComponent<PlayerSetup>();
 		if (setup != null)
 		{
 			setup.AssignedRole = PlayerRole.None;
+
+			if (State == LobbyState.InGame)
+			{
+				// Rejoint en cours de partie → spectateur direct
+				setup.Role = PlayerRole.None;
+				setup.IsAlive = false;
+				Log.Info($"{channel.DisplayName} joined as spectator (game in progress)");
+			}
 		}
 
 		playerObject.NetworkSpawn(channel);
-		Log.Info($"{channel.DisplayName} joined the lobby");
+		if (State != LobbyState.InGame)
+			Log.Info($"{channel.DisplayName} joined the lobby");
+	}
+
+	void INetworkListener.OnDisconnected(Connection channel)
+	{
+		if (!Networking.IsHost) return;
+		if (State != LobbyState.InGame) return;
+
+		var player = Scene.GetAllComponents<PlayerSetup>()
+			.FirstOrDefault(p => p.Network.Owner == channel);
+
+		if (player == null) return;
+
+		if (player.Role == PlayerRole.Killer)
+		{
+			Log.Info($"Killer ({channel.DisplayName}) disconnected — survivors win");
+			GameStateManager.Instance?.DeclareSurvivorsVictory();
+		}
+		else if (player.Role == PlayerRole.Survivor)
+		{
+			// Vérifie s'il reste des survivors vivants (hors celui qui part)
+			var remainingSurvivors = Scene.GetAllComponents<PlayerSetup>()
+				.Where(p => p.Network.Owner != channel && p.Role == PlayerRole.Survivor && p.IsAlive)
+				.ToList();
+
+			if (remainingSurvivors.Count == 0)
+			{
+				Log.Info($"Last survivor ({channel.DisplayName}) disconnected — killer wins");
+				GameStateManager.Instance?.DeclareKillerVictory();
+			}
+		}
 	}
 
 	protected override void OnUpdate()
@@ -113,8 +150,9 @@ public sealed class GameManager : Component, Component.INetworkListener
 			p.Role = role;
 			p.AssignedRole = role;
 
-			Vector3 spawnPos = FindSpawnPosition(role);
-			Rotation spawnRot = FindSpawnRotation(role);
+			var spawn = FindSpawnPoint(role);
+			Vector3 spawnPos = spawn != null ? spawn.WorldPosition : FallbackSpawnPosition;
+			Rotation spawnRot = spawn != null ? spawn.WorldRotation : Rotation.Identity;
 
 			TeleportPlayerRpc(p.GameObject.Id, spawnPos, spawnRot);
 		}
@@ -183,23 +221,14 @@ public sealed class GameManager : Component, Component.INetworkListener
 		return Scene.GetAllComponents<PlayerSetup>().ToList();
 	}
 
-	private Vector3 FindSpawnPosition(PlayerRole role)
+	private Sandbox.SpawnPoint FindSpawnPoint(PlayerRole role)
 	{
-		var spawns = Scene.GetAllComponents<SpawnPoint>()
-			.Where(sp => sp.Role == role)
+		string nameFilter = role == PlayerRole.Killer ? "Killer" : "Survivor";
+		var spawns = Scene.GetAllComponents<Sandbox.SpawnPoint>()
+			.Where(sp => sp.GameObject.Name.Contains(nameFilter))
 			.ToList();
 
-		if (spawns.Count == 0) return FallbackSpawnPosition;
-		return spawns[Random.Shared.Int(0, spawns.Count - 1)].WorldPosition;
-	}
-
-	private Rotation FindSpawnRotation(PlayerRole role)
-	{
-		var spawns = Scene.GetAllComponents<SpawnPoint>()
-			.Where(sp => sp.Role == role)
-			.ToList();
-
-		if (spawns.Count == 0) return Rotation.Identity;
-		return spawns[Random.Shared.Int(0, spawns.Count - 1)].WorldRotation;
+		if (spawns.Count == 0) return null;
+		return spawns[Random.Shared.Int(0, spawns.Count - 1)];
 	}
 }

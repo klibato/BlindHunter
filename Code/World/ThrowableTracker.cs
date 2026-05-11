@@ -53,7 +53,7 @@ public sealed class ThrowableTracker : Component, Component.ICollisionListener
 		// 3D positionnel qui sert à la fois aux survivors (feedback) et au killer (indice spatial).
 		if (ImpactSound != null)
 		{
-			Sound.Play(ImpactSound, position);
+			if (ImpactSound != null) Sound.Play(ImpactSound, position);
 		}
 	}
 	private async void DestroyGameObjectDelayed()
