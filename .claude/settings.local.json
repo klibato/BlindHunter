@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git *)",
+      "WebFetch(domain:github.com)",
+      "Read(//tmp/**)",
+      "WebSearch",
+      "Bash(gh issue *)"
+    ]
+  }
+}

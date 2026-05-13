@@ -21,6 +21,7 @@ public sealed class GameManager : Component, Component.INetworkListener
 		get => (LobbyState)StateInt;
 		set => StateInt = (int)value;
 	}
+	
 	protected override void OnAwake()
 	{
 		Instance = this;
@@ -45,8 +46,7 @@ public sealed class GameManager : Component, Component.INetworkListener
 
 		if (GetAllPlayers().Count >= MaxPlayers)
 		{
-			Log.Info($"{channel.DisplayName} tried to join but lobby is full ({MaxPlayers})");
-			channel.Kick( "Lobby is full" );
+			channel.Kick("Lobby is full");
 			return;
 		}
 
@@ -60,16 +60,13 @@ public sealed class GameManager : Component, Component.INetworkListener
 
 			if (State == LobbyState.InGame)
 			{
-				// Rejoint en cours de partie → spectateur direct
 				setup.Role = PlayerRole.None;
 				setup.IsAlive = false;
-				Log.Info($"{channel.DisplayName} joined as spectator (game in progress)");
 			}
 		}
 
 		playerObject.NetworkSpawn(channel);
-		if (State != LobbyState.InGame)
-			Log.Info($"{channel.DisplayName} joined the lobby");
+		if (State != LobbyState.InGame);
 	}
 
 	void INetworkListener.OnDisconnected(Connection channel)
@@ -89,14 +86,12 @@ public sealed class GameManager : Component, Component.INetworkListener
 		}
 		else if (player.Role == PlayerRole.Survivor)
 		{
-			// Vérifie s'il reste des survivors vivants (hors celui qui part)
 			var remainingSurvivors = Scene.GetAllComponents<PlayerSetup>()
 				.Where(p => p.Network.Owner != channel && p.Role == PlayerRole.Survivor && p.IsAlive)
 				.ToList();
 
 			if (remainingSurvivors.Count == 0)
 			{
-				Log.Info($"Last survivor ({channel.DisplayName}) disconnected — killer wins");
 				GameStateManager.Instance?.DeclareKillerVictory();
 			}
 		}
@@ -116,9 +111,6 @@ public sealed class GameManager : Component, Component.INetworkListener
 		}
 	}
 
-	/// <summary>
-	/// Appelé quand le host clique "Start Game" dans la lobby UI.
-	/// </summary>
 	public void RequestStartGame()
 	{
 		if (!Networking.IsHost) return;
@@ -136,7 +128,7 @@ public sealed class GameManager : Component, Component.INetworkListener
 		Log.Info($"Starting game in {StartCountdownDuration}s");
 	}
 
-	private async void ActuallyStartGame()
+	private void ActuallyStartGame()
 	{
 		State = LobbyState.InGame;
 
@@ -146,41 +138,101 @@ public sealed class GameManager : Component, Component.INetworkListener
 		int killerIndex = Random.Shared.Int(0, players.Count - 1);
 		Log.Info($"Killer chosen: {players[killerIndex].GameObject.Name}");
 
-		for (int i = 0; i < players.Count; i++)
-		{
-			var p = players[i];
-			p.Role = (i == killerIndex) ? PlayerRole.Killer : PlayerRole.Survivor;
-			p.AssignedRole = p.Role;
-		}
-
-		await Task.DelayRealtimeSeconds(0.15f);
-
-		var killerSpawns = GetShuffledSpawnPoints(PlayerRole.Killer);
-		var survivorSpawns = GetShuffledSpawnPoints(PlayerRole.Survivor);
+		var killerSpawns = GetSpawnPoints(PlayerRole.Killer);
+		var survivorSpawns = GetSpawnPoints(PlayerRole.Survivor);
 		int killerUsed = 0, survivorUsed = 0;
 
 		for (int i = 0; i < players.Count; i++)
 		{
 			var p = players[i];
-			Sandbox.SpawnPoint spawn = null;
+			p.Role = (i == killerIndex) ? PlayerRole.Killer : PlayerRole.Survivor;
+			p.AssignedRole = p.Role;
+			p.IsAlive = true;
 
-			if (p.Role == PlayerRole.Killer && killerUsed < killerSpawns.Count)
-				spawn = killerSpawns[killerUsed++];
-			else if (p.Role == PlayerRole.Survivor && survivorUsed < survivorSpawns.Count)
-				spawn = survivorSpawns[survivorUsed++];
+			Sandbox.SpawnPoint spawn;
+			if (p.Role == PlayerRole.Killer)
+				spawn = killerUsed < killerSpawns.Count ? killerSpawns[killerUsed++] : null;
+			else
+				spawn = survivorUsed < survivorSpawns.Count ? survivorSpawns[survivorUsed++] : null;
 
-			Vector3 spawnPos = spawn != null ? spawn.WorldPosition : FallbackSpawnPosition;
-			Rotation spawnRot = spawn != null ? spawn.WorldRotation : Rotation.Identity;
-			p.TeleportRpc(spawnPos, spawnRot);
+			Vector3 pos = spawn != null ? spawn.WorldPosition : LobbySpawnPosition;
+			Rotation rot = spawn != null ? spawn.WorldRotation : Rotation.Identity;
+			p.TeleportRpc(pos, rot);
+			Log.Info($"{p.GameObject.Name} → {p.Role} → {(spawn != null ? spawn.GameObject.Name : "LOBBY_FALLBACK")} at {pos}");
 		}
 
 		Log.Info("Game started!");
 	}
+	
 	/// <summary>
-	/// Appelé quand le host clique "Return to Lobby" sur l'écran de fin.
-	/// Reset tout l'état et téléporte les joueurs au lobby.
+	/// Détruit et recrée les joueurs morts pour éviter l'état corrompu
 	/// </summary>
-	public async void RequestReturnToLobby()
+	private void RespawnDeadPlayers()
+	{
+		if (!Networking.IsHost) return;
+		
+		var deadPlayers = Scene.GetAllComponents<PlayerSetup>()
+			.Where(p => !p.IsAlive)
+			.ToList();
+		
+		foreach (var deadPlayer in deadPlayers)
+		{
+			var owner = deadPlayer.Network.Owner;
+			if (owner == null) continue;
+			
+			var oldRole = deadPlayer.Role;
+			var oldAssignedRole = deadPlayer.AssignedRole;
+			
+			// Récupère la position de spawn selon le rôle
+			Vector3 spawnPos = LobbySpawnPosition;
+			Rotation spawnRot = Rotation.Identity;
+			
+			if (oldRole == PlayerRole.Killer)
+			{
+				var killerSpawn = GetSpawnPoints(PlayerRole.Killer).FirstOrDefault();
+				if (killerSpawn != null)
+				{
+					spawnPos = killerSpawn.WorldPosition;
+					spawnRot = killerSpawn.WorldRotation;
+				}
+			}
+			else if (oldRole == PlayerRole.Survivor)
+			{
+				var survivorSpawn = GetSpawnPoints(PlayerRole.Survivor).FirstOrDefault();
+				if (survivorSpawn != null)
+				{
+					spawnPos = survivorSpawn.WorldPosition;
+					spawnRot = survivorSpawn.WorldRotation;
+				}
+			}
+			
+			Log.Info($"Respawnning {owner.DisplayName} (was {oldRole}) at {spawnPos}");
+			
+			// Détruit l'ancien corps corrompu
+			deadPlayer.GameObject.Destroy();
+			
+			// Crée un nouveau joueur propre
+			var newPlayer = PlayerPrefab.Clone(spawnPos);
+			newPlayer.WorldRotation = spawnRot;
+			newPlayer.Name = $"Player - {owner.DisplayName}";
+			
+			var newSetup = newPlayer.GetComponent<PlayerSetup>();
+			if (newSetup != null)
+			{
+				newSetup.Role = oldRole;
+				newSetup.AssignedRole = oldAssignedRole;
+				newSetup.IsAlive = true;
+			}
+			
+			// Spawn sur le réseau pour le bon client
+			newPlayer.NetworkSpawn(owner);
+		}
+	}
+	
+	/// <summary>
+	/// Reset le lobby et recrée les joueurs morts
+	/// </summary>
+	public void RequestReturnToLobby()
 	{
 		if (!Networking.IsHost) return;
 		if (State != LobbyState.InGame) return;
@@ -191,17 +243,17 @@ public sealed class GameManager : Component, Component.INetworkListener
 		CountdownTimer = 0f;
 		GameStateManager.Instance?.ResetToPlaying();
 
+		// 🔥 RECRÉE LES JOUEURS MORTS
+		RespawnDeadPlayers();
+		
+		// Téléporte tous les joueurs (vivants et ressuscités) au lobby
 		var players = GetAllPlayers();
 		foreach (var p in players)
-			p.ResetForLobby();
-
-		// Attend que IsAlive/Role sync arrivent sur les clients avant de teleporter
-		await Task.DelayRealtimeSeconds(0.15f);
-
-		foreach (var p in players)
+		{
 			p.TeleportRpc(LobbySpawnPosition, Rotation.Identity);
+		}
 
-		// 3. Reset toutes les quêtes
+		// Reset toutes les quêtes
 		foreach (var interactable in Scene.GetAllComponents<Interactable>())
 		{
 			interactable.IsCompleted = false;
@@ -215,12 +267,12 @@ public sealed class GameManager : Component, Component.INetworkListener
 			QuestManager.Instance.CompletedQuests = 0;
 		}
 
-		// 4. Cleanup des stones / objets jetés (tout objet avec ThrowableTracker)
+		// Cleanup des stones / objets jetés
 		var trackers = Scene.GetAllComponents<ThrowableTracker>().ToList();
 		foreach (var t in trackers)
 			t.GameObject.Destroy();
 
-		// 5. Respawn les pickables désactivés (keycard, etc.)
+		// Respawn les pickables désactivés
 		foreach (var pickable in Pickable.All)
 		{
 			if (pickable.IsValid())
@@ -229,25 +281,17 @@ public sealed class GameManager : Component, Component.INetworkListener
 
 		Log.Info("Back to lobby.");
 	}
-public List<PlayerSetup> GetAllPlayers()
+	
+	public List<PlayerSetup> GetAllPlayers()
 	{
 		return Scene.GetAllComponents<PlayerSetup>().ToList();
 	}
 
-	private List<Sandbox.SpawnPoint> GetShuffledSpawnPoints(PlayerRole role)
+	private List<Sandbox.SpawnPoint> GetSpawnPoints(PlayerRole role)
 	{
 		string nameFilter = role == PlayerRole.Killer ? "Killer" : "Survivor";
-		var spawns = Scene.GetAllComponents<Sandbox.SpawnPoint>()
+		return Scene.GetAllComponents<Sandbox.SpawnPoint>()
 			.Where(sp => sp.GameObject.Name.Contains(nameFilter))
 			.ToList();
-
-		// Fisher-Yates shuffle
-		for (int i = spawns.Count - 1; i > 0; i--)
-		{
-			int j = Random.Shared.Int(0, i);
-			(spawns[i], spawns[j]) = (spawns[j], spawns[i]);
-		}
-
-		return spawns;
 	}
 }

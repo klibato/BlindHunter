@@ -272,6 +272,7 @@
         "__guid": "8be16882-6eb8-4939-8fc7-cb8e2af2521b",
         "__enabled": true,
         "Flags": 0,
+        "DisplayDuration": 4,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -588,30 +589,6 @@
         "OnComponentStart": null,
         "OnComponentUpdate": null,
         "SoundFadeDuration": 2.5,
-        "TargetPlayer": {
-          "_type": "component",
-          "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",
-          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
-          "component_type": "PlayerSetup"
-        }
-      },
-      {
-        "__type": "Sandbox.UI.KillerEchoCooldown",
-        "__guid": "e01bc7fa-2419-4a1f-ad6f-b0faacbdfdc0",
-        "__enabled": true,
-        "Flags": 0,
-        "OnComponentDestroy": null,
-        "OnComponentDisabled": null,
-        "OnComponentEnabled": null,
-        "OnComponentFixedUpdate": null,
-        "OnComponentStart": null,
-        "OnComponentUpdate": null,
-        "TargetEcho": {
-          "_type": "component",
-          "component_id": "1c89f062-a0b1-4b75-8a91-f5ce56aa3d3b",
-          "go": "a057e9a3-700b-4b3d-b60d-61e4aea1a50f",
-          "component_type": "KillerEchoActive"
-        },
         "TargetPlayer": {
           "_type": "component",
           "component_id": "e5d3f252-b2c6-4250-bd0c-e30546b3c1f9",

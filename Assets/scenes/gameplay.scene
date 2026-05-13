@@ -37,26 +37,7 @@
           "UseMapFromLaunch": false
         }
       ],
-      "Children": [
-        {
-          "__guid": "f346df79-4856-4a89-bd29-79234b148001",
-          "__version": 2,
-          "Flags": 0,
-          "Name": "PostProcess",
-          "Position": "0,0,0",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkFlags": 0,
-          "NetworkOrphaned": 0,
-          "NetworkTransmit": true,
-          "OwnerTransfer": 1,
-          "Components": [],
-          "Children": []
-        }
-      ]
+      "Children": []
     },
     {
       "__guid": "b70fda7c-4b41-4f9d-b648-5815462a3219",
@@ -600,7 +581,7 @@
       "__version": 2,
       "Flags": 0,
       "Name": "Spawn_Killer",
-      "Position": "848.217773,156.150482,1.78723669",
+      "Position": "830.431213,156.150482,5.3745122",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
@@ -1899,7 +1880,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "Spawn_Survivor_1",
-          "Position": "748.001953,-2071.72852,-17.8513641",
+          "Position": "748.001953,-2071.72852,-16.6598206",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -2100,13 +2081,13 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
-      },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
           "SelectionSets": []
         }
+      },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
       },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {

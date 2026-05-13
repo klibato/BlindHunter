@@ -11,6 +11,7 @@ public sealed class PlayerSetup : Component
 
 	[Property] public SoundEvent DeathSound { get; set; }
 	private float _noiseTimer;
+	private float _debugLogTimer;
 	private SkinnedModelRenderer _bodyRenderer;
 	private PlayerController _controller;
 	private CameraComponent _camera;
@@ -34,10 +35,7 @@ public sealed class PlayerSetup : Component
 		bool gameOver = GameStateManager.Instance != null
 			&& GameStateManager.Instance.CurrentState != GameState.Playing;
 
-		if (gameOver)
-		{
-			return;
-		}
+		if (gameOver) return;
 
 		if (!IsAlive)
 		{
@@ -45,22 +43,27 @@ public sealed class PlayerSetup : Component
 			return;
 		}
 
-		// Si on était mort et qu'on revit (reset lobby), réactive les composants côté local
-		if (_controller != null && !_controller.Enabled) _controller.Enabled = true;
-		var interactor = GameObject.GetComponent<PlayerInteractor>();
-		if (interactor != null && !interactor.Enabled) interactor.Enabled = true;
-		var inventory = GameObject.GetComponent<PlayerInventory>();
-		if (inventory != null && !inventory.Enabled) inventory.Enabled = true;
-		var flashlight = GameObject.GetComponentInChildren<Flashlight>();
-		if (flashlight != null && !flashlight.Enabled) flashlight.Enabled = true;
-
 		if (!IsProxy && _camera != null)
 		{
 			EyeRotation = _camera.WorldRotation;
 		}
 
+		DebugLogInputs();
 		ApplyRoleColor();
 		HandleNoiseEmission();
+	}
+
+	private void DebugLogInputs()
+	{
+		if (IsProxy) return;
+
+		_debugLogTimer -= Time.Delta;
+		if (_debugLogTimer > 0f) return;
+		_debugLogTimer = 1f;
+
+		var moveInput = Input.AnalogMove;
+		bool ctrlEnabled = _controller != null && _controller.Enabled;
+		var velocity = _controller != null ? _controller.Velocity : Vector3.Zero;
 	}
 
 	private void HandleNoiseEmission()
@@ -126,8 +129,6 @@ public sealed class PlayerSetup : Component
 	{
 		if (_bodyRenderer == null) return;
 
-		// Désactive AVANT le spawn du ragdoll : sinon le Rigidbody/colliders du player
-		// (encore actifs sur le client owner ce frame) bloquent le corps en l'air
 		if (_controller != null) _controller.Enabled = false;
 		foreach (var rb in GameObject.GetComponentsInChildren<Rigidbody>())
 		{
@@ -152,29 +153,8 @@ public sealed class PlayerSetup : Component
 		physics.Renderer = renderer;
 		physics.MotionEnabled = true;
 
-		// Cache le corps debout pour pas voir 2 modèles superposés
 		_bodyRenderer.Enabled = false;
-
 		_ragdoll = corpse;
-	}
-
-	[Rpc.Broadcast]
-	private void CleanupRagdollRpc()
-	{
-		if (_ragdoll != null)
-		{
-			_ragdoll.Destroy();
-			_ragdoll = null;
-		}
-		if (_bodyRenderer != null) _bodyRenderer.Enabled = true;
-		foreach (var rb in GameObject.GetComponentsInChildren<Rigidbody>())
-		{
-			rb.Enabled = true;
-		}
-		foreach (var collider in GameObject.GetComponentsInChildren<Collider>())
-		{
-			collider.Enabled = true;
-		}
 	}
 
 	private void CheckSurvivorsAllDead()
@@ -193,60 +173,29 @@ public sealed class PlayerSetup : Component
 
 	private void HandleDeathState()
 	{
-		if (_controller != null)
-		{
-			_controller.Enabled = false;
-		}
-		// Désactive le PlayerInteractor (le joueur mort ne peut plus interagir)
+		if (_controller != null) _controller.Enabled = false;
+		
 		var interactor = GameObject.GetComponent<PlayerInteractor>();
 		if (interactor != null) interactor.Enabled = false;
 
-		// Désactive l'inventaire
 		var inventory = GameObject.GetComponent<PlayerInventory>();
 		if (inventory != null) inventory.Enabled = false;
 
-		// Désactive la flashlight
 		var flashlight = GameObject.GetComponentInChildren<Flashlight>();
 		if (flashlight != null) flashlight.Enabled = false;
 	}
-	[Rpc.Owner]
+	
+	[Rpc.Broadcast]
 	public void TeleportRpc(Vector3 pos, Rotation rot)
 	{
-		if (_controller != null)
-			_controller.Enabled = false;
+		if (IsProxy) return;
+		
 		WorldPosition = pos + Vector3.Up * 5f;
 		WorldRotation = rot;
-		if (_controller != null) _controller.Enabled = true;
-	}
 
-	public void ResetForLobby()
-	{
-		if (!Networking.IsHost) return;
-
-		Role = PlayerRole.None;
-		AssignedRole = PlayerRole.None;
-		IsAlive = true;
-
-		CleanupRagdollRpc();
-
-		// Réactive les composants désactivés par HandleDeathState
-		if (_controller != null) _controller.Enabled = true;
-
-		var interactor = GameObject.GetComponent<PlayerInteractor>();
-		if (interactor != null) interactor.Enabled = true;
-
-		var inventory = GameObject.GetComponent<PlayerInventory>();
-		if (inventory != null)
+		if (_controller != null)
 		{
-			inventory.Enabled = true;
-			// Vide les 3 slots
-			inventory.Slot0 = ItemType.None;
-			inventory.Slot1 = ItemType.None;
-			inventory.Slot2 = ItemType.None;
-			inventory.ActiveSlot = 0;
+			_controller.Enabled = true;
 		}
-
-		var flashlight = GameObject.GetComponentInChildren<Flashlight>();
-		if (flashlight != null) flashlight.Enabled = true;
 	}
 }

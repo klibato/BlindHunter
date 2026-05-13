@@ -22,6 +22,7 @@
 @code
 {
 	private bool IsOpen { get; set; } = false;
+	private bool _wasInGame = false;
 
 	protected override void OnUpdate()
 	{
@@ -29,6 +30,12 @@
 		{
 			IsOpen = !IsOpen;
 		}
+
+		// Auto-close when a new game round starts (transition lobby → in-game)
+		bool isInGame = GameManager.Instance?.State == LobbyState.InGame;
+		if ( isInGame && !_wasInGame )
+			IsOpen = false;
+		_wasInGame = isInGame;
 
 		if ( IsOpen )
 		{
