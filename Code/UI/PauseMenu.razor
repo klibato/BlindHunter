@@ -4,7 +4,7 @@
 @inherits PanelComponent
 
 <root>
-	@if ( IsOpen )
+	@if ( IsOpen && !IsProxy )
 	{
 		<div class="pause-overlay">
 			@if ( !_showSettings )
@@ -81,6 +81,11 @@
 
 	protected override void OnUpdate()
 	{
+		// PauseMenu vit sur le Player prefab, donc chaque proxy (autres joueurs) en a
+		// une copie locale. Sans ce guard, leurs OnUpdate verraient aussi Input.Pressed
+		// et toggleraient leur propre IsOpen → plusieurs pause overlays s'empilent en multi.
+		if ( IsProxy ) return;
+
 		if ( Input.Pressed( "PauseMenu" ) )
 		{
 			if ( IsOpen && _showSettings )
@@ -148,6 +153,7 @@
 	protected override int BuildHash() => HashCode.Combine(
 		IsOpen,
 		_showSettings,
+		IsProxy,
 		(int)Lang.Current,
 		GameSettings.MasterVolume,
 		GameSettings.SfxVolume,
