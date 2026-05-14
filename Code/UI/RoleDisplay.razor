@@ -6,8 +6,19 @@
 <root>
 	@if (ShouldDisplay)
 	{
-		<div class="role-banner" style="color: @TextColor;">
-			@RoleText
+		<div class="role-wrap">
+			<div class="role-banner" style="color: @TextColor;">
+				@RoleText
+			</div>
+			@if (HintLines.Count > 0)
+			{
+				<div class="role-hints">
+					@foreach (var line in HintLines)
+					{
+						<div class="role-hint">@line</div>
+					}
+				</div>
+			}
 		</div>
 	}
 </root>
@@ -15,7 +26,7 @@
 @code
 {
 	[Property] public PlayerSetup TargetPlayer { get; set; }
-	[Property] public float DisplayDuration { get; set; } = 4f;
+	[Property] public float DisplayDuration { get; set; } = 10f;
 
 	private float DisplayUntil { get; set; }
 	private PlayerRole _lastRole = PlayerRole.None;
@@ -37,6 +48,29 @@ PlayerRole.None && !TargetPlayer.IsProxy;
 		PlayerRole.Survivor => "#e0d4b8",
 		_ => "#ffffff"
 	};
+
+	private List<string> HintLines
+	{
+		get
+		{
+			var list = new List<string>();
+			if (TargetPlayer == null) return list;
+
+			if (TargetPlayer.Role == PlayerRole.Killer)
+			{
+				list.Add(Lang.Get("tutorial.hint.killer.echo"));
+				list.Add(Lang.Get("tutorial.hint.killer.attack"));
+				list.Add(Lang.Get("tutorial.hint.killer.goal"));
+			}
+			else if (TargetPlayer.Role == PlayerRole.Survivor)
+			{
+				list.Add(Lang.Get("tutorial.hint.survivor.interact"));
+				list.Add(Lang.Get("tutorial.hint.survivor.inventory"));
+				list.Add(Lang.Get("tutorial.hint.survivor.goal"));
+			}
+			return list;
+		}
+	}
 
 	protected override void OnUpdate()
 	{

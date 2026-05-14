@@ -115,6 +115,14 @@ public static class Lang
 		{ "role.banner.killer",    new[] { "YOU ARE THE KILLER",           "TU ES LE TUEUR" } },
 		{ "role.banner.survivor",  new[] { "YOU ARE A SURVIVOR",           "TU ES UN SURVIVANT" } },
 
+		// Tutorial hints shown under the role banner at spawn
+		{ "tutorial.hint.killer.echo",    new[] { "RIGHT CLICK — Echolocate to see the world",          "CLIC DROIT — Écholocation pour voir le monde" } },
+		{ "tutorial.hint.killer.attack",  new[] { "LEFT CLICK — Attack a survivor in range",            "CLIC GAUCHE — Attaquer un survivant à portée" } },
+		{ "tutorial.hint.killer.goal",    new[] { "Goal: kill every survivor before they escape",       "Objectif : tue tous les survivants avant leur fuite" } },
+		{ "tutorial.hint.survivor.interact", new[] { "E — Interact with generators, keycards, doors",   "E — Interagir avec générateurs, cartes, portes" } },
+		{ "tutorial.hint.survivor.inventory", new[] { "1 / 2 / 3 — Inventory slots · LEFT CLICK throws", "1 / 2 / 3 — Slots d'inventaire · CLIC GAUCHE lance" } },
+		{ "tutorial.hint.survivor.goal",  new[] { "Goal: power generators, grab the keycard, escape",   "Objectif : alimente les générateurs, prends la carte, fuis" } },
+
 		// Quest HUD
 		{ "quest.label",           new[] { "Quests : {0}/{1}",             "Quêtes : {0}/{1}" } },
 		{ "quest.no_manager",      new[] { "(no manager)",                 "(aucun manager)" } },
