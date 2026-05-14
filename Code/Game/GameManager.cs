@@ -179,52 +179,23 @@ public sealed class GameManager : Component, Component.INetworkListener
 		{
 			var owner = deadPlayer.Network.Owner;
 			if (owner == null) continue;
-			
+
 			var oldRole = deadPlayer.Role;
-			var oldAssignedRole = deadPlayer.AssignedRole;
-			
-			// Récupère la position de spawn selon le rôle
-			Vector3 spawnPos = LobbySpawnPosition;
-			Rotation spawnRot = Rotation.Identity;
-			
-			if (oldRole == PlayerRole.Killer)
-			{
-				var killerSpawn = GetSpawnPoints(PlayerRole.Killer).FirstOrDefault();
-				if (killerSpawn != null)
-				{
-					spawnPos = killerSpawn.WorldPosition;
-					spawnRot = killerSpawn.WorldRotation;
-				}
-			}
-			else if (oldRole == PlayerRole.Survivor)
-			{
-				var survivorSpawn = GetSpawnPoints(PlayerRole.Survivor).FirstOrDefault();
-				if (survivorSpawn != null)
-				{
-					spawnPos = survivorSpawn.WorldPosition;
-					spawnRot = survivorSpawn.WorldRotation;
-				}
-			}
-			
-			Log.Info($"Respawnning {owner.DisplayName} (was {oldRole}) at {spawnPos}");
-			
-			// Détruit l'ancien corps corrompu
+			Log.Info($"Respawnning {owner.DisplayName} (was {oldRole}) at lobby");
+
 			deadPlayer.GameObject.Destroy();
-			
-			// Crée un nouveau joueur propre
-			var newPlayer = PlayerPrefab.Clone(spawnPos);
-			newPlayer.WorldRotation = spawnRot;
+
+			var newPlayer = PlayerPrefab.Clone(LobbySpawnPosition);
 			newPlayer.Name = $"Player - {owner.DisplayName}";
-			
+
 			var newSetup = newPlayer.GetComponent<PlayerSetup>();
 			if (newSetup != null)
 			{
-				newSetup.Role = oldRole;
-				newSetup.AssignedRole = oldAssignedRole;
+				newSetup.Role = PlayerRole.None;
+				newSetup.AssignedRole = PlayerRole.None;
 				newSetup.IsAlive = true;
 			}
-			
-			// Spawn sur le réseau pour le bon client
+
 			newPlayer.NetworkSpawn(owner);
 		}
 	}
@@ -246,10 +217,13 @@ public sealed class GameManager : Component, Component.INetworkListener
 		// 🔥 RECRÉE LES JOUEURS MORTS
 		RespawnDeadPlayers();
 		
-		// Téléporte tous les joueurs (vivants et ressuscités) au lobby
+		// Téléporte tous les joueurs (vivants et ressuscités) au lobby et reset leur rôle
+		// pour que le banner ne se déclenche qu'au prochain démarrage de partie
 		var players = GetAllPlayers();
 		foreach (var p in players)
 		{
+			p.Role = PlayerRole.None;
+			p.AssignedRole = PlayerRole.None;
 			p.TeleportRpc(LobbySpawnPosition, Rotation.Identity);
 		}
 
@@ -272,6 +246,9 @@ public sealed class GameManager : Component, Component.INetworkListener
 		foreach (var t in trackers)
 			t.GameObject.Destroy();
 
+		// Cleanup des cadavres ragdoll restants sur tous les clients
+		CleanupCorpsesRpc();
+
 		// Respawn les pickables désactivés
 		foreach (var pickable in Pickable.All)
 		{
@@ -282,6 +259,17 @@ public sealed class GameManager : Component, Component.INetworkListener
 		Log.Info("Back to lobby.");
 	}
 	
+	[Rpc.Broadcast]
+	private void CleanupCorpsesRpc()
+	{
+		foreach (var corpse in PlayerSetup.AllCorpses)
+		{
+			if (corpse.IsValid())
+				corpse.Destroy();
+		}
+		PlayerSetup.AllCorpses.Clear();
+	}
+
 	public List<PlayerSetup> GetAllPlayers()
 	{
 		return Scene.GetAllComponents<PlayerSetup>().ToList();

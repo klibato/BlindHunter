@@ -9,6 +9,8 @@ public sealed class PlayerSetup : Component
 	[Sync] public Rotation EyeRotation { get; set; }
 	public PlayerRole AssignedRole { get; set; } = PlayerRole.None;
 
+	public static readonly List<GameObject> AllCorpses = new();
+
 	[Property] public SoundEvent DeathSound { get; set; }
 	private float _noiseTimer;
 	private float _debugLogTimer;
@@ -155,6 +157,7 @@ public sealed class PlayerSetup : Component
 
 		_bodyRenderer.Enabled = false;
 		_ragdoll = corpse;
+		AllCorpses.Add(corpse);
 	}
 
 	private void CheckSurvivorsAllDead()
