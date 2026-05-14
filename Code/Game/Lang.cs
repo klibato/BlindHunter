@@ -80,6 +80,7 @@ public static class Lang
 		{ "lobby.tag.host",        new[] { "HOST",                         "HÔTE" } },
 		{ "lobby.start_game",      new[] { "START GAME",                   "DÉMARRER" } },
 		{ "lobby.waiting_host",    new[] { "Waiting for host to start the game...", "En attente du démarrage par l'hôte..." } },
+		{ "lobby.need_more_players", new[] { "NEED AT LEAST {0} PLAYERS",   "{0} JOUEURS MIN REQUIS" } },
 
 		// Pause menu
 		{ "pause.title",           new[] { "MENU",                         "MENU" } },

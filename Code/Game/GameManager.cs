@@ -11,6 +11,7 @@ public sealed class GameManager : Component, Component.INetworkListener
 	[Property] public Vector3 FallbackSpawnPosition { get; set; } = new Vector3(0, 0, 50);
 	[Property] public float StartCountdownDuration { get; set; } = 3f;
 	[Property] public int MaxPlayers { get; set; } = 5;
+	[Property] public int MinPlayers { get; set; } = 2;
 
 	[Sync(SyncFlags.FromHost)] public int StateInt { get; set; } = (int)LobbyState.Lobby;
 	[Sync(SyncFlags.FromHost)] public float CountdownTimer { get; set; }
@@ -117,9 +118,9 @@ public sealed class GameManager : Component, Component.INetworkListener
 		if (State != LobbyState.Lobby) return;
 
 		var players = GetAllPlayers();
-		if (players.Count == 0)
+		if (players.Count < MinPlayers)
 		{
-			Log.Warning("No players to start with");
+			Log.Warning($"Need at least {MinPlayers} players to start (currently {players.Count})");
 			return;
 		}
 

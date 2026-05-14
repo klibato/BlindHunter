@@ -39,9 +39,18 @@
 
             @if (IsHost && State == LobbyState.Lobby)
             {
-                <div class="start-button" @onclick=@OnStartClick>
-                    @Lang.Get("lobby.start_game")
-                </div>
+                @if (CanStart)
+                {
+                    <div class="start-button" @onclick=@OnStartClick>
+                        @Lang.Get("lobby.start_game")
+                    </div>
+                }
+                else
+                {
+                    <div class="start-button disabled">
+                        @Lang.Get("lobby.need_more_players", MinPlayers)
+                    </div>
+                }
             }
 
             @if (!IsHost && State == LobbyState.Lobby)
@@ -59,6 +68,8 @@
     private bool IsHost => Networking.IsHost;
     private LobbyState State => GameManager.Instance?.State ?? LobbyState.Lobby;
     private int PlayerCount => GameManager.Instance?.GetAllPlayers().Count ?? 0;
+    private int MinPlayers => GameManager.Instance?.MinPlayers ?? 2;
+    private bool CanStart => PlayerCount >= MinPlayers;
 
     private bool ShouldDisplay
     {
@@ -101,6 +112,7 @@
         PlayerCount,
         CountdownText,
         IsHost,
+        CanStart,
         (int)Lang.Current
     );
 }
