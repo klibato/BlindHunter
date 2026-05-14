@@ -22,7 +22,7 @@ public sealed class Pickable : Component
 		}
 
 		_interactable.IsQuestObject = false;
-		_interactable.PromptText = $"Pick up {ItemKind}";
+		_interactable.LocalizedPromptProvider = () => Lang.Get( "prompt.pickup", Lang.Get( $"item.{ItemKind.ToString().ToLower()}" ) );
 		_interactable.OnInteracted += OnPickedUp;
 	}
 

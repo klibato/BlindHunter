@@ -10,6 +10,21 @@ public sealed class QuestGroup : Component
 	[Property] public string GroupName { get; set; } = "Generators";
 	[Property] public List<Interactable> SubQuests { get; set; } = new();
 
+	/// <summary>
+	/// Nom affiché dans l'UI, traduit selon Lang.Current. Tente la clé "questgroup.<groupname.lower>"
+	/// et retombe sur GroupName brut si absente. Permet de garder un nom d'éditeur simple.
+	/// </summary>
+	public string LocalizedName
+	{
+		get
+		{
+			if ( string.IsNullOrEmpty( GroupName ) ) return "";
+			var key = $"questgroup.{GroupName.ToLower()}";
+			var translated = Lang.Get( key );
+			return translated == key ? GroupName : translated;
+		}
+	}
+
 	[Sync(SyncFlags.FromHost)] public bool IsCompleted { get; set; }
 
 	public event Action OnGroupCompleted;

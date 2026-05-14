@@ -8,10 +8,10 @@
 	{
 		<div class="spectator-overlay">
 			<div class="spectator-text">
-				Spectating: @TargetName
+				@Lang.Get("spectator.target", TargetName)
 			</div>
 			<div class="spectator-hint">
-				Press E to switch
+				@Lang.Get("spectator.hint")
 			</div>
 		</div>
 	}
@@ -29,10 +29,11 @@
 		&& TargetSpectator != null
 		&& TargetSpectator.IsSpectating;
 
-	private string TargetName => TargetSpectator?.GetCurrentTargetName() ?? "Unknown";
+	private string TargetName => TargetSpectator?.GetCurrentTargetName() ?? Lang.Get("common.unknown");
 
 	protected override int BuildHash() => HashCode.Combine(
 		ShouldDisplay,
-		TargetName
+		TargetName,
+		(int)Lang.Current
 	);
 }

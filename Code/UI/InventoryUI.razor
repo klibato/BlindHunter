@@ -41,7 +41,8 @@
 	{
 		if (TargetInventory == null) return "";
 		var item = TargetInventory.GetSlot(slot);
-		return item == ItemType.None ? "—" : item.ToString();
+		if (item == ItemType.None) return "—";
+		return Lang.Get($"item.{item.ToString().ToLower()}");
 	}
 
 	protected override int BuildHash() => HashCode.Combine(
@@ -49,6 +50,7 @@
 		TargetInventory?.ActiveSlot ?? -1,
 		TargetInventory?.Slot0 ?? ItemType.None,
 		TargetInventory?.Slot1 ?? ItemType.None,
-		TargetInventory?.Slot2 ?? ItemType.None
+		TargetInventory?.Slot2 ?? ItemType.None,
+		(int)Lang.Current
 	);
 }

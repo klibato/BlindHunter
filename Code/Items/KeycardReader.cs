@@ -6,8 +6,6 @@ using System.Linq;
 /// </summary>
 public sealed class KeycardReader : Component
 {
-	[Property] public string PromptWithKeycard { get; set; } = "Use Keycard";
-	[Property] public string PromptWithoutKeycard { get; set; } = "Need Keycard equipped";
 	[Property] public SoundEvent InsertSound { get; set; }
 
 	private Interactable _interactable;
@@ -29,25 +27,21 @@ public sealed class KeycardReader : Component
 			return inventory.GetActiveItem() == ItemType.Keycard;
 		};
 
+		// Prompt dynamique selon que le joueur local a une keycard équipée
+		_interactable.LocalizedPromptProvider = () =>
+		{
+			var localPlayer = Scene.GetAllComponents<PlayerSetup>()
+				.FirstOrDefault(p => !p.IsProxy);
+			if (localPlayer == null) return Lang.Get("prompt.keycard.without");
+
+			var inventory = localPlayer.GameObject.GetComponent<PlayerInventory>();
+			if (inventory == null) return Lang.Get("prompt.keycard.without");
+
+			bool hasKeycard = inventory.GetActiveItem() == ItemType.Keycard;
+			return Lang.Get(hasKeycard ? "prompt.keycard.with" : "prompt.keycard.without");
+		};
+
 		_interactable.OnInteracted += OnReaderUsed;
-	}
-
-	protected override void OnUpdate()
-	{
-		// Met à jour dynamiquement le prompt selon ce que le joueur local équipe
-		if (_interactable == null) return;
-		if (_interactable.IsCompleted) return;
-
-		var localPlayer = Scene.GetAllComponents<PlayerSetup>()
-			.FirstOrDefault(p => !p.IsProxy);
-
-		if (localPlayer == null) return;
-
-		var inventory = localPlayer.GameObject.GetComponent<PlayerInventory>();
-		if (inventory == null) return;
-
-		bool hasKeycard = inventory.GetActiveItem() == ItemType.Keycard;
-		_interactable.PromptText = hasKeycard ? PromptWithKeycard : PromptWithoutKeycard;
 	}
 
 	private void OnReaderUsed(PlayerSetup interactor)

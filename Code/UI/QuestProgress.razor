@@ -16,7 +16,7 @@
 					@foreach (var group in QuestManager.Instance.QuestGroups)
 					{
 						<div class="subquest @(group.IsCompleted ? "done" : "")">
-							@group.GroupName : @group.CompletedCount / @group.TotalCount
+							@group.LocalizedName : @group.CompletedCount / @group.TotalCount
 						</div>
 					}
 				</div>
@@ -39,8 +39,8 @@
 	{
 		get
 		{
-			if (QuestManager.Instance == null) return "(no manager)";
-			return $"Quêtes : {QuestManager.Instance.CompletedQuests}/{QuestManager.Instance.TotalQuests}";
+			if (QuestManager.Instance == null) return Lang.Get("quest.no_manager");
+			return Lang.Get("quest.label", QuestManager.Instance.CompletedQuests, QuestManager.Instance.TotalQuests);
 		}
 	}
 
@@ -58,5 +58,5 @@
 		}
 	}
 
-	protected override int BuildHash() => HashCode.Combine(ShouldDisplay, MainLabelText, SubProgressHash);
+	protected override int BuildHash() => HashCode.Combine(ShouldDisplay, MainLabelText, SubProgressHash, (int)Lang.Current);
 }

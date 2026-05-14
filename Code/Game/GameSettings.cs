@@ -19,6 +19,7 @@ public static class GameSettings
 		public float SfxVolume { get; set; } = 1.0f;
 		public float MusicVolume { get; set; } = 1.0f;
 		public bool Fullscreen { get; set; } = true;
+		public AppLanguage AppLanguage { get; set; } = AppLanguage.English;
 	}
 
 	private static State _state = new State();
@@ -45,6 +46,12 @@ public static class GameSettings
 	{
 		get => _state.Fullscreen;
 		set { _state.Fullscreen = value; Save(); }
+	}
+
+	public static AppLanguage AppLanguage
+	{
+		get => _state.AppLanguage;
+		set { _state.AppLanguage = value; Lang.SetAppLanguage( value ); Save(); }
 	}
 
 	/// <summary>
@@ -80,6 +87,7 @@ public static class GameSettings
 			if ( FileSystem.Data.FileExists( FileName ) )
 			{
 				_state = FileSystem.Data.ReadJson<State>( FileName ) ?? new State();
+				Lang.SetAppLanguage( _state.AppLanguage );
 				return;
 			}
 		}
@@ -88,6 +96,7 @@ public static class GameSettings
 			Log.Warning( $"GameSettings load failed: {e.Message} — using defaults" );
 		}
 		_state = new State();
+		Lang.SetAppLanguage( _state.AppLanguage );
 	}
 
 	private static void Save()
