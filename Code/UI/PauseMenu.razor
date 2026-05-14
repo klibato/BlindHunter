@@ -4,18 +4,71 @@
 @inherits PanelComponent
 
 <root>
-	@if ( ShouldDisplay )
+	@if ( IsOpen )
 	{
 		<div class="pause-overlay">
-			<div class="pause-panel">
-				<div class="pause-title">@Lang.Get("pause.title")</div>
+			@if ( !_showSettings )
+			{
+				<div class="pause-panel">
+					<div class="pause-title">@Lang.Get("pause.title")</div>
 
-				<div class="pause-buttons">
-					<div class="pause-button" @onclick=@OnResumeClick>@Lang.Get("pause.resume")</div>
-					<div class="pause-button" @onclick=@OnSettingsClick>@Lang.Get("pause.settings")</div>
-					<div class="pause-button danger" @onclick=@OnDisconnectClick>@Lang.Get("pause.disconnect")</div>
+					<div class="pause-buttons">
+						<div class="pause-button" @onclick=@OnResumeClick>@Lang.Get("pause.resume")</div>
+						<div class="pause-button" @onclick=@OnSettingsClick>@Lang.Get("pause.settings")</div>
+						<div class="pause-button danger" @onclick=@OnDisconnectClick>@Lang.Get("pause.disconnect")</div>
+					</div>
 				</div>
-			</div>
+			}
+			else
+			{
+				<div class="pause-settings-panel">
+					<div class="pause-settings-title">@Lang.Get("settings.title")</div>
+
+					<div class="pause-setting-row">
+						<div class="pause-setting-label">@Lang.Get("settings.master_volume")</div>
+						<div class="pause-preset-group">
+							<div class="pause-preset-button @(IsVolumePreset(0f) ? "active" : "")" @onclick=@(() => SetMasterVolume(0f))>@Lang.Get("settings.preset.mute")</div>
+							<div class="pause-preset-button @(IsVolumePreset(0.33f) ? "active" : "")" @onclick=@(() => SetMasterVolume(0.33f))>@Lang.Get("settings.preset.low")</div>
+							<div class="pause-preset-button @(IsVolumePreset(0.66f) ? "active" : "")" @onclick=@(() => SetMasterVolume(0.66f))>@Lang.Get("settings.preset.med")</div>
+							<div class="pause-preset-button @(IsVolumePreset(1f) ? "active" : "")" @onclick=@(() => SetMasterVolume(1f))>@Lang.Get("settings.preset.full")</div>
+						</div>
+					</div>
+
+					<div class="pause-setting-row">
+						<div class="pause-setting-label">@Lang.Get("settings.sfx_volume")</div>
+						<div class="pause-preset-group">
+							<div class="pause-preset-button @(IsSfxPreset(0f) ? "active" : "")" @onclick=@(() => SetSfxVolume(0f))>@Lang.Get("settings.preset.mute")</div>
+							<div class="pause-preset-button @(IsSfxPreset(0.33f) ? "active" : "")" @onclick=@(() => SetSfxVolume(0.33f))>@Lang.Get("settings.preset.low")</div>
+							<div class="pause-preset-button @(IsSfxPreset(0.66f) ? "active" : "")" @onclick=@(() => SetSfxVolume(0.66f))>@Lang.Get("settings.preset.med")</div>
+							<div class="pause-preset-button @(IsSfxPreset(1f) ? "active" : "")" @onclick=@(() => SetSfxVolume(1f))>@Lang.Get("settings.preset.full")</div>
+						</div>
+					</div>
+
+					<div class="pause-setting-row">
+						<div class="pause-setting-label">@Lang.Get("settings.music_volume")</div>
+						<div class="pause-preset-group">
+							<div class="pause-preset-button @(IsMusicPreset(0f) ? "active" : "")" @onclick=@(() => SetMusicVolume(0f))>@Lang.Get("settings.preset.mute")</div>
+							<div class="pause-preset-button @(IsMusicPreset(0.33f) ? "active" : "")" @onclick=@(() => SetMusicVolume(0.33f))>@Lang.Get("settings.preset.low")</div>
+							<div class="pause-preset-button @(IsMusicPreset(0.66f) ? "active" : "")" @onclick=@(() => SetMusicVolume(0.66f))>@Lang.Get("settings.preset.med")</div>
+							<div class="pause-preset-button @(IsMusicPreset(1f) ? "active" : "")" @onclick=@(() => SetMusicVolume(1f))>@Lang.Get("settings.preset.full")</div>
+						</div>
+					</div>
+
+					<div class="pause-setting-row">
+						<div class="pause-setting-label">@Lang.Get("settings.language")</div>
+						<div class="pause-preset-group">
+							<div class="pause-preset-button @(IsAppLanguage(AppLanguage.English) ? "active" : "")" @onclick=@(() => SetAppLanguage(AppLanguage.English))>@Lang.Get("settings.english")</div>
+							<div class="pause-preset-button @(IsAppLanguage(AppLanguage.French) ? "active" : "")" @onclick=@(() => SetAppLanguage(AppLanguage.French))>@Lang.Get("settings.french")</div>
+						</div>
+					</div>
+
+					<div class="pause-settings-footer">
+						<div class="pause-footer-note">@Lang.Get("settings.footer_note")</div>
+					</div>
+
+					<div class="pause-back-button" @onclick=@OnSettingsBackClick>@Lang.Get("settings.back")</div>
+				</div>
+			}
 		</div>
 	}
 </root>
@@ -23,40 +76,22 @@
 @code
 {
 	private bool IsOpen { get; set; } = false;
+	private bool _showSettings = false;
 	private bool _wasInGame = false;
-	private SettingsMenu _settings;
-
-	// Masque le pause overlay quand Settings est ouvert pour éviter le chevauchement
-	// (les deux PanelComponent sur le même GameObject créent des stacking contexts séparés
-	// donc le z-index CSS ne suffit pas à garantir l'ordre).
-	private bool ShouldDisplay => IsOpen && !(_settings != null && _settings.IsOpen);
-
-	protected override void OnStart()
-	{
-		// Auto-provision un SettingsMenu sur le même GameObject pour que les clients
-		// puissent ouvrir leurs paramètres pendant la partie (la scène gameplay
-		// n'en contient pas par défaut, contrairement au mainmenu).
-		_settings = GetComponent<SettingsMenu>();
-		if ( _settings == null )
-		{
-			_settings = GameObject.AddComponent<SettingsMenu>();
-		}
-		_settings.OnClose = ReopenAfterSettings;
-	}
 
 	protected override void OnUpdate()
 	{
 		if ( Input.Pressed( "PauseMenu" ) )
 		{
-			if ( _settings != null && _settings.IsOpen )
+			if ( IsOpen && _showSettings )
 			{
-				// Echap dans Settings → ferme Settings et revient au Pause
-				_settings.IsOpen = false;
-				IsOpen = true;
+				// Echap dans Settings → revient au pause
+				_showSettings = false;
 			}
 			else
 			{
 				IsOpen = !IsOpen;
+				if ( !IsOpen ) _showSettings = false;
 			}
 		}
 
@@ -65,11 +100,11 @@
 		if ( isInGame && !_wasInGame )
 		{
 			IsOpen = false;
-			if ( _settings != null ) _settings.IsOpen = false;
+			_showSettings = false;
 		}
 		_wasInGame = isInGame;
 
-		if ( IsOpen || (_settings != null && _settings.IsOpen) )
+		if ( IsOpen )
 		{
 			Mouse.Visible = true;
 		}
@@ -78,19 +113,17 @@
 	private void OnResumeClick()
 	{
 		IsOpen = false;
+		_showSettings = false;
 	}
 
 	private void OnSettingsClick()
 	{
-		if ( _settings == null ) return;
-		IsOpen = false;
-		_settings.IsOpen = true;
+		_showSettings = true;
 	}
 
-	private void ReopenAfterSettings()
+	private void OnSettingsBackClick()
 	{
-		// Appelé par SettingsMenu quand l'utilisateur clique BACK
-		IsOpen = true;
+		_showSettings = false;
 	}
 
 	private void OnDisconnectClick()
@@ -102,5 +135,22 @@
 		Game.ActiveScene.LoadFromFile( "scenes/mainmenu.scene" );
 	}
 
-	protected override int BuildHash() => HashCode.Combine( ShouldDisplay, (int)Lang.Current );
+	private bool IsVolumePreset( float val ) => MathF.Abs( GameSettings.MasterVolume - val ) < 0.05f;
+	private bool IsSfxPreset( float val ) => MathF.Abs( GameSettings.SfxVolume - val ) < 0.05f;
+	private bool IsMusicPreset( float val ) => MathF.Abs( GameSettings.MusicVolume - val ) < 0.05f;
+	private bool IsAppLanguage( AppLanguage lang ) => GameSettings.AppLanguage == lang;
+
+	private void SetMasterVolume( float val ) => GameSettings.MasterVolume = val;
+	private void SetSfxVolume( float val ) => GameSettings.SfxVolume = val;
+	private void SetMusicVolume( float val ) => GameSettings.MusicVolume = val;
+	private void SetAppLanguage( AppLanguage lang ) => GameSettings.AppLanguage = lang;
+
+	protected override int BuildHash() => HashCode.Combine(
+		IsOpen,
+		_showSettings,
+		(int)Lang.Current,
+		GameSettings.MasterVolume,
+		GameSettings.SfxVolume,
+		GameSettings.MusicVolume
+	);
 }
