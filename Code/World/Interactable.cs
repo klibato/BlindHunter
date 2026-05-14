@@ -19,9 +19,15 @@ public sealed class Interactable : Component
         get
         {
             if ( LocalizedPromptProvider != null ) return LocalizedPromptProvider();
-            // Traduit le défaut anglais "Press E to interact" tel qu'il vient du prefab
-            if ( PromptText == "Press E to interact" ) return Lang.Get( "prompt.interact" );
-            return PromptText;
+            // Traduit les défauts anglais hérités du prefab/scène quand aucun composant
+            // dynamique n'a fourni de provider (cas des générateurs et autres
+            // interactables "plain").
+            return PromptText switch
+            {
+                "Press E to interact" => Lang.Get( "prompt.interact" ),
+                "Press E to activate the generator" => Lang.Get( "prompt.activate_generator" ),
+                _ => PromptText,
+            };
         }
     }
     [Property] public bool IsQuestObject { get; set; } = true;

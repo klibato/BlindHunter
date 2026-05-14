@@ -16,7 +16,7 @@
 					@foreach (var group in QuestManager.Instance.QuestGroups)
 					{
 						<div class="subquest @(group.IsCompleted ? "done" : "")">
-							@group.GroupName : @group.CompletedCount / @group.TotalCount
+							@group.LocalizedName : @group.CompletedCount / @group.TotalCount
 						</div>
 					}
 				</div>

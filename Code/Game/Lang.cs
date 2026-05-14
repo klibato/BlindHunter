@@ -124,6 +124,7 @@ public static class Lang
 
 		// Interactables
 		{ "prompt.interact",       new[] { "Press E to interact",          "Appuie sur E pour interagir" } },
+		{ "prompt.activate_generator", new[] { "Press E to activate the generator", "Appuie sur E pour activer le générateur" } },
 		{ "prompt.pickup",         new[] { "Pick up {0}",                  "Ramasser {0}" } },
 		{ "prompt.keycard.with",   new[] { "Use Keycard",                  "Utiliser la carte" } },
 		{ "prompt.keycard.without",new[] { "Need Keycard equipped",        "Carte requise (équipée)" } },
@@ -134,5 +135,8 @@ public static class Lang
 		{ "item.keycard",          new[] { "Keycard",                      "Carte" } },
 		{ "item.stone",            new[] { "Stone",                        "Pierre" } },
 		{ "item.none",             new[] { "None",                         "Aucun" } },
+
+		// Quest group display names (looked up via QuestGroup.LocalizedName)
+		{ "questgroup.generators", new[] { "Generators",                   "Générateurs" } },
 	};
 }
