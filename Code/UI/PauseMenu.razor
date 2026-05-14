@@ -4,7 +4,7 @@
 @inherits PanelComponent
 
 <root>
-	@if ( IsOpen )
+	@if ( ShouldDisplay )
 	{
 		<div class="pause-overlay">
 			<div class="pause-panel">
@@ -25,6 +25,11 @@
 	private bool IsOpen { get; set; } = false;
 	private bool _wasInGame = false;
 	private SettingsMenu _settings;
+
+	// Masque le pause overlay quand Settings est ouvert pour éviter le chevauchement
+	// (les deux PanelComponent sur le même GameObject créent des stacking contexts séparés
+	// donc le z-index CSS ne suffit pas à garantir l'ordre).
+	private bool ShouldDisplay => IsOpen && !(_settings != null && _settings.IsOpen);
 
 	protected override void OnStart()
 	{
@@ -97,5 +102,5 @@
 		Game.ActiveScene.LoadFromFile( "scenes/mainmenu.scene" );
 	}
 
-	protected override int BuildHash() => HashCode.Combine( IsOpen, (int)Lang.Current );
+	protected override int BuildHash() => HashCode.Combine( ShouldDisplay, (int)Lang.Current );
 }
