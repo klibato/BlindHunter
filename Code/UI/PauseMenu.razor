@@ -12,6 +12,7 @@
 
 				<div class="pause-buttons">
 					<div class="pause-button" @onclick=@OnResumeClick>@Lang.Get("pause.resume")</div>
+					<div class="pause-button" @onclick=@OnSettingsClick>@Lang.Get("pause.settings")</div>
 					<div class="pause-button danger" @onclick=@OnDisconnectClick>@Lang.Get("pause.disconnect")</div>
 				</div>
 			</div>
@@ -23,21 +24,47 @@
 {
 	private bool IsOpen { get; set; } = false;
 	private bool _wasInGame = false;
+	private SettingsMenu _settings;
+
+	protected override void OnStart()
+	{
+		// Auto-provision un SettingsMenu sur le même GameObject pour que les clients
+		// puissent ouvrir leurs paramètres pendant la partie (la scène gameplay
+		// n'en contient pas par défaut, contrairement au mainmenu).
+		_settings = GetComponent<SettingsMenu>();
+		if ( _settings == null )
+		{
+			_settings = GameObject.AddComponent<SettingsMenu>();
+		}
+		_settings.OnClose = ReopenAfterSettings;
+	}
 
 	protected override void OnUpdate()
 	{
 		if ( Input.Pressed( "PauseMenu" ) )
 		{
-			IsOpen = !IsOpen;
+			if ( _settings != null && _settings.IsOpen )
+			{
+				// Echap dans Settings → ferme Settings et revient au Pause
+				_settings.IsOpen = false;
+				IsOpen = true;
+			}
+			else
+			{
+				IsOpen = !IsOpen;
+			}
 		}
 
 		// Auto-close when a new game round starts (transition lobby → in-game)
 		bool isInGame = GameManager.Instance?.State == LobbyState.InGame;
 		if ( isInGame && !_wasInGame )
+		{
 			IsOpen = false;
+			if ( _settings != null ) _settings.IsOpen = false;
+		}
 		_wasInGame = isInGame;
 
-		if ( IsOpen )
+		if ( IsOpen || (_settings != null && _settings.IsOpen) )
 		{
 			Mouse.Visible = true;
 		}
@@ -48,6 +75,19 @@
 		IsOpen = false;
 	}
 
+	private void OnSettingsClick()
+	{
+		if ( _settings == null ) return;
+		IsOpen = false;
+		_settings.IsOpen = true;
+	}
+
+	private void ReopenAfterSettings()
+	{
+		// Appelé par SettingsMenu quand l'utilisateur clique BACK
+		IsOpen = true;
+	}
+
 	private void OnDisconnectClick()
 	{
 		if ( Networking.IsActive )
@@ -55,11 +95,6 @@
 			Game.Disconnect();
 		}
 		Game.ActiveScene.LoadFromFile( "scenes/mainmenu.scene" );
-	}
-
-	private void OnQuitClick()
-	{
-		Game.Close();
 	}
 
 	protected override int BuildHash() => HashCode.Combine( IsOpen, (int)Lang.Current );

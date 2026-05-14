@@ -84,6 +84,7 @@ public static class Lang
 		// Pause menu
 		{ "pause.title",           new[] { "MENU",                         "MENU" } },
 		{ "pause.resume",          new[] { "RESUME",                       "REPRENDRE" } },
+		{ "pause.settings",        new[] { "SETTINGS",                     "PARAMÈTRES" } },
 		{ "pause.disconnect",      new[] { "DISCONNECT",                   "DÉCONNECTER" } },
 
 		// Game over
