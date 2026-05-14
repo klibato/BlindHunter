@@ -6,6 +6,24 @@ using Sandbox; // Assure-toi d'avoir les bons namespaces pour S&box
 public sealed class Interactable : Component
 {
     [Property] public string PromptText { get; set; } = "Press E to interact";
+
+    /// <summary>
+    /// Si défini, retourné par <see cref="LocalizedPromptText"/> au lieu de <see cref="PromptText"/>.
+    /// Permet aux composants greffés (Pickable, KeycardReader, ExitDoor) d'override dynamiquement
+    /// le prompt avec une clé de traduction tout en gardant la valeur fixe dans l'inspector.
+    /// </summary>
+    public Func<string> LocalizedPromptProvider { get; set; }
+
+    public string LocalizedPromptText
+    {
+        get
+        {
+            if ( LocalizedPromptProvider != null ) return LocalizedPromptProvider();
+            // Traduit le défaut anglais "Press E to interact" tel qu'il vient du prefab
+            if ( PromptText == "Press E to interact" ) return Lang.Get( "prompt.interact" );
+            return PromptText;
+        }
+    }
     [Property] public bool IsQuestObject { get; set; } = true;
     [Property] public float NoiseIntensity { get; set; } = 200f;
     

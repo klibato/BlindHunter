@@ -22,7 +22,7 @@
 		&& TargetInteractor.CurrentTarget != null 
 		&& !TargetInteractor.CurrentTarget.IsCompleted;
 
-	private string PromptText => TargetInteractor?.CurrentTarget?.PromptText ?? "";
+	private string PromptText => TargetInteractor?.CurrentTarget?.LocalizedPromptText ?? "";
 
-	protected override int BuildHash() => HashCode.Combine( ShouldDisplay, PromptText );
+	protected override int BuildHash() => HashCode.Combine( ShouldDisplay, PromptText, (int)Lang.Current );
 }

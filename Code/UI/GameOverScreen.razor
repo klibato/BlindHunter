@@ -14,13 +14,13 @@
 			@if ( IsHost )
 			{
 				<div class="return-button" @onclick=@OnReturnClick>
-					RETURN TO LOBBY
+					@Lang.Get("gameover.return_lobby")
 				</div>
 			}
 			else
 			{
 				<div class="waiting-text">
-					Waiting for host...
+					@Lang.Get("gameover.waiting_host")
 				</div>
 			}
 		</div>
@@ -51,11 +51,11 @@
 
 			if ( survivorsWon )
 			{
-				return isKiller ? "THEY ESCAPED" : "YOU ESCAPED";
+				return isKiller ? Lang.Get("gameover.they_escaped") : Lang.Get("gameover.you_escaped");
 			}
 			else
 			{
-				return isKiller ? "VICTORY" : "YOU DIED";
+				return isKiller ? Lang.Get("gameover.victory") : Lang.Get("gameover.you_died");
 			}
 		}
 	}
@@ -85,6 +85,6 @@
 	}
 
 	protected override int BuildHash() => HashCode.Combine(
-		ShouldDisplay, MessageText, MessageColor, IsHost
+		ShouldDisplay, MessageText, MessageColor, IsHost, (int)Lang.Current
 	);
 }

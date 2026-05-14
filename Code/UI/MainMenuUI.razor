@@ -5,22 +5,22 @@
 
 <root>
     <div class="main-menu">
-        <div class="dev-banner">STILL IN DEVELOPMENT</div>
+        <div class="dev-banner">@Lang.Get("menu.dev_banner")</div>
 
         <div class="logo-container">
             <div class="logo-title">BLINDHUNTER</div>
-            <div class="logo-subtitle">A horror echolocation experience</div>
+            <div class="logo-subtitle">@Lang.Get("menu.subtitle")</div>
         </div>
 
         <div class="button-container">
             <div class="menu-button play-button" @onclick=@OnPlayClick>
-                PLAY
+                @Lang.Get("menu.play")
             </div>
             <div class="menu-button" @onclick=@OnSettingsClick>
-                SETTINGS
+                @Lang.Get("menu.settings")
             </div>
             <div class="menu-button" @onclick=@OnQuitClick>
-                QUIT
+                @Lang.Get("menu.quit")
             </div>
         </div>
 
@@ -29,18 +29,18 @@
             <div class="discord-label">
                 @if (_showCopied)
                 {
-                    <span class="copied-feedback">LINK COPIED — PASTE IN BROWSER</span>
+                    <span class="copied-feedback">@Lang.Get("menu.link_copied")</span>
                 }
                 else
                 {
-                    <span>JOIN OUR DISCORD</span>
+                    <span>@Lang.Get("menu.join_discord")</span>
                     <span class="discord-url">discord.gg/QFFGHJF3jr</span>
                 }
             </div>
         </div>
 
         <div class="footer">
-            <div>BlindHunter v1 — by Klibato</div>
+            <div>@Lang.Get("menu.footer")</div>
         </div>
     </div>
 </root>
@@ -94,6 +94,7 @@
 
     protected override int BuildHash() => HashCode.Combine(
         SettingsPanel?.IsOpen ?? false,
-        _showCopied
+        _showCopied,
+        (int)Lang.Current
     );
 }

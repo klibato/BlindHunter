@@ -8,11 +8,11 @@
 	{
 		<div class="pause-overlay">
 			<div class="pause-panel">
-				<div class="pause-title">MENU</div>
-				
+				<div class="pause-title">@Lang.Get("pause.title")</div>
+
 				<div class="pause-buttons">
-					<div class="pause-button" @onclick=@OnResumeClick>RESUME</div>
-					<div class="pause-button danger" @onclick=@OnDisconnectClick>DISCONNECT</div>
+					<div class="pause-button" @onclick=@OnResumeClick>@Lang.Get("pause.resume")</div>
+					<div class="pause-button danger" @onclick=@OnDisconnectClick>@Lang.Get("pause.disconnect")</div>
 				</div>
 			</div>
 		</div>
@@ -62,5 +62,5 @@
 		Game.Close();
 	}
 
-	protected override int BuildHash() => HashCode.Combine( IsOpen );
+	protected override int BuildHash() => HashCode.Combine( IsOpen, (int)Lang.Current );
 }

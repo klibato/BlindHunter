@@ -14,18 +14,14 @@ public sealed class ExitDoor : Component
 			return;
 		}
 
+		_interactable.LocalizedPromptProvider = () =>
+		{
+			if ( QuestManager.Instance == null ) return Lang.Get( "prompt.exit.unlocked" );
+			if ( QuestManager.Instance.AllQuestsCompleted ) return Lang.Get( "prompt.exit.unlocked" );
+			return Lang.Get( "prompt.exit.locked", QuestManager.Instance.CompletedQuests, QuestManager.Instance.TotalQuests );
+		};
+
 		_interactable.OnInteracted += OnDoorInteracted;
-	}
-
-	protected override void OnUpdate()
-	{
-		if ( _interactable == null ) return;
-		if ( QuestManager.Instance == null ) return;
-
-		bool unlocked = QuestManager.Instance.AllQuestsCompleted;
-		_interactable.PromptText = unlocked
-			? "Escape through the door"
-			: $"Door locked ({QuestManager.Instance.CompletedQuests}/{QuestManager.Instance.TotalQuests})";
 	}
 
 	private void OnDoorInteracted( PlayerSetup interactor )

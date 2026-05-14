@@ -8,18 +8,18 @@
     @if (ShouldDisplay)
     {
         <div class="lobby-room">
-            <div class="lobby-title">LOBBY</div>
+            <div class="lobby-title">@Lang.Get("lobby.title")</div>
 
             @if (State == LobbyState.Starting)
             {
                 <div class="countdown-display">
-                    Starting in @CountdownText
+                    @Lang.Get("lobby.starting_in", CountdownText)
                 </div>
             }
 
             <div class="player-list">
                 <div class="list-header">
-                    Players : @PlayerCount
+                    @Lang.Get("lobby.players", PlayerCount)
                 </div>
                 @foreach (var player in GetPlayers())
                 {
@@ -27,11 +27,11 @@
                         <div class="player-name">@GetPlayerName(player)</div>
                         @if (player.Network.IsOwner)
                         {
-                            <div class="player-tag you">YOU</div>
+                            <div class="player-tag you">@Lang.Get("lobby.tag.you")</div>
                         }
                         @if (player.Network.Owner.IsHost)
                         {
-                            <div class="player-tag host">HOST</div>
+                            <div class="player-tag host">@Lang.Get("lobby.tag.host")</div>
                         }
                     </div>
                 }
@@ -40,14 +40,14 @@
             @if (IsHost && State == LobbyState.Lobby)
             {
                 <div class="start-button" @onclick=@OnStartClick>
-                    START GAME
+                    @Lang.Get("lobby.start_game")
                 </div>
             }
 
             @if (!IsHost && State == LobbyState.Lobby)
             {
                 <div class="waiting-text">
-                    Waiting for host to start the game...
+                    @Lang.Get("lobby.waiting_host")
                 </div>
             }
         </div>
@@ -87,7 +87,7 @@
 
     private string GetPlayerName(PlayerSetup player)
     {
-        return player.GameObject.Name?.Replace("Player - ", "") ?? "Unknown";
+        return player.GameObject.Name?.Replace("Player - ", "") ?? Lang.Get("common.unknown");
     }
 
     private void OnStartClick()
@@ -100,6 +100,7 @@
         State,
         PlayerCount,
         CountdownText,
-        IsHost
+        IsHost,
+        (int)Lang.Current
     );
 }
