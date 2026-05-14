@@ -43,8 +43,8 @@
 				<div class="setting-row">
 					<div class="setting-label">@Lang.Get("settings.language")</div>
 					<div class="preset-group">
-						<div class="preset-button @(IsLanguage(Language.English) ? "active" : "")" @onclick=@(() => SetLanguage(Language.English))>@Lang.Get("settings.english")</div>
-						<div class="preset-button @(IsLanguage(Language.French) ? "active" : "")" @onclick=@(() => SetLanguage(Language.French))>@Lang.Get("settings.french")</div>
+						<div class="preset-button @(IsAppLanguage(AppLanguage.English) ? "active" : "")" @onclick=@(() => SetAppLanguage(AppLanguage.English))>@Lang.Get("settings.english")</div>
+						<div class="preset-button @(IsAppLanguage(AppLanguage.French) ? "active" : "")" @onclick=@(() => SetAppLanguage(AppLanguage.French))>@Lang.Get("settings.french")</div>
 					</div>
 				</div>
 
@@ -67,7 +67,7 @@
 	private bool IsVolumePreset( float val ) => MathF.Abs( GameSettings.MasterVolume - val ) < 0.05f;
 	private bool IsSfxPreset( float val ) => MathF.Abs( GameSettings.SfxVolume - val ) < 0.05f;
 	private bool IsMusicPreset( float val ) => MathF.Abs( GameSettings.MusicVolume - val ) < 0.05f;
-	private bool IsLanguage( Language lang ) => GameSettings.Language == lang;
+	private bool IsAppLanguage( AppLanguage lang ) => GameSettings.AppLanguage == lang;
 
 	private void SetMasterVolume( float val )
 	{
@@ -87,10 +87,10 @@
 		Log.Info( $"MusicVolume set to {val:F2}" );
 	}
 
-	private void SetLanguage( Language lang )
+	private void SetAppLanguage( AppLanguage lang )
 	{
-		GameSettings.Language = lang;
-		Log.Info( $"Language set to {lang}" );
+		GameSettings.AppLanguage = lang;
+		Log.Info( $"AppLanguage set to {lang}" );
 	}
 
 	private void OnBackClick()

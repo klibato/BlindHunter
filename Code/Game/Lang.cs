@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Sandbox;
 
-public enum Language
+public enum AppLanguage
 {
 	English = 0,
 	French = 1
@@ -10,20 +10,20 @@ public enum Language
 
 /// <summary>
 /// Système de traduction simple. Lookup par clé, fallback sur la clé brute si manquant.
-/// La langue active est persistée via GameSettings.Language.
+/// La langue active est persistée via GameSettings.AppLanguage.
 /// Les composants UI doivent inclure Lang.Current dans leur BuildHash pour re-render au switch.
 /// </summary>
 public static class Lang
 {
-	public static Language Current { get; private set; } = Language.English;
+	public static AppLanguage Current { get; private set; } = AppLanguage.English;
 
-	public static event Action OnLanguageChanged;
+	public static event Action OnAppLanguageChanged;
 
-	public static void SetLanguage( Language lang )
+	public static void SetAppLanguage( AppLanguage lang )
 	{
 		if ( Current == lang ) return;
 		Current = lang;
-		OnLanguageChanged?.Invoke();
+		OnAppLanguageChanged?.Invoke();
 	}
 
 	public static string Get( string key )
