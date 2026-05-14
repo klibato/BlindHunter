@@ -86,7 +86,12 @@
 		// et toggleraient leur propre IsOpen → plusieurs pause overlays s'empilent en multi.
 		if ( IsProxy ) return;
 
-		if ( Input.Pressed( "PauseMenu" ) )
+		// Echap : on consomme l'input pour empêcher le menu built-in s&box de s'ouvrir
+		// par dessus le nôtre, puis on traite la pression comme un toggle du PauseMenu.
+		bool escape = Input.EscapePressed;
+		if ( escape ) Input.EscapePressed = false;
+
+		if ( escape || Input.Pressed( "PauseMenu" ) )
 		{
 			if ( IsOpen && _showSettings )
 			{
