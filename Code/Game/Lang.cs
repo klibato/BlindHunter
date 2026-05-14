@@ -60,6 +60,22 @@ public static class Lang
 		catch { return template; }
 	}
 
+	/// <summary>
+	/// Variante avec fallback explicite : si la clé n'existe pas dans le dictionnaire
+	/// (binaire pas à jour, etc.), retourne <paramref name="fallback"/> tel quel au lieu
+	/// d'humaniser la clé. Préférable quand l'appelant connaît le texte à afficher.
+	/// </summary>
+	public static string GetOr( string key, string fallback )
+	{
+		if ( _table.TryGetValue( key, out var entries ) )
+		{
+			int idx = (int)Current;
+			if ( idx >= 0 && idx < entries.Length ) return entries[idx];
+			if ( entries.Length > 0 ) return entries[0];
+		}
+		return fallback;
+	}
+
 	// index 0 = English, 1 = French
 	private static readonly Dictionary<string, string[]> _table = new()
 	{

@@ -58,15 +58,15 @@ PlayerRole.None && !TargetPlayer.IsProxy;
 
 			if (TargetPlayer.Role == PlayerRole.Killer)
 			{
-				list.Add(Lang.Get("tutorial.hint.killer.echo"));
-				list.Add(Lang.Get("tutorial.hint.killer.attack"));
-				list.Add(Lang.Get("tutorial.hint.killer.goal"));
+				list.Add(Lang.GetOr("tutorial.hint.killer.echo",   "RIGHT CLICK — Echolocate to see the world"));
+				list.Add(Lang.GetOr("tutorial.hint.killer.attack", "LEFT CLICK — Attack a survivor in range"));
+				list.Add(Lang.GetOr("tutorial.hint.killer.goal",   "Goal: kill every survivor before they escape"));
 			}
 			else if (TargetPlayer.Role == PlayerRole.Survivor)
 			{
-				list.Add(Lang.Get("tutorial.hint.survivor.interact"));
-				list.Add(Lang.Get("tutorial.hint.survivor.inventory"));
-				list.Add(Lang.Get("tutorial.hint.survivor.goal"));
+				list.Add(Lang.GetOr("tutorial.hint.survivor.interact",  "E — Interact with generators, keycards, doors"));
+				list.Add(Lang.GetOr("tutorial.hint.survivor.inventory", "1 / 2 / 3 — Inventory slots · LEFT CLICK throws"));
+				list.Add(Lang.GetOr("tutorial.hint.survivor.goal",      "Goal: power generators, grab the keycard, escape"));
 			}
 			return list;
 		}
