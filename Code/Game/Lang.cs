@@ -32,8 +32,25 @@ public static class Lang
 		{
 			int idx = (int)Current;
 			if ( idx >= 0 && idx < entries.Length ) return entries[idx];
+			// Langue out-of-range : retombe sur l'anglais plutôt qu'afficher la clé
+			if ( entries.Length > 0 ) return entries[0];
 		}
-		return key;
+		return Humanize( key );
+	}
+
+	/// <summary>
+	/// Si une clé n'existe pas dans le dictionnaire (typo, hot-reload partiel, build pas
+	/// à jour), on affiche au moins une version lisible du dernier segment plutôt que
+	/// la clé brute façon "tutorial.hint.killer.echo".
+	/// </summary>
+	private static string Humanize( string key )
+	{
+		if ( string.IsNullOrEmpty( key ) ) return key;
+		var lastDot = key.LastIndexOf( '.' );
+		var segment = lastDot >= 0 ? key.Substring( lastDot + 1 ) : key;
+		segment = segment.Replace( '_', ' ' );
+		if ( segment.Length > 0 ) segment = char.ToUpper( segment[0] ) + segment.Substring( 1 );
+		return segment;
 	}
 
 	public static string Get( string key, params object[] args )
