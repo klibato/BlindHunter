@@ -88,11 +88,9 @@
 
 		// Echap : on consomme l'input pour empêcher le menu built-in s&box de s'ouvrir
 		// par dessus le nôtre, puis on traite la pression comme un toggle du PauseMenu.
-		bool escape = Input.EscapePressed;
-		if ( escape ) Input.EscapePressed = false;
-
-		if ( escape || Input.Pressed( "PauseMenu" ) )
+		if ( Input.EscapePressed )
 		{
+			Input.EscapePressed = false;
 			if ( IsOpen && _showSettings )
 			{
 				// Echap dans Settings → revient au pause
